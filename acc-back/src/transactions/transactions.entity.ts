@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Accounts } from '../accounts/accounts.entity';
 
 @Entity({ name: 'transactions' })
@@ -18,9 +25,10 @@ export class Transactions {
   @Column({ name: 'transaction_credit' })
   transactionCredit: number;
 
-  @OneToMany(
+  @ManyToOne(
     type => Accounts,
     accounts => accounts.transactions,
   )
-  accounts: Accounts[];
+  @JoinColumn({ name: 'transaction_FK' })
+  accounts: Array<Accounts[]>;
 }

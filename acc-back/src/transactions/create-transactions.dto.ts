@@ -6,5 +6,5 @@ export class CreateTransactionsDto {
   transactionDescription: string;
   transactionDebit: number;
   transactionCredit: number;
-  accounts: Accounts[];
+  accounts: Array<Accounts[]>;
 }

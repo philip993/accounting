@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 import { Transactions } from 'src/transactions/transactions.entity';
 
@@ -24,10 +25,9 @@ export class Accounts {
   @Column({ name: 'credit_balance' })
   creditBalance: number;
 
-  @ManyToOne(
+  @OneToMany(
     type => Transactions,
     transactions => transactions.accounts,
   )
-  @JoinColumn({ name: 'account_id' })
-  transactions: Transactions;
+  transactions: Array<Transactions[]>;
 }
