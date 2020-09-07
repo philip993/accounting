@@ -25,6 +25,9 @@ export class Transactions {
   @Column({ name: 'transaction_credit' })
   transactionCredit: number;
 
+  @Column({ name: 'transaction_lines' })
+  transactionLines: number;
+
   @ManyToOne(
     type => Accounts,
     accounts => accounts.transactions,
