@@ -1,13 +1,18 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Invoice } from './invoice.entity';
 import { Repository } from 'typeorm';
+import { INVOICE_REPOSITORY } from 'src/constats/constats';
 
 @Injectable()
 export class InvoiceService {
-  constructor(@Inject() private invoiceRepository: Repository<Invoice>) {}
+  constructor(
+    @Inject(INVOICE_REPOSITORY) private invoiceRepository: Repository<Invoice>,
+  ) {}
 
   async findAll(): Promise<Invoice[]> {
-    return await this.invoiceRepository.find();
+    return await this.invoiceRepository.find({
+      relations: ['invoices', 'vendor'],
+    });
   }
 
   async findOne(id: number): Promise<Invoice> {

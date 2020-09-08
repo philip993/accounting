@@ -11,7 +11,9 @@ export class TransactionsService {
   ) {}
 
   async findAll(): Promise<Transactions[]> {
-    return await this.transactionsRepository.find({ relations: ['accounts'] });
+    return await this.transactionsRepository.find({
+      relations: ['accounts', 'invoicelines', 'transactionlines'],
+    });
   }
 
   async findOne(id: number): Promise<Transactions> {

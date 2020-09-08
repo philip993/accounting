@@ -13,9 +13,6 @@ export class Vendor {
   @PrimaryGeneratedColumn({ name: 'vendor_id' })
   vendorId: number;
 
-  @Column({ name: 'vendor_FK' })
-  vendorFK: number;
-
   @Column({ name: 'vendor_name' })
   vendorName: string;
 
@@ -31,10 +28,4 @@ export class Vendor {
   // relation O:O with Invoice
 
   // relation O:M with Transactions
-
-  @OneToMany(
-    type => Transactions,
-    transactions => transactions.transactionLines,
-  )
-  transactions: Array<Transactions[]>;
 }
