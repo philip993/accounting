@@ -23,6 +23,9 @@ export class Transactions {
   @Column({ name: 'transaction_lines_FK' })
   transactionLinesFK: number;
 
+  @Column({ name: 'transaction_invoice_FK' })
+  transactionInvoiceFK: number;
+
   @Column({ name: 'transaction_description' })
   transactionDescription: string;
 
@@ -45,14 +48,21 @@ export class Transactions {
 
   // @ManyToOne(
   //   type => Invoice,
-  //   transactionlines => transactionlines.something,
+  //   transactionlines => transactionlines.invoices,
   // )
   // // @JoinColumn({ name: 'transaction_lines_FK' })
-  // transactionlines: Array<Invoice[]>;
+  // transactionlines: Invoice[];
 
-  @OneToMany(
+  // @OneToMany(
+  //   type => Invoice,
+  //   transactionlines => transactionlines.invoices,
+  // )
+  // transactionlines: Invoice;
+
+  @ManyToOne(
     type => Invoice,
     transactionlines => transactionlines.invoices,
   )
-  transactionlines: Array<Invoice[]>;
+  @JoinColumn({ name: 'transaction_invoice_FK' })
+  transactionlines: Invoice[];
 }

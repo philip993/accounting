@@ -17,8 +17,8 @@ export class Invoice {
   @PrimaryGeneratedColumn({ name: 'invoice_id' })
   invoiceId: number;
   // transactions id
-  @Column({ name: 'invoice_FK' })
-  invoiceFK: any;
+  // @Column({ name: 'invoice_FK' })
+  // invoiceFK: number;
   // vendor id
   @Column({ name: 'invoice_vendor_FK' })
   invoiceVendorFK: number;
@@ -33,19 +33,19 @@ export class Invoice {
   invoiceDue: string;
 
   // O:M with Transactions
-  // @OneToMany(
-  //   type => Transactions,
-  //   something => something.transactionlines,
-  // )
-  // @JoinColumn({ name: 'invoice_FK' })
-  // something: [Array<Transactions[]>];
-
-  @ManyToOne(
+  @OneToMany(
     type => Transactions,
     invoices => invoices.transactionlines,
   )
-  @JoinColumn({ name: 'invoice_FK' })
+  // @JoinColumn({ name: 'invoice_FK' })
   invoices: [Array<Transactions[]>];
+
+  // @ManyToOne(
+  //   type => Transactions,
+  //   invoices => invoices.transactionlines,
+  // )
+  // // @JoinColumn({ name: 'invoice_FK' })
+  // invoices: [Array<Transactions[]>];
 
   // O:O with Vendor
   @OneToOne(type => Vendor)

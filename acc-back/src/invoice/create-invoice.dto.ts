@@ -3,7 +3,7 @@ import { Transactions } from 'src/transactions/transactions.entity';
 
 export class CreateInvoiceDto {
   invoiceId: number;
-  invoiceFK: any;
+  // invoiceFK: number;
   invoiceVendorFK: number;
   invoiceNumber: string;
   invoiceDate: string;

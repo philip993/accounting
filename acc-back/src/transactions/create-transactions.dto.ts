@@ -7,10 +7,11 @@ export class CreateTransactionsDto {
   transactionId: number;
   transactionFK: number;
   transactionLinesFK: number;
+  transactionInvoiceFK: number;
   transactionDescription: string;
   transactionDebit: number;
   transactionCredit: number;
   accounts: Array<Accounts[]>;
   invoicelines: Vendor;
-  transactionlines: Array<Invoice[]>;
+  transactionlines: Invoice[];
 }
