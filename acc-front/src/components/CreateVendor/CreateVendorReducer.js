@@ -1,6 +1,8 @@
 import {
   SUCCESS_CREATE_VENDOR,
   FAILURE_CREATE_VENDOR,
+  INPUT_VENDOR_NAME,
+  INPUT_VENDOR_ADDRESS,
 } from './CreateVendorActionTypes';
 
 const initialState = {
@@ -33,6 +35,16 @@ export const CreateVendorReducer = (state = initialState, action) => {
         vendorAddress: '',
         vendorDebit: 0,
         vendorCredit: 0,
+      };
+    case INPUT_VENDOR_NAME:
+      return {
+        ...state,
+        vendorName: action.payload,
+      };
+    case INPUT_VENDOR_ADDRESS:
+      return {
+        ...state,
+        vendorAddress: action.payload,
       };
     default:
       return state;
