@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import './AppStyle.scss';
 import ChartAccounts from '../ChartAccounts/ChartAccounts';
 import Navbar from '../Navbar/Navbar';
 import Home from '../Home/Home';
@@ -10,7 +11,7 @@ import CreateVendor from '../CreateVendor/CreateVendor';
 
 const App = () => {
   return (
-    <div>
+    <div className="app">
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
