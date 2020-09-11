@@ -1,6 +1,8 @@
 import {
-  INPUT_VENDOR_NAME,
+  INPUT_VENDOR_TITLE,
   INPUT_VENDOR_ADDRESS,
+  INPUT_VENDOR_BANK_ACCOUNT,
+  INPUT_VENDOR_TAX_NUMBER,
   SUCCESS_CREATE_VENDOR,
   FAILURE_CREATE_VENDOR,
 } from './CreateVendorActionTypes';
@@ -10,14 +12,14 @@ import axios from 'axios';
 export const requestCreateVendor = () => {
   return (dispatch, getState) => {
     let {
-      vendorName,
+      vendorTitle,
       vendorAddress,
       vendorDebit,
       vendorCredit,
     } = getState().CreateVendorReducer;
     return axios
       .post(`http://localhost:4000/vendor`, {
-        vendorName,
+        vendorTitle,
         vendorAddress,
         vendorDebit: 0,
         vendorCredit: 0,
@@ -39,9 +41,9 @@ export const requestCreateVendor = () => {
 };
 
 // input
-export const inputVendorName = (e) => {
+export const inputVendorTitle = (e) => {
   return {
-    type: INPUT_VENDOR_NAME,
+    type: INPUT_VENDOR_TITLE,
     payload: e,
   };
 };
@@ -49,6 +51,20 @@ export const inputVendorName = (e) => {
 export const inputVendorAddres = (e) => {
   return {
     type: INPUT_VENDOR_ADDRESS,
+    payload: e,
+  };
+};
+
+export const inputVendorBankAccount = (e) => {
+  return {
+    type: INPUT_VENDOR_BANK_ACCOUNT,
+    payload: e,
+  };
+};
+
+export const inputVendorTaxNumber = (e) => {
+  return {
+    type: INPUT_VENDOR_TAX_NUMBER,
     payload: e,
   };
 };
