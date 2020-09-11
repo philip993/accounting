@@ -1,6 +1,15 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Redux Actions
 import { requestGetAllVendors } from './VendorActions';
+import {
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from '@material-ui/core';
+// Material Ui
 
 const Vendor = () => {
   const { allVendors } = useSelector((state) => state.VendorReducer);
@@ -13,16 +22,42 @@ const Vendor = () => {
   return (
     <div>
       <h1>Vendors</h1>
-      {allVendors.map(
-        ({ vendorName, vendorAddress, vendorDebit, vendorCredit }) => (
-          <React.Fragment>
-            <h3>{vendorName}</h3>
-            <h3>{vendorAddress}</h3>
-            <h3>{vendorDebit}</h3>
-            <h3>{vendorCredit}</h3>
-          </React.Fragment>
-        )
-      )}
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>Vendor</TableCell>
+            <TableCell>Address</TableCell>
+            <TableCell>Bank Account No</TableCell>
+            <TableCell>Tax Number</TableCell>
+            <TableCell>Debit Balance</TableCell>
+            <TableCell>Credit Balance</TableCell>
+            <TableCell>Balance</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {allVendors.map(
+            ({
+              vendorName,
+              vendorAddress,
+              vendorDebit,
+              vendorCredit,
+              vendorBankAccount,
+              vendorTaxNumber,
+              vendor,
+            }) => (
+              <TableRow>
+                <TableCell>{vendorName}</TableCell>
+                <TableCell>{vendorAddress}</TableCell>
+                <TableCell>{vendorBankAccount}</TableCell>
+                <TableCell>{vendorTaxNumber}</TableCell>
+                <TableCell>{vendorDebit}</TableCell>
+                <TableCell>{vendorCredit}</TableCell>
+                <TableCell>{vendorDebit - vendorCredit}</TableCell>
+              </TableRow>
+            )
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 };
