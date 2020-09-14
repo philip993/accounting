@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Redux Actions
 import { requestGetAllVendors } from './VendorActions';
+// Material Ui
 import {
   Table,
   TableHead,
@@ -9,7 +10,6 @@ import {
   TableCell,
   TableBody,
 } from '@material-ui/core';
-// Material Ui
 
 const Vendor = () => {
   const { allVendors } = useSelector((state) => state.VendorReducer);

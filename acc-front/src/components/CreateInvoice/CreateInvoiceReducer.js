@@ -4,6 +4,7 @@ import {
   INPUT_INVOICE_VENDOR,
   INPUT_INVOICE_NUMBER,
   INPUT_INVOICE_DATE,
+  INPUT_INVOICE_DUE,
 } from './CreateInvoiceActionTypes';
 
 const initialState = {

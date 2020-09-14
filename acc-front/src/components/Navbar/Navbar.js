@@ -9,6 +9,8 @@ const Navbar = () => {
       <Link to="/journal">Journal</Link>
       <Link to="/vendors">Vendors</Link>
       <Link to="/createvendor">Vendor Form</Link>
+      <Link to="/invoices">Invoices</Link>
+      <Link to="/createinvoice">Invoice Form</Link>
     </div>
   );
 };

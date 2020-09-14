@@ -8,6 +8,8 @@ import Home from '../Home/Home';
 import Journal from '../Journal/Journal';
 import Vendor from '../Vendor/Vendor';
 import CreateVendor from '../CreateVendor/CreateVendor';
+import Invoice from '../Invoice/Invoice';
+import CreateInvoice from '../CreateInvoice/CreateInvoice';
 
 const App = () => {
   return (
@@ -19,6 +21,8 @@ const App = () => {
         <Route exact path="/journal" component={Journal} />
         <Route exact path="/vendors" component={Vendor} />
         <Route exact path="/createvendor" component={CreateVendor} />
+        <Route exact path="/invoices" component={Invoice} />
+        <Route exact path="/createinvoice" component={CreateInvoice} />
       </Switch>
     </div>
   );
