@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   requestCreateInvoice,
   inputInvoiceVendor,
+  inputInvoiceDate,
+  inputInvoiceDue,
+  inputInvoiceNumber,
 } from './CreateInvoiceActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
@@ -33,18 +36,18 @@ const CreateInvoice = () => {
   };
 
   const handleInvoiceNumber = (e) => {
-    dispatch(invoiceNumber(e.target.value));
+    dispatch(inputInvoiceNumber(e.target.value));
   };
 
   const handleInvoiceDate = (e) => {
-    dispatch(invoiceDate(e.target.value));
+    dispatch(inputInvoiceDate(e.target.value));
   };
 
   const handleInvoiceDue = (e) => {
-    dispatch(invoiceDue(e.target.value));
+    dispatch(inputInvoiceDue(e.target.value));
   };
 
-  const submitForm = () => {
+  const submitForm = (e) => {
     dispatch(requestCreateInvoice());
   };
 
@@ -115,7 +118,7 @@ const CreateInvoice = () => {
                 name="invoiceDate"
                 value={invoiceDate}
                 onChange={handleInvoiceDate}
-                ref={register({
+                inputRef={register({
                   required: 'This field is required!',
                 })}
               />
@@ -137,7 +140,7 @@ const CreateInvoice = () => {
                 name="invoiceDue"
                 value={invoiceDue}
                 onChange={handleInvoiceDue}
-                ref={register({
+                inputRef={register({
                   required: 'This field is required!',
                 })}
               />
