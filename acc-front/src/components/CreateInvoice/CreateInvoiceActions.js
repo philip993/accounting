@@ -19,7 +19,7 @@ export const requestCreateInvoice = () => {
     } = getState().CreateInvoiceReducer;
     return axios
       .post(`http://localhost:4000/invoice`, {
-        vendor,
+        invoiceVendorFK: vendor,
         invoiceNumber,
         invoiceDate,
         invoiceDue,
