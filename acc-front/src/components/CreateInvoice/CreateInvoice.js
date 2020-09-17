@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Redux Actions
 import {
@@ -10,6 +10,8 @@ import {
 } from './CreateInvoiceActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
+// Scss
+import './CreateInvoiceStyle.scss';
 // Material Ui
 import {
   FormGroup,
@@ -17,7 +19,12 @@ import {
   InputBase,
   FormHelperText,
   Button,
+  Select,
+  MenuItem,
 } from '@material-ui/core';
+import Transactions from '../Transactions/Transactions';
+import { requestGetAllVendors } from '../Vendor/VendorActions';
+import { inputTransactionsVendor } from '../Transactions/TransactionsActions';
 
 const CreateInvoice = () => {
   const {
@@ -27,12 +34,21 @@ const CreateInvoice = () => {
     invoiceNumber,
     invoiceDate,
     invoiceDue,
-  } = useSelector((state) => state.CreateInvoiceReducer);
+    allVendors,
+  } = useSelector((state) => ({
+    ...state.CreateInvoiceReducer,
+    ...state.VendorReducer,
+  }));
   const dispatch = useDispatch();
   const { register, handleSubmit, message, control, errors } = useForm();
 
+  useEffect(() => {
+    dispatch(requestGetAllVendors());
+  }, []);
+
   const handleInvoiceVendor = (e) => {
     dispatch(inputInvoiceVendor(e.target.value));
+    dispatch(inputTransactionsVendor(e.target.value));
   };
 
   const handleInvoiceNumber = (e) => {
@@ -54,14 +70,14 @@ const CreateInvoice = () => {
   return (
     <div className="createInvoice">
       <h1>Create Invoice</h1>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form className="createInvoiceForm" onSubmit={handleSubmit(submitForm)}>
         <FormGroup className="formGroup">
           <FormLabel className="formLabel">Vendor Code</FormLabel>
           <Controller
             control={control}
             name="vendor"
             render={({ onChange, value, name, message }) => (
-              <InputBase
+              <Select
                 className="formInput"
                 name="vendor"
                 value={vendor}
@@ -69,7 +85,11 @@ const CreateInvoice = () => {
                 inputRef={register({
                   required: 'This field is required',
                 })}
-              />
+              >
+                {allVendors.map(({ vendorId, vendorName }) => (
+                  <MenuItem value={vendorId}>{vendorName}</MenuItem>
+                ))}
+              </Select>
             )}
           />
 
@@ -155,6 +175,7 @@ const CreateInvoice = () => {
           <Button type={'submit'}>Post</Button>
         </FormGroup>
       </form>
+      <Transactions />
     </div>
   );
 };
