@@ -1,1 +1,97 @@
-.transactions {}
+.transactions {
+    width: 80%;
+    margin: auto;
+    border: 1px solid #0f52ab;
+    margin-top: 2%;
+    padding: 1%;
+    // display: flex;
+
+    h1 {
+        text-align: center;
+        color: #0f52ab;
+    }
+
+    .transactionsForm {
+        display: inline-flex;
+        width: 100%;
+        margin: auto;
+        padding: 1% 0%;
+        border: 1px solid #0f52ab;
+
+        .formGroup {
+            width: 80%;
+            margin: auto;
+
+            .formLabel {
+                background-color: #0f52ab;
+                padding: 5px 0px 5px 5px;
+                margin: 10px 0px 15px 0px;
+                text-align: center;
+                color: #fff;
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 1.5px;
+            }
+
+            .formInput {
+                background-color: #fff;
+                border: 1px solid gray;
+                padding-left: 10px;
+
+                &:hover {
+                    box-shadow: 0px 0px 5px #a90f52;
+                }
+            }
+
+            .formHelperText {
+                font-weight: bold;
+                letter-spacing: 1px;
+            }
+        }
+
+        .formGroupButton {
+            width: 80%;
+            margin: auto;
+            margin-top: 5%;
+            margin-bottom: 2%;
+
+            .saveButton {
+                margin: auto;
+                margin-top: 20px;
+                margin-bottom: 20px;
+                width: 50%;
+                background-color: #fff;
+                border: 1px solid #a90f52;
+                color: #a90f52;
+                font-weight: bold;
+
+                &:hover {
+                    background-color: #a90f52;
+                    border: 1px solid #fff;
+                    color: #fff;
+
+                    letter-spacing: 1.5px;
+                }
+            }
+        }
+    }
+
+
+    .table {
+        .tableHead {
+            .tableRow {
+                .tableCell {
+                    color: #000;
+                }
+            }
+        }
+
+        .tableBody {
+            .tableRow {
+                .tableCell {
+                    color: #000;
+                }
+            }
+        }
+    }
+}
