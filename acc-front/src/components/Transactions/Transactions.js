@@ -39,11 +39,11 @@ const Transactions = () => {
     transactionsCredit,
     transactionsRow,
     accounts,
-    allVendors,
+    newInvoice,
   } = useSelector((state) => ({
     ...state.TransactionsReducer,
     ...state.ChartAccountsReducer,
-    ...state.VendorReducer,
+    ...state.CreateInvoiceReducer,
   }));
   const dispatch = useDispatch();
   const { handleSubmit, message, errors, register, control } = useForm();
@@ -55,8 +55,6 @@ const Transactions = () => {
   const handleTransactionsAccount = (e) => {
     dispatch(inputTransactionsAccount(e.target.value));
   };
-
-  const handleTransactionsInvoice = (e) => {};
 
   const handleTransactionsDescription = (e) => {
     dispatch(inputTransactionsDescription(e.target.value));
@@ -77,6 +75,8 @@ const Transactions = () => {
   const submitForm = (e) => {
     dispatch(requestCreateTransactions());
   };
+
+  console.log(newInvoice.invoiceId);
 
   return (
     <div className="transactions">
@@ -106,42 +106,6 @@ const Transactions = () => {
           />
           <FormHelperText className="formHelperText" error>
             {errors.account && errors.account.message}
-          </FormHelperText>
-        </FormGroup>
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Vendor</FormLabel>
-          <Controller
-            control={control}
-            name="vendor"
-            render={({ onChange, value, name, message }) => (
-              <InputBase
-                className="formInput"
-                name="vendor"
-                value={vendor}
-                disabled
-              />
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.vendor && errors.vendor.message}
-          </FormHelperText>
-        </FormGroup>
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Invoice</FormLabel>
-          <Controller
-            control={control}
-            name="account"
-            render={({ onChange, value, name, message }) => (
-              <InputBase
-                className="formInput"
-                name="invoice"
-                value={invoice}
-                onChange={handleTransactionsInvoice}
-              />
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.invoice && errors.invoice.message}
           </FormHelperText>
         </FormGroup>
         <FormGroup className="formGroup">
@@ -219,8 +183,6 @@ const Transactions = () => {
         <TableHead className="tableHead">
           <TableRow className="tableRow">
             <TableCell className="tableCell">Account</TableCell>
-            <TableCell className="tableCell">Vendor</TableCell>
-            <TableCell className="tableCell">Invoice</TableCell>
             <TableCell className="tableCell">Description</TableCell>
             <TableCell className="tableCell">Debit</TableCell>
             <TableCell className="tableCell">Credit</TableCell>
@@ -237,8 +199,6 @@ const Transactions = () => {
           }) => (
             <TableRow className="tableRow">
               <TableCell className="tableCell">{account}</TableCell>
-              <TableCell className="tableCell">{vendor}</TableCell>
-              <TableCell className="tableCell">{invoice}</TableCell>
               <TableCell className="tableCell">
                 {transactionsDescription}
               </TableCell>

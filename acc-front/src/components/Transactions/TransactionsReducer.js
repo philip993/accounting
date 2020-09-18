@@ -36,7 +36,7 @@ export const TransactionsReducer = (state = initialState, action) => {
     case SUCCESS_CREATE_TRANSACTIONS:
       return {
         ...state,
-        newTransactions: action.payload,
+        newTransactions: state.transactionsRow,
         newTransactionsError: false,
         account: '',
         vendor: '',

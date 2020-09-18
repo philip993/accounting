@@ -14,23 +14,21 @@ import axios from 'axios';
 // request
 export const requestCreateTransactions = () => {
   return (dispatch, getState) => {
-    let {
-      account,
-      vendor,
-      invoice,
-      transactionsDescription,
-      transactionsDebit,
-      transactionsCredit,
-    } = getState().TransactionsReducer;
+    let { transactionsRow } = getState().TransactionsReducer;
+    let { newInvoice } = getState().CreateInvoiceReducer;
+    let transactions = transactionsRow
+      .map((transaction, index) => ({
+        transactionFK: transaction.account,
+        transactionLinesFK: transaction.vendor,
+        transactionInvoiceFK: newInvoice.invoiceId,
+        transactionDescription: transaction.transactionsDescription,
+        transactionDebit: transaction.transactionsDebit,
+        transactionCredit: transaction.transactionsCredit,
+      }))
+      .slice(1);
+    console.log(transactions);
     return axios
-      .post(`http://localhost:4000/transactions`, {
-        transactionFK: account,
-        transactionLinesFK: vendor,
-        transactionInvoiceFK: invoice,
-        transactionsDescription,
-        transactionsDebit,
-        transactionsCredit,
-      })
+      .post(`http://localhost:4000/transactions`, transactions)
       .then((response) => {
         console.log(response);
         dispatch({

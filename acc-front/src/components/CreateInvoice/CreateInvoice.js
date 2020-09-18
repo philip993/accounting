@@ -24,7 +24,10 @@ import {
 } from '@material-ui/core';
 import Transactions from '../Transactions/Transactions';
 import { requestGetAllVendors } from '../Vendor/VendorActions';
-import { inputTransactionsVendor } from '../Transactions/TransactionsActions';
+import {
+  inputTransactionsVendor,
+  requestCreateTransactions,
+} from '../Transactions/TransactionsActions';
 
 const CreateInvoice = () => {
   const {
@@ -63,8 +66,9 @@ const CreateInvoice = () => {
     dispatch(inputInvoiceDue(e.target.value));
   };
 
-  const submitForm = (e) => {
-    dispatch(requestCreateInvoice());
+  const submitForm = async (e) => {
+    await dispatch(requestCreateInvoice());
+    await dispatch(requestCreateTransactions());
   };
 
   return (
