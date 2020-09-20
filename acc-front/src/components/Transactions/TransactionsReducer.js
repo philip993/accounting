@@ -8,6 +8,7 @@ import {
   INPUT_TRANSACTIONS_DEBIT,
   INPUT_TRANSACTIONS_CREDIT,
   SELECT_NEW_ROW,
+  TRANSACTION_TOTAL,
 } from './TransactionsActionTypes';
 
 const initialState = {
@@ -17,16 +18,17 @@ const initialState = {
   vendor: '',
   invoice: '',
   transactionsDescription: '',
-  transactionsDebit: '',
+  transactionsDebit: 0,
   transactionsCredit: 0,
+  transactionsTotal: 0,
   transactionsRow: [
     {
       account: '',
       vendor: '',
       invoice: '',
       transactionsDescription: '',
-      transactionsDebit: '',
-      transactionsCredit: '',
+      transactionsDebit: 0,
+      transactionsCredit: 0,
     },
   ],
 };
@@ -42,8 +44,8 @@ export const TransactionsReducer = (state = initialState, action) => {
         vendor: '',
         invoice: '',
         transactionsDescription: '',
-        transactionsDebit: '',
-        transactionsCredit: '',
+        transactionsDebit: 0,
+        transactionsCredit: 0,
       };
     case FAILURE_CREATE_TRANSACTIONS:
       return {
@@ -53,8 +55,8 @@ export const TransactionsReducer = (state = initialState, action) => {
         account: '',
         vendor: '',
         transactionsDescription: '',
-        transactionsDebit: '',
-        transactionsCredit: '',
+        transactionsDebit: 0,
+        transactionsCredit: 0,
       };
     case INPUT_TRANSACTIONS_ACCOUNT:
       return {
@@ -90,6 +92,11 @@ export const TransactionsReducer = (state = initialState, action) => {
       return {
         ...state,
         transactionsRow: [...state.transactionsRow, action.payload],
+      };
+    case TRANSACTION_TOTAL:
+      return {
+        ...state,
+        transactionsTotal: action.payload,
       };
     default:
       return state;

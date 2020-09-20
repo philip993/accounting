@@ -12,3 +12,6 @@ export const INPUT_TRANSACTIONS_CREDIT = 'INPUT_TRANSACTIONS_CREDIT';
 
 // select
 export const SELECT_NEW_ROW = 'SELECT_NEW_ROW';
+
+// total
+export const TRANSACTION_TOTAL = 'TRANSACTION_TOTAL';

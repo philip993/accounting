@@ -30,7 +30,7 @@ import {
 import { requestGetChartOfAccounts } from '../ChartAccounts/ChartAccountsActions';
 
 const Transactions = () => {
-  const {
+  let {
     account,
     vendor,
     invoice,
@@ -38,6 +38,7 @@ const Transactions = () => {
     transactionsDebit,
     transactionsCredit,
     transactionsRow,
+    transactionsTotal,
     accounts,
     newInvoice,
   } = useSelector((state) => ({
@@ -136,6 +137,7 @@ const Transactions = () => {
               <InputBase
                 className="formInput"
                 name="transactionsDebit"
+                type="number"
                 value={transactionsDebit}
                 onChange={handleTransactionsDebit}
               />
@@ -203,9 +205,7 @@ const Transactions = () => {
                 {transactionsDescription}
               </TableCell>
               <TableCell className="tableCell">{transactionsDebit}</TableCell>
-              <TableCell className="tableCell">
-                {transactionsDescription}
-              </TableCell>
+              <TableCell className="tableCell">{transactionsCredit}</TableCell>
             </TableRow>
           )
         )}

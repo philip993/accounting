@@ -8,6 +8,7 @@ import {
   INPUT_TRANSACTIONS_CREDIT,
   INPUT_TRANSACTIONS_INVOICE,
   SELECT_NEW_ROW,
+  TRANSACTION_TOTAL,
 } from './TransactionsActionTypes';
 import axios from 'axios';
 
@@ -92,6 +93,14 @@ export const inputTransactionsCredit = (e) => {
 export const selectNewRow = (e) => {
   return {
     type: SELECT_NEW_ROW,
+    payload: e,
+  };
+};
+
+// total
+export const transactionsTotal = (e) => {
+  return {
+    type: TRANSACTION_TOTAL,
     payload: e,
   };
 };
