@@ -19,6 +19,8 @@ import {
   TableCell,
   TableBody,
 } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
+// Redux Actions
 import {
   requestCreateTransactions,
   inputTransactionsAccount,
@@ -26,6 +28,7 @@ import {
   inputTransactionsCredit,
   inputTransactionsDescription,
   selectNewRow,
+  getTransactionsTotal,
 } from './TransactionsActions';
 import { requestGetChartOfAccounts } from '../ChartAccounts/ChartAccountsActions';
 
@@ -38,7 +41,6 @@ const Transactions = () => {
     transactionsDebit,
     transactionsCredit,
     transactionsRow,
-    transactionsTotal,
     accounts,
     newInvoice,
   } = useSelector((state) => ({
@@ -71,6 +73,10 @@ const Transactions = () => {
 
   const handleNewRow = (e) => {
     dispatch(selectNewRow(e));
+  };
+
+  const handleTotalRow = (e) => {
+    dispatch(getTransactionsTotal(e));
   };
 
   const submitForm = (e) => {
@@ -173,11 +179,11 @@ const Transactions = () => {
               vendor,
               invoice,
               transactionsDescription,
-              transactionsDebit,
+              transactionsDebit: parseInt(transactionsDebit),
               transactionsCredit,
             })}
           >
-            +
+            <AddBoxIcon fontSize="large" className="plusIcon" />
           </Button>
         </FormGroup>
       </form>
@@ -190,26 +196,53 @@ const Transactions = () => {
             <TableCell className="tableCell">Credit</TableCell>
           </TableRow>
         </TableHead>
-        {transactionsRow.map(
-          ({
-            account,
-            vendor,
-            invoice,
-            transactionsDescription,
-            transactionsDebit,
-            transactionsCredit,
-          }) => (
-            <TableRow className="tableRow">
-              <TableCell className="tableCell">{account}</TableCell>
-              <TableCell className="tableCell">
-                {transactionsDescription}
-              </TableCell>
-              <TableCell className="tableCell">{transactionsDebit}</TableCell>
-              <TableCell className="tableCell">{transactionsCredit}</TableCell>
-            </TableRow>
-          )
-        )}
-        <TableBody className="tableBody"></TableBody>
+        <TableBody className="tableBody">
+          {transactionsRow.map(
+            ({
+              account,
+              transactionsDescription,
+              transactionsDebit,
+              transactionsCredit,
+            }) => (
+              <TableRow className="tableRow">
+                <TableCell className="tableCell">{account}</TableCell>
+                <TableCell className="tableCell">
+                  {transactionsDescription}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {transactionsDebit.toFixed(2)} $
+                </TableCell>
+                <TableCell className="tableCell">
+                  {transactionsCredit.toFixed(2)} $
+                </TableCell>
+              </TableRow>
+            )
+          )}
+
+          <TableRow className="tableRow">
+            <TableCell className="tableCellTotal" colSpan={2}>
+              Complete Transactions
+            </TableCell>
+            <TableCell className="tableCellTotal" colSpan={2}>
+              <Button
+                className="tableBtn"
+                onClick={handleTotalRow.bind(this, {
+                  account: 3,
+                  vendor,
+                  invoice,
+                  transactionsDescription: 'Liabilities',
+                  transactionsDebit: 0,
+                  transactionsCredit: transactionsRow.reduce(
+                    (a, b) => a + b.transactionsDebit,
+                    0
+                  ),
+                })}
+              >
+                Yes
+              </Button>
+            </TableCell>
+          </TableRow>
+        </TableBody>
       </Table>
     </div>
   );

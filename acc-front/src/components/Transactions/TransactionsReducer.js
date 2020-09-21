@@ -96,7 +96,7 @@ export const TransactionsReducer = (state = initialState, action) => {
     case TRANSACTION_TOTAL:
       return {
         ...state,
-        transactionsTotal: action.payload,
+        transactionsRow: [...state.transactionsRow, action.payload],
       };
     default:
       return state;

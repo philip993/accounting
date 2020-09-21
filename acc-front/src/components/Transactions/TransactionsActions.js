@@ -98,7 +98,7 @@ export const selectNewRow = (e) => {
 };
 
 // total
-export const transactionsTotal = (e) => {
+export const getTransactionsTotal = (e) => {
   return {
     type: TRANSACTION_TOTAL,
     payload: e,
