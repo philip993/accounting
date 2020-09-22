@@ -5,9 +5,6 @@ import {
   OneToOne,
   OneToMany,
   JoinColumn,
-  ManyToMany,
-  JoinTable,
-  ManyToOne,
 } from 'typeorm';
 import { Vendor } from 'src/vendor/vendor.entity';
 import { Transactions } from 'src/transactions/transactions.entity';
@@ -16,9 +13,6 @@ import { Transactions } from 'src/transactions/transactions.entity';
 export class Invoice {
   @PrimaryGeneratedColumn({ name: 'invoice_id' })
   invoiceId: number;
-  // transactions id
-  // @Column({ name: 'invoice_FK' })
-  // invoiceFK: number;
   // vendor id
   @Column({ name: 'invoice_vendor_FK' })
   invoiceVendorFK: number;
@@ -40,23 +34,10 @@ export class Invoice {
     type => Transactions,
     invoices => invoices.transactionlines,
   )
-  // @JoinColumn({ name: 'invoice_FK' })
   invoices: [Array<Transactions[]>];
-
-  // @ManyToOne(
-  //   type => Transactions,
-  //   invoices => invoices.transactionlines,
-  // )
-  // // @JoinColumn({ name: 'invoice_FK' })
-  // invoices: [Array<Transactions[]>];
 
   // O:O with Vendor
   @OneToOne(type => Vendor)
   @JoinColumn({ name: 'invoice_vendor_FK' })
   vendor: Vendor;
-
-  // @ManyToMany(type => Transactions)
-  // @JoinTable()
-  // @JoinColumn({ name: 'invoice_FK' })
-  // something: Transactions[];
 }
