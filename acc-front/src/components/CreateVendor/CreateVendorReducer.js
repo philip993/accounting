@@ -1,7 +1,7 @@
 import {
   SUCCESS_CREATE_VENDOR,
   FAILURE_CREATE_VENDOR,
-  INPUT_VENDOR_TITLE,
+  INPUT_VENDOR_NAME,
   INPUT_VENDOR_ADDRESS,
   INPUT_VENDOR_BANK_ACCOUNT,
   INPUT_VENDOR_TAX_NUMBER,
@@ -10,7 +10,7 @@ import {
 const initialState = {
   newVendor: [],
   newVendorError: null,
-  vendorTitle: '',
+  vendorName: '',
   vendorAddress: '',
   vendorBankAccount: '',
   vendorTaxNumber: '',
@@ -25,7 +25,7 @@ export const CreateVendorReducer = (state = initialState, action) => {
         ...state,
         newVendor: action.payload,
         newVendorError: false,
-        vendorTitle: '',
+        vendorName: '',
         vendorAddress: '',
         vendorDebit: 0,
         vendorCredit: 0,
@@ -35,15 +35,15 @@ export const CreateVendorReducer = (state = initialState, action) => {
         ...state,
         newVendor: null,
         newVendorError: true,
-        vendorTitle: '',
+        vendorName: '',
         vendorAddress: '',
         vendorDebit: 0,
         vendorCredit: 0,
       };
-    case INPUT_VENDOR_TITLE:
+    case INPUT_VENDOR_NAME:
       return {
         ...state,
-        vendorTitle: action.payload,
+        vendorName: action.payload,
       };
     case INPUT_VENDOR_ADDRESS:
       return {

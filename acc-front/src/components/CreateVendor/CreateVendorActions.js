@@ -1,5 +1,5 @@
 import {
-  INPUT_VENDOR_TITLE,
+  INPUT_VENDOR_NAME,
   INPUT_VENDOR_ADDRESS,
   INPUT_VENDOR_BANK_ACCOUNT,
   INPUT_VENDOR_TAX_NUMBER,
@@ -12,15 +12,19 @@ import axios from 'axios';
 export const requestCreateVendor = () => {
   return (dispatch, getState) => {
     let {
-      vendorTitle,
+      vendorName,
       vendorAddress,
+      vendorTaxNumber,
+      vendorBankAccount,
       vendorDebit,
       vendorCredit,
     } = getState().CreateVendorReducer;
     return axios
       .post(`http://localhost:4000/vendor`, {
-        vendorTitle,
+        vendorName,
         vendorAddress,
+        vendorTaxNumber,
+        vendorBankAccount,
         vendorDebit: 0,
         vendorCredit: 0,
       })
@@ -41,9 +45,9 @@ export const requestCreateVendor = () => {
 };
 
 // input
-export const inputVendorTitle = (e) => {
+export const inputVendorName = (e) => {
   return {
-    type: INPUT_VENDOR_TITLE,
+    type: INPUT_VENDOR_NAME,
     payload: e,
   };
 };

@@ -6,7 +6,7 @@ import './CreateVendorStyle.scss';
 // Redux Actions
 import {
   requestCreateVendor,
-  inputVendorTitle,
+  inputVendorName,
   inputVendorAddres,
   inputVendorBankAccount,
   inputVendorTaxNumber,
@@ -22,7 +22,7 @@ import {
 
 const CreateVendor = () => {
   const {
-    vendorTitle,
+    vendorName,
     vendorAddress,
     vendorBankAccount,
     vendorTaxNumber,
@@ -32,8 +32,8 @@ const CreateVendor = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, errors, message, control } = useForm();
 
-  const handleInputVendorTitle = (e) => {
-    dispatch(inputVendorTitle(e.target.value));
+  const handleInputVendorName = (e) => {
+    dispatch(inputVendorName(e.target.value));
   };
 
   const handleInputVendorAddress = (e) => {
@@ -64,13 +64,13 @@ const CreateVendor = () => {
           <FormLabel className="formLabel">Vendor Name</FormLabel>
           <Controller
             control={control}
-            name="vendorTitle"
+            name="vendorName"
             render={({ onChange, value, name, message }) => (
               <InputBase
-                name="vendorTitle"
+                name="vendorName"
                 className="formInput"
-                value={vendorTitle}
-                onChange={handleInputVendorTitle}
+                value={vendorName}
+                onChange={handleInputVendorName}
                 inputRef={register({
                   required: 'This field is required!',
                   minLength: {
@@ -82,7 +82,7 @@ const CreateVendor = () => {
             )}
           />
           <FormHelperText className="formHelperText" error>
-            {errors.vendorTitle && errors.vendorTitle.message}
+            {errors.vendorName && errors.vendorName.message}
           </FormHelperText>
         </FormGroup>
 
