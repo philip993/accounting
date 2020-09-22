@@ -19,6 +19,12 @@ export class Vendor {
   @Column({ name: 'vendor_address' })
   vendorAddress: string;
 
+  @Column({ name: 'vendor_tax_number' })
+  vendorTaxNumber: string;
+
+  @Column({ name: 'vendor_bank_number' })
+  vendorBankAccount: string;
+
   @Column({ name: 'vendor_debit' })
   vendorDebit: number;
 
