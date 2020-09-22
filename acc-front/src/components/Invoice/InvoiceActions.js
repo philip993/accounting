@@ -1,6 +1,7 @@
 import {
   SUCCESS_GET_ALL_INVOICES,
   FAILURE_GET_ALL_INVOICES,
+  SELECT_ONE_INVOICE,
 } from './InvoiceActionTypes';
 import axios from 'axios';
 
@@ -8,7 +9,7 @@ import axios from 'axios';
 export const requestGetAllInvoices = () => {
   return (dispatch, getState) => {
     return axios
-      .get(`http://localhost:4000/invoices`)
+      .get(`http://localhost:4000/invoice`)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -22,5 +23,13 @@ export const requestGetAllInvoices = () => {
           type: FAILURE_GET_ALL_INVOICES,
         });
       });
+  };
+};
+
+// select
+export const selectOneInvoice = (e) => {
+  return {
+    type: SELECT_ONE_INVOICE,
+    payload: e,
   };
 };
