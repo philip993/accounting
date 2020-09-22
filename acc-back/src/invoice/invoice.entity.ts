@@ -26,6 +26,9 @@ export class Invoice {
   @Column({ name: 'invoice_number' })
   invoiceNumber: string;
 
+  @Column({ name: 'invoice_total' })
+  invoiceTotal: number;
+
   @Column({ name: 'invoice_date' })
   invoiceDate: string;
 

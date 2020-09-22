@@ -6,6 +6,7 @@ export class CreateInvoiceDto {
   // invoiceFK: number;
   invoiceVendorFK: number;
   invoiceNumber: string;
+  invoiceTotal: number;
   invoiceDate: string;
   invoiceDue: string;
   vendor: Vendor;
