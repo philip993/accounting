@@ -81,7 +81,7 @@ const DetailInvoice = () => {
                 ) => (
                   <TableRow className="tableRow">
                     <TableCell className="tableCell" colSpan={1}>
-                      {transactionFK}
+                      {transactionFK - 1}
                     </TableCell>
                     <TableCell className="tableCell" colSpan={4}>
                       {transactionDescription}
