@@ -44,7 +44,9 @@ const Journal = () => {
             }) => (
               <TableRow className="tableRow">
                 <TableCell className="tableCell">{transactionId}</TableCell>
-                <TableCell className="tableCell">{transactionFK}</TableCell>
+                <TableCell className="tableCell">
+                  {accounts.accountCode}. {accounts.accountName}
+                </TableCell>
                 <TableCell className="tableCell">
                   {transactionDescription}
                 </TableCell>
