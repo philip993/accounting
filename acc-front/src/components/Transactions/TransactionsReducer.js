@@ -44,6 +44,16 @@ export const TransactionsReducer = (state = initialState, action) => {
         vendor: '',
         invoice: '',
         transactionsDescription: '',
+        transactionsRow: [
+          {
+            account: '',
+            vendor: '',
+            invoice: '',
+            transactionsDescription: '',
+            transactionsDebit: 0,
+            transactionsCredit: 0,
+          },
+        ],
         transactionsDebit: 0,
         transactionsCredit: 0,
       };
@@ -55,6 +65,16 @@ export const TransactionsReducer = (state = initialState, action) => {
         account: '',
         vendor: '',
         transactionsDescription: '',
+        transactionsRow: [
+          {
+            account: '',
+            vendor: '',
+            invoice: '',
+            transactionsDescription: '',
+            transactionsDebit: 0,
+            transactionsCredit: 0,
+          },
+        ],
         transactionsDebit: 0,
         transactionsCredit: 0,
       };

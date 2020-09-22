@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
@@ -31,6 +31,7 @@ import {
   getTransactionsTotal,
 } from './TransactionsActions';
 import { requestGetChartOfAccounts } from '../ChartAccounts/ChartAccountsActions';
+import { inputInvoiceTotal } from '../CreateInvoice/CreateInvoiceActions';
 
 const Transactions = () => {
   let {
@@ -50,6 +51,8 @@ const Transactions = () => {
   }));
   const dispatch = useDispatch();
   const { handleSubmit, message, errors, register, control } = useForm();
+
+  const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
     dispatch(requestGetChartOfAccounts());
@@ -77,6 +80,8 @@ const Transactions = () => {
 
   const handleTotalRow = (e) => {
     dispatch(getTransactionsTotal(e));
+    dispatch(inputInvoiceTotal(e.transactionsCredit));
+    setClicked(true);
   };
 
   const submitForm = (e) => {
@@ -173,6 +178,7 @@ const Transactions = () => {
         </FormGroup>
         <FormGroup className="formGroupButton">
           <Button
+            disabled={clicked === true}
             className="saveButton"
             onClick={handleNewRow.bind(this, {
               account,
@@ -225,6 +231,7 @@ const Transactions = () => {
             </TableCell>
             <TableCell className="tableCellTotal" colSpan={2}>
               <Button
+                disabled={clicked === true}
                 className="tableBtn"
                 onClick={handleTotalRow.bind(this, {
                   account: 3,
