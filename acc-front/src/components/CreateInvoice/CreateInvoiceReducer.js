@@ -5,12 +5,14 @@ import {
   INPUT_INVOICE_NUMBER,
   INPUT_INVOICE_DATE,
   INPUT_INVOICE_DUE,
+  INPUT_INVOICE_TOTAL,
 } from './CreateInvoiceActionTypes';
 
 const initialState = {
   newInvoice: [],
   newInvoiceError: null,
   vendor: '',
+  invoiceTotal: 0,
   invoiceNumber: '',
   invoiceDate: '',
   invoiceDue: '',
@@ -25,6 +27,7 @@ export const CreateInvoiceReducer = (state = initialState, action) => {
         newInvoiceError: false,
         vendor: '',
         invoiceNumber: '',
+        invoiceTotal: '',
         invoiceDate: '',
         invoiceDue: '',
       };
@@ -47,6 +50,11 @@ export const CreateInvoiceReducer = (state = initialState, action) => {
       return {
         ...state,
         invoiceNumber: action.payload,
+      };
+    case INPUT_INVOICE_TOTAL:
+      return {
+        ...state,
+        invoiceTotal: action.payload,
       };
     case INPUT_INVOICE_DATE:
       return {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Redux Actions
 import {
@@ -31,11 +31,12 @@ import {
 } from '../Transactions/TransactionsActions';
 
 const CreateInvoice = () => {
-  const {
+  let {
     newInvoice,
     newInvoiceError,
     vendor,
     invoiceNumber,
+    invoiceTotal,
     invoiceDate,
     invoiceDue,
     allVendors,
@@ -48,6 +49,8 @@ const CreateInvoice = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit, message, control, errors } = useForm();
 
+  const [clicked, setClicked] = useState(false);
+
   useEffect(() => {
     dispatch(requestGetAllVendors());
   }, []);
@@ -55,6 +58,7 @@ const CreateInvoice = () => {
   const handleInvoiceVendor = (e) => {
     dispatch(inputInvoiceVendor(e.target.value));
     dispatch(inputTransactionsVendor(e.target.value));
+    setClicked(true);
   };
 
   const handleInvoiceNumber = (e) => {
@@ -80,7 +84,7 @@ const CreateInvoice = () => {
       <form className="createInvoiceForm" onSubmit={handleSubmit(submitForm)}>
         <div className="one">
           <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Vendor Code</FormLabel>
+            <FormLabel className="formLabel">Vendor</FormLabel>
             <Controller
               control={control}
               name="vendor"
@@ -105,6 +109,43 @@ const CreateInvoice = () => {
               {errors.vendor && errors.vendor.message}
             </FormHelperText>
           </FormGroup>
+
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Code</FormLabel>
+            <div className="formInput">
+              {!clicked
+                ? ''
+                : allVendors
+                    .filter((vend) => vend.vendorId === vendor)
+                    .map(({ vendorId }) => <Typography>{vendorId}</Typography>)}
+            </div>
+          </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Address</FormLabel>
+            <div className="formInput">
+              {!clicked
+                ? ''
+                : allVendors
+                    .filter((vend) => vend.vendorId === vendor)
+                    .map(({ vendorAddress }) => (
+                      <Typography>{vendorAddress}</Typography>
+                    ))}
+            </div>
+          </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Tax Number</FormLabel>
+            <div className="formInput">
+              {!clicked
+                ? ''
+                : allVendors
+                    .filter((vend) => vend.vendorId === vendor)
+                    .map(({ vendorTaxNumber }) => (
+                      <Typography>{vendorTaxNumber}</Typography>
+                    ))}
+            </div>
+          </FormGroup>
+        </div>
+        <div className="two">
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Invoice No.</FormLabel>
             <Controller
@@ -135,8 +176,6 @@ const CreateInvoice = () => {
               {errors.invoiceNumber && errors.invoiceNumber.message}
             </FormHelperText>
           </FormGroup>
-        </div>
-        <div className="two">
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Invoice Date</FormLabel>
             <Controller
@@ -189,7 +228,13 @@ const CreateInvoice = () => {
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Total</FormLabel>
             <Typography className="formTotal">
-              {transactionsRow.reduce((a, b) => a + b.transactionsDebit, 0)} $
+              {
+                (invoiceTotal = transactionsRow.reduce(
+                  (a, b) => a + b.transactionsDebit,
+                  0
+                ))
+              }{' '}
+              $
             </Typography>
           </FormGroup>
         </div>

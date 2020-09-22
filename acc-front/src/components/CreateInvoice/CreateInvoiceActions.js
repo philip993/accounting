@@ -5,6 +5,7 @@ import {
   INPUT_INVOICE_NUMBER,
   INPUT_INVOICE_DATE,
   INPUT_INVOICE_DUE,
+  INPUT_INVOICE_TOTAL,
 } from './CreateInvoiceActionTypes';
 import axios from 'axios';
 
@@ -14,6 +15,7 @@ export const requestCreateInvoice = () => {
     let {
       vendor,
       invoiceNumber,
+      invoiceTotal,
       invoiceDate,
       invoiceDue,
     } = getState().CreateInvoiceReducer;
@@ -21,6 +23,7 @@ export const requestCreateInvoice = () => {
       .post(`http://localhost:4000/invoice`, {
         invoiceVendorFK: vendor,
         invoiceNumber,
+        invoiceTotal,
         invoiceDate,
         invoiceDue,
       })
@@ -65,6 +68,13 @@ export const inputInvoiceDate = (e) => {
 export const inputInvoiceDue = (e) => {
   return {
     type: INPUT_INVOICE_DUE,
+    payload: e,
+  };
+};
+
+export const inputInvoiceTotal = (e) => {
+  return {
+    type: INPUT_INVOICE_TOTAL,
     payload: e,
   };
 };
