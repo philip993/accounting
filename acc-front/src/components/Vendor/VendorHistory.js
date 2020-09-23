@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Style
+import './VendorStyle.scss';
+// Accounting
+import { formatMoney } from 'accounting';
 // Redux Actions
 import { requestGetOneVendor } from './VendorActions';
 // Material Ui
@@ -30,8 +34,11 @@ const VendorHistory = () => {
           vendorTaxNumber,
           vendorBankAccount,
         }) => (
-          <Table>
+          <Table className="table">
             <TableHead className="tableHead">
+              <TableRow className="tableRowInfo">
+                <TableCell className="tableCell">INFO</TableCell>
+              </TableRow>
               <TableRow className="tableRow">
                 <TableCell className="tableCell">{vendorName}</TableCell>
                 <TableCell className="tableCell">{vendorAddress}</TableCell>
@@ -40,7 +47,7 @@ const VendorHistory = () => {
               </TableRow>
             </TableHead>
             <TableBody className="tableBody">
-              <TableRow className="tableRow">
+              <TableRow className="tableRowHeader">
                 <TableCell className="tableCell">Date</TableCell>
                 <TableCell className="tableCell">Invoice No.</TableCell>
                 <TableCell className="tableCell">Amount</TableCell>
@@ -52,7 +59,7 @@ const VendorHistory = () => {
                     <TableCell className="tableCell">{invoiceDate}</TableCell>
                     <TableCell className="tableCell">{invoiceNumber}</TableCell>
                     <TableCell className="tableCell">
-                      {invoiceTotal.toFixed(2)} $
+                      {formatMoney(invoiceTotal)} $
                     </TableCell>
                     <TableCell className="tableCell">{invoiceDue}</TableCell>
                   </TableRow>
@@ -65,10 +72,7 @@ const VendorHistory = () => {
                   Total
                 </TableCell>
                 <TableCell className="tableCell">
-                  {parseInt(
-                    invoice.reduce((a, b) => a + b.invoiceTotal.toFixed(2), 0)
-                  )}{' '}
-                  $
+                  {formatMoney(invoice.reduce((a, b) => a + b.invoiceTotal, 0))}
                 </TableCell>
               </TableRow>
             </TableFooter>

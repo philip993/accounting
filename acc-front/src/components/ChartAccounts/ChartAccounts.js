@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Style
+import './ChartAccountsStyle.scss';
+// Accounting
+import { formatMoney, formatColumn } from 'accounting';
 // Redux Actions
 import { requestGetChartOfAccounts } from './ChartAccountsActions';
 // Material Ui
@@ -48,23 +52,23 @@ const ChartAccounts = () => {
                 <TableCell className="tableCell">{accountCode}</TableCell>
                 <TableCell className="tableCell">{accountName}</TableCell>
                 <TableCell className="tableCell">
-                  {
+                  {formatMoney(
                     (debitBalance = transactions.reduce(
                       (a, b) => a + b.transactionDebit,
                       0
                     ))
-                  }
+                  )}
                 </TableCell>
                 <TableCell className="tableCell">
-                  {
+                  {formatMoney(
                     (creditBalance = transactions.reduce(
                       (a, b) => a + b.transactionCredit,
                       0
                     ))
-                  }
+                  )}
                 </TableCell>
                 <TableCell className="tableCell">
-                  {debitBalance - creditBalance}
+                  {formatMoney(debitBalance - creditBalance)}
                 </TableCell>
               </TableRow>
             )

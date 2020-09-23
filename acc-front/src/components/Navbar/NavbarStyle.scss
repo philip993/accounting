@@ -1,0 +1,27 @@
+.navbar {
+
+    .appBar {
+        background-color: #1471e9;
+
+        .toolbar {
+
+            .link {
+                text-align: center;
+                text-decoration: none;
+                color: #fff;
+                font-size: 1rem;
+                letter-spacing: 2px;
+                font-weight: bold;
+                min-width: 100px;
+                border: 1px solid #fff;
+                margin: 0px 10px;
+                padding: 5px;
+
+                &:hover {
+                    box-shadow: 0px 0px 5px #a90f52;
+                    border: 1px solid #a90f52;
+                }
+            }
+        }
+    }
+}

@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // React Router Dom
 import { useHistory } from 'react-router-dom';
+// Style
+import './InvoiceStyle.scss';
+// Accouting
+import { formatMoney } from 'accounting';
 // Redux Actions
 import { requestGetAllInvoices, selectOneInvoice } from './InvoiceActions';
 // Material Ui
@@ -61,7 +65,7 @@ const Invoice = () => {
                 <TableCell className="tableCell">{vendor.vendorName}</TableCell>
                 <TableCell className="tableCell">{invoiceNumber}</TableCell>
                 <TableCell className="tableCell">
-                  {invoiceTotal.toFixed(2)} $
+                  {formatMoney(invoiceTotal)}
                 </TableCell>
                 <TableCell className="tableCell">{invoiceDue}</TableCell>
                 <TableCell className="tableCell">

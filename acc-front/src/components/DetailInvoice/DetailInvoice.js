@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Style
+import './DetailInvoiceStyle.scss';
+// Accounting
+import { formatMoney } from 'accounting';
 // Redux Actions
 import { requestGetInvoiceDetails } from './DetailInvoiceActions';
 // Material Ui
@@ -7,8 +11,12 @@ import {
   Card,
   CardContent,
   Typography,
+  Table,
+  TableBody,
   TableRow,
   TableCell,
+  TableHead,
+  TableFooter,
 } from '@material-ui/core';
 
 const DetailInvoice = () => {
@@ -21,54 +29,69 @@ const DetailInvoice = () => {
 
   return (
     <div className="detailInvoice">
-      <Card>
-        {oneInvoice.map(
-          (
-            {
-              invoiceId,
-              invoiceNumber,
-              invoiceDate,
-              invoiceTotal,
-              invoiceDue,
-              invoices,
-              vendor,
-            },
-            index
-          ) => (
-            <CardContent>
-              <TableRow className="tableRow">
+      {oneInvoice.map(
+        (
+          {
+            invoiceId,
+            invoiceNumber,
+            invoiceDate,
+            invoiceTotal,
+            invoiceDue,
+            invoices,
+            vendor,
+          },
+          index
+        ) => (
+          <Table className="table">
+            <TableHead className="cardContent">
+              <TableRow className="tableRowInfo">
                 <TableCell className="tableCell">Basic Information</TableCell>
               </TableRow>
               <TableRow className="tableRow">
-                <TableCell className="tableCell" colSpan={8}>
+                <TableCell className="tableCell" colSpan={20}>
                   Posted Invoice No.
                 </TableCell>
-                <TableCell className="tableCell">{invoiceId}</TableCell>
-              </TableRow>
-              <TableRow className="tableRow">
-                <TableCell className="tableCell" colSpan={8}>
-                  {vendor.vendorName}
+                <TableCell className="tableCell" colSpan={4}>
+                  {invoiceId}
                 </TableCell>
-                <TableCell className="tableCell">{invoiceNumber}</TableCell>
               </TableRow>
               <TableRow className="tableRow">
-                <TableCell className="tableCell" colSpan={8}>
-                  {vendor.vendorId}
+                <TableCell className="tableCell" colSpan={20}>
+                  Vendor: {vendor.vendorName}
                 </TableCell>
-                <TableCell className="tableCell">{invoiceDate}</TableCell>
-              </TableRow>
-              <TableRow className="tableRow">
-                <TableCell className="tableCell" colSpan={8}>
-                  {vendor.vendorAddress}
-                </TableCell>
-                <TableCell className="tableCell">{invoiceDue}</TableCell>
-              </TableRow>
-              <TableRow className="tableRow">
                 <TableCell className="tableCell">
-                  {vendor.vendorTaxNumber}
+                  Invoice No.: {formatMoney(invoiceNumber)}
                 </TableCell>
               </TableRow>
-
+              <TableRow className="tableRow">
+                <TableCell className="tableCell" colSpan={20}>
+                  Vendor Code: {vendor.vendorId}
+                </TableCell>
+                <TableCell className="tableCell">DATE: {invoiceDate}</TableCell>
+              </TableRow>
+              <TableRow className="tableRow">
+                <TableCell className="tableCell" colSpan={20}>
+                  Vendor Address: {vendor.vendorAddress}
+                </TableCell>
+                <TableCell className="tableCell">DUE: {invoiceDue}</TableCell>
+              </TableRow>
+              <TableRow className="tableRow">
+                <TableCell className="tableCell" colSpan={20}>
+                  Tax No.: {vendor.vendorTaxNumber}
+                </TableCell>
+                <TableCell className="tableCell"></TableCell>
+              </TableRow>
+              <TableRow className="tableRow">
+                <TableCell className="tableCell" colSpan={20}>
+                  Bank Account: {vendor.vendorBankAccount}
+                </TableCell>
+                <TableCell className="tableCell"></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableRow className="tableRowInfo">
+              <TableCell className="tableCell">Lines</TableCell>
+            </TableRow>
+            <TableBody>
               {invoices.map(
                 (
                   {
@@ -80,34 +103,36 @@ const DetailInvoice = () => {
                   index
                 ) => (
                   <TableRow className="tableRow">
-                    <TableCell className="tableCell" colSpan={1}>
+                    <TableCell className="tableCell">
                       {transactionFK - 1}
                     </TableCell>
-                    <TableCell className="tableCell" colSpan={4}>
+                    <TableCell className="tableCell" colSpan={14}>
                       {transactionDescription}
                     </TableCell>
-                    <TableCell className="tableCell" colSpan={2}>
-                      {transactionDebit.toFixed(2)} $
+                    <TableCell className="tableCell" colSpan={4}>
+                      {formatMoney(transactionDebit)}
                     </TableCell>
-                    <TableCell className="tableCell" colSpan={2}>
-                      {transactionCredit.toFixed(2)} $
+                    <TableCell className="tableCell" colSpan={4}>
+                      {formatMoney(transactionCredit)}
                     </TableCell>
                   </TableRow>
                 )
               )}
-
-              <TableRow>
-                <TableCell className="tableCell" colSpan={4}>
-                  TOTAL
-                </TableCell>
-                <TableCell className="tableCell" colSpan={3}>
-                  {invoiceTotal.toFixed(2)} $
+            </TableBody>
+            <TableFooter>
+              <TableRow className="tableRowInfo">
+                <TableCell className="tableCell">Summary</TableCell>
+              </TableRow>
+              <TableRow className="tableRowTotal">
+                <TableCell className="tableCell">TOTAL</TableCell>
+                <TableCell className="tableCell">
+                  {formatMoney(invoiceTotal)}
                 </TableCell>
               </TableRow>
-            </CardContent>
-          )
-        )}
-      </Card>
+            </TableFooter>
+          </Table>
+        )
+      )}
     </div>
   );
 };

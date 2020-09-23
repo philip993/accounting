@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // React Router Dom
 import { useHistory } from 'react-router-dom';
+// Style
+import './VendorStyle.scss';
+// Accounting
+import { formatMoney } from 'accounting';
 // Redux Actions
 import { requestGetAllVendors, selectOneVendor } from './VendorActions';
 // Material Ui
@@ -70,21 +74,21 @@ const Vendor = () => {
                   </Button>
                 </TableCell>
                 <TableCell className="tableCell">
-                  {
+                  {formatMoney(
                     (vendorDebit = vendorlines
                       .filter((transaction) => transaction.transactionFK === 3)
                       .reduce((a, b) => a + b.transactionDebit, 0))
-                  }
+                  )}
                 </TableCell>
                 <TableCell className="tableCell">
-                  {
+                  {formatMoney(
                     (vendorCredit = vendorlines
                       .filter((transaction) => transaction.transactionFK === 3)
                       .reduce((a, b) => a + b.transactionCredit, 0))
-                  }
+                  )}
                 </TableCell>
                 <TableCell className="tableCell">
-                  {vendorDebit - vendorCredit}
+                  {formatMoney(vendorDebit - vendorCredit)}
                 </TableCell>
               </TableRow>
             )

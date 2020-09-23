@@ -1,17 +1,115 @@
 .vendors {
+  width: 80%;
+  margin: auto;
+
   .table {
     .tableHead {
+      background-color: #1471e9;
+
       .tableRow {
+
+
         .tableCell {
-          color: #000;
+          color: #fff;
+          border: 1px solid #363636;
+          font-size: 1rem;
+          letter-spacing: 1.5px;
         }
       }
     }
 
     .tableBody {
+
+
       .tableRow {
         .tableCell {
-          color: #000;
+          color: #363636;
+          border: 1px solid #bebebe;
+        }
+
+        .tableCellTotal {
+          color: #0f52ab;
+          font-weight: bold;
+          letter-spacing: 1.5px;
+        }
+
+        .tableBtn {
+          color: #a90f52;
+          border: 1px solid #a90f52;
+          font-weight: bold;
+
+          &:hover {
+            background-color: #a90f52;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+.vendorHistory {
+  width: 80%;
+  margin: auto;
+
+  .tableHead {
+    background-color: #bebebe;
+    margin-bottom: 5%;
+
+    .tableRowInfo {
+      background-color: #0f52ab;
+      color: #fff;
+
+      .tableCell {
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+        color: #fff;
+      }
+    }
+
+    .tableRow {
+
+
+      .tableCell {
+        color: #fff;
+        border: 1px solid #363636;
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+      }
+    }
+  }
+
+  .tableBody {
+
+
+    .tableRowHeader {
+      background-color: #0f52ab;
+
+      .tableCell {
+        color: #fff;
+      }
+    }
+
+    .tableRow {
+      .tableCell {
+        color: #363636;
+        border: 1px solid #bebebe;
+      }
+
+      .tableCellTotal {
+        color: #0f52ab;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+      }
+
+      .tableBtn {
+        color: #a90f52;
+        border: 1px solid #a90f52;
+        font-weight: bold;
+
+        &:hover {
+          background-color: #a90f52;
+          color: #fff;
         }
       }
     }

@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+// Style
+import './JournalStyle.scss';
+// Accounting
+import { formatMoney } from 'accounting';
 // Redux Actions
 import { requestGetTransactions } from './JournalActions';
 // Mateiral Ui
@@ -50,8 +54,12 @@ const Journal = () => {
                 <TableCell className="tableCell">
                   {transactionDescription}
                 </TableCell>
-                <TableCell className="tableCell">{transactionDebit}</TableCell>
-                <TableCell className="tableCell">{transactionCredit}</TableCell>
+                <TableCell className="tableCell">
+                  {formatMoney(transactionDebit)}
+                </TableCell>
+                <TableCell className="tableCell">
+                  {formatMoney(transactionCredit)}
+                </TableCell>
               </TableRow>
             )
           )}
