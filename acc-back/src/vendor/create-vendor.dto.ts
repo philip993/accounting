@@ -9,5 +9,6 @@ export class CreateVendorDto {
   vendorBankAccount: string;
   vendorDebit: number;
   vendorCredit: number;
-  invoice: Invoice;
+  invoice: Invoice[];
+  vendorlines: Transactions[];
 }

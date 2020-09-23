@@ -10,11 +10,15 @@ export class VendorService {
   ) {}
 
   async findAll(): Promise<Vendor[]> {
-    return await this.vendorRepository.find();
+    return await this.vendorRepository.find({
+      relations: ['vendorlines', 'invoice'],
+    });
   }
 
   async findOne(id: number): Promise<Vendor> {
-    return await this.vendorRepository.findOne(id);
+    return await this.vendorRepository.findOne(id, {
+      relations: ['vendorlines', 'invoice'],
+    });
   }
 
   async create(vendor: Vendor): Promise<Vendor> {

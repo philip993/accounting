@@ -32,6 +32,16 @@ export class Vendor {
   vendorCredit: number;
 
   // relation O:O with Invoice
-
+  // O:O with Vendor
+  @OneToMany(
+    type => Invoice,
+    invoice => invoice.vendor,
+  )
+  invoice: Invoice[];
   // relation O:M with Transactions
+  @OneToMany(
+    type => Transactions,
+    vendorlines => vendorlines.invoicelines,
+  )
+  vendorlines: Transactions[];
 }

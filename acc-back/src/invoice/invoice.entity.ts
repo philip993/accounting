@@ -2,9 +2,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  OneToOne,
   OneToMany,
   JoinColumn,
+  ManyToOne,
 } from 'typeorm';
 import { Vendor } from 'src/vendor/vendor.entity';
 import { Transactions } from 'src/transactions/transactions.entity';
@@ -36,8 +36,11 @@ export class Invoice {
   )
   invoices: [Array<Transactions[]>];
 
-  // O:O with Vendor
-  @OneToOne(type => Vendor)
+  // M:O with Vendor
+  @ManyToOne(
+    type => Vendor,
+    vendor => vendor.invoice,
+  )
   @JoinColumn({ name: 'invoice_vendor_FK' })
   vendor: Vendor;
 }

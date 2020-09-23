@@ -42,22 +42,9 @@ export class Transactions {
   @JoinColumn({ name: 'transaction_FK' })
   accounts: Array<Accounts[]>;
 
-  @OneToOne(type => Vendor)
+  @ManyToOne(type => Vendor)
   @JoinColumn({ name: 'transaction_lines_FK' })
   invoicelines: Vendor;
-
-  // @ManyToOne(
-  //   type => Invoice,
-  //   transactionlines => transactionlines.invoices,
-  // )
-  // // @JoinColumn({ name: 'transaction_lines_FK' })
-  // transactionlines: Invoice[];
-
-  // @OneToMany(
-  //   type => Invoice,
-  //   transactionlines => transactionlines.invoices,
-  // )
-  // transactionlines: Invoice;
 
   @ManyToOne(
     type => Invoice,
