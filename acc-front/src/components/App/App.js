@@ -11,6 +11,7 @@ import CreateVendor from '../CreateVendor/CreateVendor';
 import Invoice from '../Invoice/Invoice';
 import CreateInvoice from '../CreateInvoice/CreateInvoice';
 import DetailInvoice from '../DetailInvoice/DetailInvoice';
+import VendorHistory from '../Vendor/VendorHistory';
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route exact path="/invoices" component={Invoice} />
         <Route exact path="/createinvoice" component={CreateInvoice} />
         <Route exact path="/invoicedetails" component={DetailInvoice} />
+        <Route exact path="/vendorhistory" component={VendorHistory} />
       </Switch>
     </div>
   );
