@@ -25,6 +25,24 @@ export class Vendor {
   @Column({ name: 'vendor_bank_number' })
   vendorBankAccount: string;
 
+  @Column({ name: 'vendor_city' })
+  vendorCity: string;
+
+  @Column({ name: 'vendor_zipcode' })
+  vendorZipCode: string;
+
+  @Column({ name: 'vendor_telephone' })
+  vendorTelephone: string;
+
+  @Column({ name: 'vendor_email' })
+  vendorEmail: string;
+
+  @Column({ name: 'vendor_language' })
+  vendorLanguage: string;
+
+  @Column({ name: 'vendor_currency' })
+  vendorCurrency: string;
+
   @Column({ name: 'vendor_debit' })
   vendorDebit: number;
 
