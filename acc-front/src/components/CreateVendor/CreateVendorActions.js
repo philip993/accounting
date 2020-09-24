@@ -5,6 +5,12 @@ import {
   INPUT_VENDOR_TAX_NUMBER,
   SUCCESS_CREATE_VENDOR,
   FAILURE_CREATE_VENDOR,
+  INPUT_VENDOR_CITY,
+  INPUT_VENDOR_ZIP_CODE,
+  INPUT_VENDOR_TELEPHONE,
+  INPUT_VENDOR_EMAIL,
+  INPUT_VENDOR_LANGUAGE,
+  INPUT_VENDOR_CURRENCY,
 } from './CreateVendorActionTypes';
 import axios from 'axios';
 
@@ -16,6 +22,12 @@ export const requestCreateVendor = () => {
       vendorAddress,
       vendorTaxNumber,
       vendorBankAccount,
+      vendorCity,
+      vendorZipCode,
+      vendorTelephone,
+      vendorEmail,
+      vendorLanguage,
+      vendorCurrency,
       vendorDebit,
       vendorCredit,
     } = getState().CreateVendorReducer;
@@ -25,6 +37,12 @@ export const requestCreateVendor = () => {
         vendorAddress,
         vendorTaxNumber,
         vendorBankAccount,
+        vendorCity,
+        vendorZipCode,
+        vendorTelephone,
+        vendorEmail,
+        vendorLanguage,
+        vendorCurrency,
         vendorDebit: 0,
         vendorCredit: 0,
       })
@@ -69,6 +87,48 @@ export const inputVendorBankAccount = (e) => {
 export const inputVendorTaxNumber = (e) => {
   return {
     type: INPUT_VENDOR_TAX_NUMBER,
+    payload: e,
+  };
+};
+
+export const inputVendorCity = (e) => {
+  return {
+    type: INPUT_VENDOR_CITY,
+    payload: e,
+  };
+};
+
+export const inputVendorZipCode = (e) => {
+  return {
+    type: INPUT_VENDOR_ZIP_CODE,
+    payload: e,
+  };
+};
+
+export const inputVendorTelephone = (e) => {
+  return {
+    type: INPUT_VENDOR_TELEPHONE,
+    payload: e,
+  };
+};
+
+export const inputVendorEmail = (e) => {
+  return {
+    type: INPUT_VENDOR_EMAIL,
+    payload: e,
+  };
+};
+
+export const inputVendorLanguage = (e) => {
+  return {
+    type: INPUT_VENDOR_LANGUAGE,
+    payload: e,
+  };
+};
+
+export const inputVendorCurrency = (e) => {
+  return {
+    type: INPUT_VENDOR_CURRENCY,
     payload: e,
   };
 };
