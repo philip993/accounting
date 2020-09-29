@@ -25,8 +25,12 @@ const App = () => {
         <Route exact path="/createvendor" component={CreateVendor} />
         <Route exact path="/invoices" component={Invoice} />
         <Route exact path="/createinvoice" component={CreateInvoice} />
-        <Route exact path="/invoicedetails" component={DetailInvoice} />
-        <Route exact path="/vendorhistory" component={VendorHistory} />
+        <Route
+          exact
+          path="/invoices/invoicedetails"
+          component={DetailInvoice}
+        />
+        <Route exact path="/vendors/vendorhistory" component={VendorHistory} />
       </Switch>
     </div>
   );

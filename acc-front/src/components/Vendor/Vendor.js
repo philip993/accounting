@@ -25,7 +25,7 @@ const Vendor = () => {
 
   const handleVendorHistory = (e) => {
     dispatch(selectOneVendor(e));
-    history.push('/vendorhistory');
+    history.push('/vendors/vendorhistory');
   };
 
   useEffect(() => {
