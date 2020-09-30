@@ -29,6 +29,9 @@ export class Transactions {
   @Column({ name: 'transaction_description' })
   transactionDescription: string;
 
+  @Column({ name: 'transaction_date' })
+  transactionDate: string;
+
   @Column({ name: 'transaction_debit' })
   transactionDebit: number;
 

@@ -9,6 +9,7 @@ export class CreateTransactionsDto {
   transactionLinesFK: number;
   transactionInvoiceFK: number;
   transactionDescription: string;
+  transactionDate: string;
   transactionDebit: number;
   transactionCredit: number;
   accounts: Array<Accounts[]>;
