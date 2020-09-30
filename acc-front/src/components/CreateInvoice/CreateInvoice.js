@@ -8,6 +8,11 @@ import {
   inputInvoiceDue,
   inputInvoiceNumber,
 } from './CreateInvoiceActions';
+import { requestGetAllVendors } from '../Vendor/VendorActions';
+import {
+  inputTransactionsVendor,
+  requestCreateTransactions,
+} from '../Transactions/TransactionsActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
 // Scss
@@ -23,12 +28,8 @@ import {
   MenuItem,
   Typography,
 } from '@material-ui/core';
+// React Components
 import Transactions from '../Transactions/Transactions';
-import { requestGetAllVendors } from '../Vendor/VendorActions';
-import {
-  inputTransactionsVendor,
-  requestCreateTransactions,
-} from '../Transactions/TransactionsActions';
 
 const CreateInvoice = () => {
   let {
@@ -185,6 +186,7 @@ const CreateInvoice = () => {
                 <InputBase
                   className="formInput"
                   name="invoiceDate"
+                  type="date"
                   value={invoiceDate}
                   onChange={handleInvoiceDate}
                   inputRef={register({
@@ -207,6 +209,7 @@ const CreateInvoice = () => {
                 <InputBase
                   className="formInput"
                   name="invoiceDue"
+                  type="date"
                   value={invoiceDue}
                   onChange={handleInvoiceDue}
                   inputRef={register({

@@ -5,6 +5,7 @@ import {
   INPUT_TRANSACTIONS_VENDOR,
   INPUT_TRANSACTIONS_INVOICE,
   INPUT_TRANSACTIONS_DESCRIPTION,
+  INPUT_TRANSACTIONS_DATE,
   INPUT_TRANSACTIONS_DEBIT,
   INPUT_TRANSACTIONS_CREDIT,
   SELECT_NEW_ROW,
@@ -21,12 +22,14 @@ const initialState = {
   transactionsDebit: 0,
   transactionsCredit: 0,
   transactionsTotal: 0,
+  transactionsDate: '',
   transactionsRow: [
     {
       account: '',
       vendor: '',
       invoice: '',
       transactionsDescription: '',
+      transactionsDate: '',
       transactionsDebit: 0,
       transactionsCredit: 0,
     },
@@ -50,6 +53,7 @@ export const TransactionsReducer = (state = initialState, action) => {
             vendor: '',
             invoice: '',
             transactionsDescription: '',
+            transactionsDate: '',
             transactionsDebit: 0,
             transactionsCredit: 0,
           },
@@ -97,6 +101,11 @@ export const TransactionsReducer = (state = initialState, action) => {
       return {
         ...state,
         transactionsDescription: action.payload,
+      };
+    case INPUT_TRANSACTIONS_DATE:
+      return {
+        ...state,
+        transactionsDate: action.payload,
       };
     case INPUT_TRANSACTIONS_DEBIT:
       return {

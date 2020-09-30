@@ -39,6 +39,7 @@ const Transactions = () => {
     vendor,
     invoice,
     transactionsDescription,
+    transactionsDate,
     transactionsDebit,
     transactionsCredit,
     transactionsRow,
@@ -185,6 +186,7 @@ const Transactions = () => {
               vendor,
               invoice,
               transactionsDescription,
+              transactionsDate,
               transactionsDebit: parseInt(transactionsDebit),
               transactionsCredit,
             })}

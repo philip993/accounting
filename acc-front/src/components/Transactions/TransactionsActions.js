@@ -9,6 +9,7 @@ import {
   INPUT_TRANSACTIONS_INVOICE,
   SELECT_NEW_ROW,
   TRANSACTION_TOTAL,
+  INPUT_TRANSACTIONS_DATE,
 } from './TransactionsActionTypes';
 import axios from 'axios';
 
@@ -22,6 +23,7 @@ export const requestCreateTransactions = () => {
         transactionFK: transaction.account,
         transactionLinesFK: transaction.vendor,
         transactionInvoiceFK: newInvoice.invoiceId,
+        transactionDate: newInvoice.invoiceDate,
         transactionDescription: transaction.transactionsDescription,
         transactionDebit: transaction.transactionsDebit,
         transactionCredit: transaction.transactionsCredit,
@@ -71,6 +73,13 @@ export const inputTransactionsInvoice = (e) => {
 export const inputTransactionsDescription = (e) => {
   return {
     type: INPUT_TRANSACTIONS_DESCRIPTION,
+    payload: e,
+  };
+};
+
+export const inputTransactionsDate = (e) => {
+  return {
+    type: INPUT_TRANSACTIONS_DATE,
     payload: e,
   };
 };
