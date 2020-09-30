@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import './JournalStyle.scss';
 // Accounting
 import { formatMoney } from 'accounting';
+// Moment
+// import * as moment from 'moment';
+import Moment from 'react-moment';
 // Redux Actions
 import { requestGetTransactions } from './JournalActions';
 // Mateiral Ui
@@ -32,6 +35,7 @@ const Journal = () => {
             <TableCell className="tableCell">#</TableCell>
             <TableCell className="tableCell">Account Code</TableCell>
             <TableCell className="tableCell">Description</TableCell>
+            <TableCell className="tableCell">Date</TableCell>
             <TableCell className="tableCell">Debit</TableCell>
             <TableCell className="tableCell">Credit</TableCell>
           </TableRow>
@@ -42,6 +46,7 @@ const Journal = () => {
               transactionId,
               transactionFK,
               transactionDescription,
+              transactionDate,
               transactionDebit,
               transactionCredit,
               accounts,
@@ -53,6 +58,9 @@ const Journal = () => {
                 </TableCell>
                 <TableCell className="tableCell">
                   {transactionDescription}
+                </TableCell>
+                <TableCell className="tableCell">
+                  <Moment format="DD.MM.yyyy">{transactionDate}</Moment>
                 </TableCell>
                 <TableCell className="tableCell">
                   {formatMoney(transactionDebit)}

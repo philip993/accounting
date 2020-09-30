@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import './DetailInvoiceStyle.scss';
 // Accounting
 import { formatMoney } from 'accounting';
+// Moment
+import Moment from 'react-moment';
 // Redux Actions
 import { requestGetInvoiceDetails } from './DetailInvoiceActions';
 // Material Ui
@@ -60,20 +62,24 @@ const DetailInvoice = () => {
                   Vendor: {vendor.vendorName}
                 </TableCell>
                 <TableCell className="tableCell">
-                  Invoice No.: {formatMoney(invoiceNumber)}
+                  Invoice No.: {invoiceNumber}
                 </TableCell>
               </TableRow>
               <TableRow className="tableRow">
                 <TableCell className="tableCell" colSpan={20}>
                   Vendor Code: {vendor.vendorId}
                 </TableCell>
-                <TableCell className="tableCell">DATE: {invoiceDate}</TableCell>
+                <TableCell className="tableCell">
+                  DATE:<Moment format="DD.MM.YYYY">{invoiceDate}</Moment>{' '}
+                </TableCell>
               </TableRow>
               <TableRow className="tableRow">
                 <TableCell className="tableCell" colSpan={20}>
                   Vendor Address: {vendor.vendorAddress}
                 </TableCell>
-                <TableCell className="tableCell">DUE: {invoiceDue}</TableCell>
+                <TableCell className="tableCell">
+                  DUE: <Moment format="DD.MM.YYYY">{invoiceDue}</Moment>{' '}
+                </TableCell>
               </TableRow>
               <TableRow className="tableRow">
                 <TableCell className="tableCell" colSpan={20}>

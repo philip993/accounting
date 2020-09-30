@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import './InvoiceStyle.scss';
 // Accouting
 import { formatMoney } from 'accounting';
+// Moment
+import Moment from 'react-moment';
 // Redux Actions
 import { requestGetAllInvoices, selectOneInvoice } from './InvoiceActions';
 // Material Ui
@@ -61,13 +63,18 @@ const Invoice = () => {
             }) => (
               <TableRow className="tableRow">
                 <TableCell className="tableCell">{invoiceId}</TableCell>
-                <TableCell className="tableCell">{invoiceDate}</TableCell>
+                <TableCell className="tableCell">
+                  <Moment format="DD.MM.yyyy">{invoiceDate}</Moment>
+                </TableCell>
                 <TableCell className="tableCell">{vendor.vendorName}</TableCell>
                 <TableCell className="tableCell">{invoiceNumber}</TableCell>
                 <TableCell className="tableCell">
                   {formatMoney(invoiceTotal)}
                 </TableCell>
-                <TableCell className="tableCell">{invoiceDue}</TableCell>
+                <TableCell className="tableCell">
+                  {' '}
+                  <Moment format="DD.MM.yyyy">{invoiceDue}</Moment>
+                </TableCell>
                 <TableCell className="tableCell">
                   <Button
                     onClick={handleSelectInvoice.bind(this, { invoiceId })}
