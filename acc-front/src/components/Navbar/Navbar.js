@@ -28,28 +28,28 @@ const Navbar = () => {
           <Link to="/" className="link">
             Home
           </Link>
-          <Link to="/chart" className="link">
+          <Link to="/general/chart" className="link">
             Chart Accounts
           </Link>
-          <Link to="/journal" className="link">
+          <Link to="/general/journal" className="link">
             Journal
           </Link>
-          <Link to="/vendors" className="link">
+          <Link to="/payables/vendors" className="link">
             Vendors
           </Link>
-          <Link to="/createvendor" className="link">
+          <Link to="/payables/createvendor" className="link">
             Vendor Form
           </Link>
-          <Link to="/invoices" className="link">
+          <Link to="/payables/invoices" className="link">
             Invoices
           </Link>
-          <Link to="/createinvoice" className="link">
+          <Link to="/payables/createinvoice" className="link">
             Invoice Form
           </Link>
         </Toolbar>
         <Toolbar className="toolbar">
           <Breadcrumbs
-            maxItems={3}
+            maxItems={5}
             aria-label="breadcrumb"
             className="breadcrumbs"
           >
@@ -64,7 +64,7 @@ const Navbar = () => {
                   <Link
                     className="startlink"
                     key={index}
-                    onClick={() => history.push(route)}
+                    onClick={() => history.goBack(-1)}
                   >
                     {route}
                   </Link>

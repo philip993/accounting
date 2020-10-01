@@ -31,7 +31,7 @@ const Invoice = () => {
 
   const handleSelectInvoice = (e) => {
     dispatch(selectOneInvoice(e));
-    history.push('/invoices/invoicedetails');
+    history.push('/payables/invoices/invoicedetails');
   };
 
   return (
