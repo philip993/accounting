@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // Style
 import './HomeStyle.scss';
+import {} from '@material-ui/core';
 
 const Home = () => {
   return (
