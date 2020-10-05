@@ -9,19 +9,25 @@ import {} from '@material-ui/core';
 const Home = () => {
   return (
     <div className="home">
-      <h1>Accounting</h1>
-      <Link className="link" to="/general">
-        General Ledgder
-      </Link>
-      <Link className="link" to="/receivables">
-        Receivables
-      </Link>
-      <Link className="link" to="/payables">
-        Payables
-      </Link>
-      <Link className="link" to="/humanresources">
-        Human Resources
-      </Link>
+      <div className="one">
+        <h1>Accounting App</h1>
+      </div>
+      <div className="two">
+        <Link className="link" to="/general">
+          General Ledgder
+        </Link>
+        <Link className="link" to="/humanresources">
+          Human Resources
+        </Link>
+      </div>
+      <div className="three">
+        <Link className="link" to="/receivables">
+          Receivables
+        </Link>
+        <Link className="link" to="/payables">
+          Payables
+        </Link>
+      </div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import {
   MenuItem,
   Menu,
 } from '@material-ui/core';
+import SideMenu from '../SideMenu/SideMenu';
 
 const Navbar = () => {
   let location = useLocation();
@@ -25,36 +26,14 @@ const Navbar = () => {
     <div className="navbar">
       <AppBar position="static" className="appBar">
         <Toolbar className="toolbar">
-          <Link to="/" className="link">
-            Home
-          </Link>
-          <Link to="/general/chart" className="link">
-            Chart Accounts
-          </Link>
-          <Link to="/general/journal" className="link">
-            Journal
-          </Link>
-          <Link to="/payables/vendors" className="link">
-            Vendors
-          </Link>
-          <Link to="/payables/createvendor" className="link">
-            Vendor Form
-          </Link>
-          <Link to="/payables/invoices" className="link">
-            Invoices
-          </Link>
-          <Link to="/payables/createinvoice" className="link">
-            Invoice Form
-          </Link>
-        </Toolbar>
-        <Toolbar className="toolbar">
+          <SideMenu />
           <Breadcrumbs
             maxItems={5}
             aria-label="breadcrumb"
             className="breadcrumbs"
           >
             <Link className="startlink" onClick={() => history.push('/')}>
-              home
+              Home
             </Link>
             {currentRoutes.length == 1 ? (
               <Link className="startlink">{currentRoutes[0]}</Link>

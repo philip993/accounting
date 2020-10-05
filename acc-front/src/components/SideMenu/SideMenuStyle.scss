@@ -1,0 +1,28 @@
+.sideMenu {
+
+    .icon {
+        color: #fff;
+        padding-right: 2%;
+
+        &:hover {
+            color: #a90f52;
+        }
+    }
+
+    .drawer {
+
+        width: 300px;
+
+        .list {
+            width: 300px;
+
+            .listItem {
+                text-decoration: none;
+
+                .link {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}

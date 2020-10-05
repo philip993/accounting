@@ -2,60 +2,37 @@
   .appBar {
     background-color: #1471e9;
 
-    // .side {
-    //   height: 540px;
-    // }
-
     .toolbar {
+      padding: 0.5%;
+
       .link {
-        text-align: center;
         text-decoration: none;
         color: #fff;
-        font-size: 1rem;
-        letter-spacing: 2px;
-        font-weight: bold;
-        min-width: 100px;
-        border: 1px solid #fff;
-        margin: 0px 10px;
-        padding: 5px;
+        margin-right: 2%;
 
-        &:hover {
-          box-shadow: 0px 0px 5px #a90f52;
-          border: 1px solid #a90f52;
-        }
       }
 
       .breadcrumbs {
+        border: 1px solid #fff;
+        background-color: #fff;
+        width: 90%;
+
         .startlink {
           text-align: center;
           text-decoration: none;
-          color: #fff;
+          color: #000;
           font-size: 1rem;
           letter-spacing: 2px;
           font-weight: bold;
           min-width: 100px;
-          //   border: 1px solid #fff;
           margin: 0px 10px;
           padding: 5px;
 
           &:hover {
-            box-shadow: 0px 0px 5px #a90f52;
-            // border: 1px solid #a90f52;
+            color: #a90f52;
           }
         }
 
-        .activelink {
-          text-align: center;
-          text-decoration: none;
-          color: #eece2f;
-          font-size: 1rem;
-          letter-spacing: 2px;
-          font-weight: bold;
-          min-width: 100px;
-          //   border: 1px solid #eece2f;
-          margin: 0px 10px;
-          padding: 5px;
-        }
       }
     }
   }
