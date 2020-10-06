@@ -1,0 +1,42 @@
+.navbar {
+  .appBar {
+    background-color: #1471e9;
+    z-index: 1301;
+    height: 79px;
+    position: relative;
+
+    .toolbar {
+      padding: 0.5%;
+
+      .link {
+        text-decoration: none;
+        color: #fff;
+        margin-right: 2%;
+
+      }
+
+      .breadcrumbs {
+        border: 1px solid #fff;
+        background-color: #fff;
+        width: 90%;
+
+        .startlink {
+          text-align: center;
+          text-decoration: none;
+          color: #000;
+          font-size: 1rem;
+          letter-spacing: 2px;
+          font-weight: bold;
+          min-width: 100px;
+          margin: 0px 10px;
+          padding: 5px;
+
+          &:hover {
+            color: #a90f52;
+          }
+        }
+
+      }
+    }
+  }
+}

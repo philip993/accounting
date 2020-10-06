@@ -1,0 +1,43 @@
+.menu {
+    width: 60%;
+    margin: auto;
+
+    h1 {
+        color: #a90f52;
+        padding-bottom: 20px;
+    }
+
+    ul {
+
+        li {
+            list-style-type: none;
+            letter-spacing: 1px;
+
+
+            h3 {
+                font-size: 1.5rem;
+                color: #0f52ab;
+            }
+
+
+            .link {
+                padding-left: 10px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                text-decoration: none;
+                color: #000;
+                font-weight: bold;
+                display: list-item;
+
+                &:hover {
+                    color: #a90f52;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+
+    }
+
+
+}
