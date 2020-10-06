@@ -7,8 +7,9 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Customer } from 'src/customer/customer.entity';
+import { Transactions } from 'src/transactions/transactions.entity';
 
-@Entity({ name: 'sales_invoice' })
+@Entity({ name: 'salesinvoices' })
 export class SalesInvoice {
   @PrimaryGeneratedColumn({ name: 'sales_invoice_id' })
   salesInvoiceId: number;
@@ -34,4 +35,10 @@ export class SalesInvoice {
   )
   @JoinColumn({ name: 'sales_invoice_customer_FK' })
   customer: Customer;
+
+  @OneToMany(
+    type => Transactions,
+    salesinvoice => salesinvoice.transactionsales,
+  )
+  salesinvoice: Transactions[];
 }
