@@ -15,6 +15,7 @@ import VendorHistory from '../Vendor/VendorHistory';
 import PayablesMenu from '../Menu/PayablesMenu';
 import ReceivablesMenu from '../Menu/Receivables';
 import GeneralMenu from '../Menu/GeneralMenu';
+import HumanResourcesMenu from '../Menu/HumanResourcesMenu';
 
 const App = () => {
   return (
@@ -41,6 +42,7 @@ const App = () => {
         <Route exact path="/payables" component={PayablesMenu} />
         <Route exact path="/receivables" component={ReceivablesMenu} />
         <Route exact path="/general" component={GeneralMenu} />
+        <Route exact path="/hr" component={HumanResourcesMenu} />
       </Switch>
     </div>
   );

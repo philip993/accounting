@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 // Style
 import './HomeStyle.scss';
-import {} from '@material-ui/core';
 
 const Home = () => {
   return (
@@ -16,7 +15,7 @@ const Home = () => {
         <Link className="link" to="/general">
           General Ledgder
         </Link>
-        <Link className="link" to="/humanresources">
+        <Link className="link" to="/hr">
           Human Resources
         </Link>
       </div>
