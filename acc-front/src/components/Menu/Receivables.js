@@ -1,5 +1,7 @@
 import React from 'react';
 
+// Style
+import './MenuStyle.scss';
 // import React Router Dom
 import { Link } from 'react-router-dom';
 
@@ -9,32 +11,28 @@ const ReceivablesMenu = () => {
       <h1>Receivables</h1>
       <ul>
         <li>
-          Lists
-          <ul>
-            <li>
-              <Link to="/receivables/invoices">Posted Sales Invoices</Link>
-            </li>
-            <li>
-              <Link to="/receivables/customers">Customers</Link>
-            </li>
-          </ul>
+          <h3>Lists</h3>
+          <Link to="/receivables/invoices" className="link">
+            Posted Sales Invoices
+          </Link>
+          <Link to="/receivables/customers" className="link">
+            Customers
+          </Link>
         </li>
         <li>
-          Task
-          <ul>
-            <li>
-              <Link to="/receivables/createinvoice">Sales Invoice</Link>
-            </li>
-            <li>
-              <Link to="/receivables/createcustomer">Customer</Link>
-            </li>
-          </ul>
+          <h3>Reports</h3>
         </li>
         <li>
-          History
-          <ul>
-            <li></li>
-          </ul>
+          <h3>Tasks</h3>
+          <Link to="/receivables/createinvoice" className="link">
+            Sales Invoice
+          </Link>
+          <Link to="/receivables/createcustomer" className="link">
+            Customer
+          </Link>
+        </li>
+        <li>
+          <h3>History</h3>
         </li>
       </ul>
     </div>
