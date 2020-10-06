@@ -2,6 +2,7 @@ import { Accounts } from 'src/accounts/accounts.entity';
 import { Vendor } from 'src/vendor/vendor.entity';
 import { Transactions } from './transactions.entity';
 import { Invoice } from 'src/invoice/invoice.entity';
+import { Customer } from 'src/customer/customer.entity';
 
 export class CreateTransactionsDto {
   transactionId: number;
@@ -14,5 +15,6 @@ export class CreateTransactionsDto {
   transactionCredit: number;
   accounts: Array<Accounts[]>;
   invoicelines: Vendor;
+  saleslines: Customer;
   transactionlines: Invoice[];
 }

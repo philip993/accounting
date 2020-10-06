@@ -11,6 +11,7 @@ import {
 import { Accounts } from '../accounts/accounts.entity';
 import { Invoice } from 'src/invoice/invoice.entity';
 import { Vendor } from 'src/vendor/vendor.entity';
+import { Customer } from 'src/customer/customer.entity';
 
 @Entity({ name: 'transactions' })
 export class Transactions {
@@ -48,6 +49,10 @@ export class Transactions {
   @ManyToOne(type => Vendor)
   @JoinColumn({ name: 'transaction_lines_FK' })
   invoicelines: Vendor;
+
+  @ManyToOne(type => Customer)
+  @JoinColumn({ name: 'transaction_lines_FK' })
+  saleslines: Customer;
 
   @ManyToOne(
     type => Invoice,
