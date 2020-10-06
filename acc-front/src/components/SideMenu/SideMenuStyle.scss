@@ -8,20 +8,64 @@
             color: #a90f52;
         }
     }
+}
 
-    .drawer {
+.drawer {
+    width: 100%;
 
-        width: 300px;
 
-        .list {
-            width: 300px;
 
-            .listItem {
+
+    .list {
+        padding-top: 79px;
+        width: 260px;
+        background-color: #bebebe;
+        height: 100%;
+
+        .listItem {
+            border: 1px solid #fff;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            .link {
                 text-decoration: none;
+                color: #fff;
+                letter-spacing: 2px;
+                font-weight: bold;
+                min-width: 100%;
 
-                .link {
-                    text-decoration: none;
+                &:hover {
+                    color: #a90f52;
+
                 }
+            }
+        }
+
+
+
+        .listItemClose {
+            width: 100%;
+
+
+            .button {
+                float: right;
+                margin-bottom: 10px;
+
+                &:hover {
+                    background-color: #bebebe;
+                }
+
+                .icon {
+                    color: #fff;
+                    padding-right: 2%;
+
+                    &:hover {
+                        color: #b80f08;
+                        background-color: #bebebe;
+                    }
+                }
+
             }
         }
     }

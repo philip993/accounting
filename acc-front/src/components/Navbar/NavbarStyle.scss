@@ -1,6 +1,9 @@
 .navbar {
   .appBar {
     background-color: #1471e9;
+    z-index: 1301;
+    height: 79px;
+    position: relative;
 
     .toolbar {
       padding: 0.5%;

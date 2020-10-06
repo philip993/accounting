@@ -5,8 +5,9 @@ import './SideMenuStyle.scss';
 // React Router Dom
 import { Link } from 'react-router-dom';
 // Material Ui
-import { Drawer, List, ListItem, IconButton } from '@material-ui/core';
+import { Drawer, List, ListItem, IconButton, Button } from '@material-ui/core';
 import MenuIcons from '@material-ui/icons/Menu';
+import CloseIcon from '@material-ui/icons/Close';
 
 const SideMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +32,11 @@ const SideMenu = () => {
         onClose={handleCloseDrawer}
       >
         <List className="list" onClick={handleCloseDrawer}>
+          <div className="listItemClose">
+            <IconButton onClick={handleCloseDrawer} className="button">
+              <CloseIcon className="icon" />
+            </IconButton>
+          </div>
           <ListItem className="listItem">
             <Link to="/" className="link">
               Home
@@ -39,6 +45,11 @@ const SideMenu = () => {
           <ListItem className="listItem">
             <Link to="/general" className="link">
               General Ledger
+            </Link>
+          </ListItem>
+          <ListItem className="listItem">
+            <Link to="/hr" className="link">
+              Human Resources
             </Link>
           </ListItem>
           <ListItem className="listItem">
