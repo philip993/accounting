@@ -11,7 +11,9 @@ export class SalesInvoiceService {
   ) {}
 
   async findAll(): Promise<SalesInvoice[]> {
-    return this.salesInvoiceRepository.find();
+    return this.salesInvoiceRepository.find({
+      relations: ['customer', 'salesinvoice'],
+    });
   }
 
   async findOne(id: number): Promise<SalesInvoice> {
@@ -19,7 +21,7 @@ export class SalesInvoiceService {
   }
 
   async create(salesInvoice: SalesInvoice): Promise<SalesInvoice> {
-    const newSalesInvoice = this.salesInvoiceRepository.create(salesInvoice);
+    const newSalesInvoice = this.salesInvoiceRepository.save(salesInvoice);
     return await newSalesInvoice;
   }
 }
