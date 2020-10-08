@@ -12,7 +12,7 @@ const ReceivablesMenu = () => {
       <ul>
         <li>
           <h3>Lists</h3>
-          <Link to="/receivables/invoices" className="link">
+          <Link to="/receivables/salesinvoice" className="link">
             Posted Sales Invoices
           </Link>
           <Link to="/receivables/customers" className="link">
