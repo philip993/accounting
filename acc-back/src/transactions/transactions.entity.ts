@@ -69,8 +69,8 @@ export class Transactions {
   transactionlines: Invoice[];
 
   @ManyToOne(
-    type => Invoice,
-    transactionsales => transactionsales.invoices,
+    type => SalesInvoice,
+    transactionsales => transactionsales.salesinvoice,
   )
   @JoinColumn({ name: 'transaction_salesinvoice_FK' })
   transactionsales: SalesInvoice[];
