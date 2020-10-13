@@ -17,6 +17,8 @@ import ReceivablesMenu from '../Menu/Receivables';
 import GeneralMenu from '../Menu/GeneralMenu';
 import HumanResourcesMenu from '../Menu/HumanResourcesMenu';
 import { SalesInvoice } from '../SalesInvoice/SalesInvoice';
+import Customer from '../Customer/Customer';
+import CreateSalesInvoice from '../CreateSalesInvoice/CreateSalesInvoice';
 
 const App = () => {
   return (
@@ -49,6 +51,13 @@ const App = () => {
           path="/receivables/salesinvoice"
           component={SalesInvoice}
         />
+        <Route exact path="/receivables/customers" component={Customer} />
+        <Route
+          exact
+          path="/receivables/createsalesinvoice"
+          component={CreateSalesInvoice}
+        />
+        {/* <Route exact path='/receivables/customers/customerhistory' component={} /> */}
       </Switch>
     </div>
   );
