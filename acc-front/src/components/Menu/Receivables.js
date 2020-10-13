@@ -24,7 +24,7 @@ const ReceivablesMenu = () => {
         </li>
         <li>
           <h3>Tasks</h3>
-          <Link to="/receivables/createinvoice" className="link">
+          <Link to="/receivables/createsalesinvoice" className="link">
             Sales Invoice
           </Link>
           <Link to="/receivables/createcustomer" className="link">

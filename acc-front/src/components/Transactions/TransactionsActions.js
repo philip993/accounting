@@ -10,6 +10,7 @@ import {
   SELECT_NEW_ROW,
   TRANSACTION_TOTAL,
   INPUT_TRANSACTIONS_DATE,
+  INPUT_TRANSACTION_CUSTOMER,
 } from './TransactionsActionTypes';
 import axios from 'axios';
 
@@ -48,6 +49,41 @@ export const requestCreateTransactions = () => {
   };
 };
 
+// request
+export const requestCreateSalesTransactions = () => {
+  return (dispatch, getState) => {
+    let { transactionsRow } = getState().TransactionsReducer;
+    let { newSalesInvoice } = getState().CreateSalesInvoiceReducer;
+    let transactions = transactionsRow
+      .map((transaction, index) => ({
+        transactionFK: transaction.account,
+        transactionCustomerFK: transaction.customer,
+        transactionSalesinvoiceFK: newSalesInvoice.salesInvoiceId,
+        transactionDate: newSalesInvoice.salesInvoiceDate,
+        transactionDescription: transaction.transactionsDescription,
+        transactionDebit: transaction.transactionsDebit,
+        transactionCredit: transaction.transactionsCredit,
+      }))
+      .slice(1);
+    console.log(transactions);
+    return axios
+      .post(`http://localhost:4000/transactions`, transactions)
+      .then((response) => {
+        console.log(response);
+        dispatch({
+          type: SUCCESS_CREATE_TRANSACTIONS,
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: FAILURE_CREATE_TRANSACTIONS,
+        });
+      });
+  };
+};
+
 // input
 export const inputTransactionsAccount = (e) => {
   return {
@@ -59,6 +95,13 @@ export const inputTransactionsAccount = (e) => {
 export const inputTransactionsVendor = (e) => {
   return {
     type: INPUT_TRANSACTIONS_VENDOR,
+    payload: e,
+  };
+};
+
+export const inputTransactionCustomer = (e) => {
+  return {
+    type: INPUT_TRANSACTION_CUSTOMER,
     payload: e,
   };
 };
