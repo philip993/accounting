@@ -11,11 +11,15 @@ export class CustomerService {
   ) {}
 
   async findAll(): Promise<Customer[]> {
-    return await this.customerRepository.find();
+    return await this.customerRepository.find({
+      relations: ['xsales', 'saleinvoice'],
+    });
   }
 
   async findOne(id: number): Promise<Customer> {
-    return await this.customerRepository.findOne(id);
+    return await this.customerRepository.findOne(id, {
+      relations: ['xsales', 'saleinvoice'],
+    });
   }
 
   async create(customer: Customer): Promise<Customer> {
