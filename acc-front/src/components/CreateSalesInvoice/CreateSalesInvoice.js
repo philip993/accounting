@@ -179,7 +179,7 @@ const CreateSalesInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceNumber && errors.invoiceNumber.message}
+              {errors.salesInvoiceNumber && errors.salesInvoiceNumber.message}
             </FormHelperText>
           </FormGroup>
           <FormGroup className="formGroup">
@@ -202,7 +202,7 @@ const CreateSalesInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceDate && errors.invoiceDate.message}
+              {errors.salesInvoiceDate && errors.salesInvoiceDate.message}
             </FormHelperText>
           </FormGroup>
           <FormGroup className="formGroup">
@@ -225,7 +225,7 @@ const CreateSalesInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceDue && errors.invoiceDue.message}
+              {errors.salesInvoiceDue && errors.salesInvoiceDue.message}
             </FormHelperText>
           </FormGroup>
         </div>
@@ -238,7 +238,7 @@ const CreateSalesInvoice = () => {
             <Typography className="formTotal">
               {
                 (salesInvoiceTotal = transactionsRow.reduce(
-                  (a, b) => a + b.transactionsDebit,
+                  (a, b) => a + b.transactionsCredit,
                   0
                 ))
               }{' '}
