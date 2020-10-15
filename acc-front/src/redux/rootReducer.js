@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   DetailInvoiceReducer,
   SalesInvoiceReducer,
   CustomerReducer,
-  CreateInvoiceReducer,
+  CreateSalesInvoiceReducer,
 });
 
 export default rootReducer;
