@@ -59,6 +59,7 @@ const Customer = () => {
               customerBankAccount,
               customerTaxNumber,
               xsales,
+              saleinvoice,
             }) => (
               <TableRow class="tableRow">
                 <TableCell className="tableCell">{customerName}</TableCell>
@@ -77,14 +78,14 @@ const Customer = () => {
                 <TableCell className="tableCell">
                   {formatMoney(
                     (customerDebit = xsales
-                      .filter((transaction) => xsales.transactionFK === 2)
+                      .filter((transaction) => transaction.transactionFK === 2)
                       .reduce((a, b) => a + b.transactionDebit, 0))
                   )}
                 </TableCell>
                 <TableCell className="tableCell">
                   {formatMoney(
                     (customerCredit = xsales
-                      .filter((transaction) => xsales.transactionFK === 2)
+                      .filter((transaction) => transaction.transactionFK === 2)
                       .reduce((a, b) => a + b.transactionCredit, 0))
                   )}
                 </TableCell>
