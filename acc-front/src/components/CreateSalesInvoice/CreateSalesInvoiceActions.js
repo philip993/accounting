@@ -21,7 +21,7 @@ export const requestCreateSalesInvoice = () => {
     } = getState().CreateSalesInvoiceReducer;
     return axios
       .post(`http://localhost:4000/sales-invoice`, {
-        customer,
+        salesInvoiceCustomerFK: customer,
         salesInvoiceNumber,
         salesInvoiceTotal,
         salesInvoiceDate,
