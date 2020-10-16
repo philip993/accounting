@@ -16,8 +16,8 @@ const initialState = {
   newTransactions: [],
   newTransactionsError: null,
   account: '',
-  vendor: '',
-  invoice: '',
+  userType: '',
+  documentType: '',
   transactionsDescription: '',
   transactionsDebit: 0,
   transactionsCredit: 0,
@@ -26,8 +26,8 @@ const initialState = {
   transactionsRow: [
     {
       account: '',
-      vendor: '',
-      invoice: '',
+      userType: '',
+      documentType: '',
       transactionsDescription: '',
       transactionsDate: '',
       transactionsDebit: 0,
@@ -44,14 +44,14 @@ export const TransactionsReducer = (state = initialState, action) => {
         newTransactions: state.transactionsRow,
         newTransactionsError: false,
         account: '',
-        vendor: '',
-        invoice: '',
+        userType: '',
+        documentType: '',
         transactionsDescription: '',
         transactionsRow: [
           {
             account: '',
-            vendor: '',
-            invoice: '',
+            userType: '',
+            documentType: '',
             transactionsDescription: '',
             transactionsDate: '',
             transactionsDebit: 0,
@@ -67,13 +67,13 @@ export const TransactionsReducer = (state = initialState, action) => {
         newTransactions: null,
         newTransactionsError: true,
         account: '',
-        vendor: '',
+        userType: '',
         transactionsDescription: '',
         transactionsRow: [
           {
             account: '',
-            vendor: '',
-            invoice: '',
+            userType: '',
+            documentType: '',
             transactionsDescription: '',
             transactionsDebit: 0,
             transactionsCredit: 0,
@@ -87,15 +87,10 @@ export const TransactionsReducer = (state = initialState, action) => {
         ...state,
         account: action.payload,
       };
-    case INPUT_TRANSACTIONS_VENDOR:
-      return {
-        ...state,
-        vendor: action.payload,
-      };
     case INPUT_TRANSACTIONS_INVOICE:
       return {
         ...state,
-        invoice: action.payload,
+        documentType: action.payload,
       };
     case INPUT_TRANSACTIONS_DESCRIPTION:
       return {

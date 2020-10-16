@@ -42,6 +42,7 @@ const Transactions = () => {
     account,
     vendor,
     invoice,
+    customer,
     transactionsDescription,
     transactionsDate,
     transactionsDebit,
@@ -53,6 +54,7 @@ const Transactions = () => {
     ...state.TransactionsReducer,
     ...state.ChartAccountsReducer,
     ...state.CreateInvoiceReducer,
+    ...state.CreateSalesInvoiceReducer,
   }));
   const dispatch = useDispatch();
   const { handleSubmit, message, errors, register, control } = useForm();
@@ -103,8 +105,6 @@ const Transactions = () => {
   const submitReceivablesTransaction = (e) => {
     dispatch(requestCreateSalesTransactions());
   };
-
-  console.log(newInvoice.invoiceId);
 
   return (
     <div className="transactions">
@@ -202,8 +202,8 @@ const Transactions = () => {
               className="saveButton"
               onClick={handleNewRow.bind(this, {
                 account,
-                vendor,
-                invoice,
+                userType: vendor,
+                documentType: invoice,
                 transactionsDescription,
                 transactionsDate,
                 transactionsDebit: parseInt(transactionsDebit),
@@ -308,8 +308,8 @@ const Transactions = () => {
               className="saveButton"
               onClick={handleNewRow.bind(this, {
                 account,
-                vendor,
-                invoice,
+                userType: customer,
+                documentType: invoice,
                 transactionsDescription,
                 transactionsDate,
                 transactionsDebit: parseInt(transactionsDebit),
@@ -365,8 +365,8 @@ const Transactions = () => {
                   className="tableBtn"
                   onClick={handleTotalPayablesRow.bind(this, {
                     account: 3,
-                    vendor,
-                    invoice,
+                    userType: vendor,
+                    documentType: invoice,
                     transactionsDescription: 'Payables',
                     transactionsDebit: 0,
                     transactionsCredit: transactionsRow.reduce(
@@ -383,8 +383,8 @@ const Transactions = () => {
                   className="tableBtn"
                   onClick={handleTotalReceivablesRow.bind(this, {
                     account: 2,
-                    vendor,
-                    invoice,
+                    userType: customer,
+                    documentType: invoice,
                     transactionsDescription: 'Recievables',
                     transactionsDebit: transactionsRow.reduce(
                       (a, b) => a + b.transactionsCredit,

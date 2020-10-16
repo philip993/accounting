@@ -22,7 +22,7 @@ export const requestCreateTransactions = () => {
     let transactions = transactionsRow
       .map((transaction, index) => ({
         transactionFK: transaction.account,
-        transactionLinesFK: transaction.vendor,
+        transactionLinesFK: transaction.userType,
         transactionInvoiceFK: newInvoice.invoiceId,
         transactionDate: newInvoice.invoiceDate,
         transactionDescription: transaction.transactionsDescription,
@@ -57,7 +57,7 @@ export const requestCreateSalesTransactions = () => {
     let transactions = transactionsRow
       .map((transaction, index) => ({
         transactionFK: transaction.account,
-        transactionCustomerFK: transaction.customer,
+        transactionCustomerFK: transaction.userType,
         transactionSalesinvoiceFK: newSalesInvoice.salesInvoiceId,
         transactionDate: newSalesInvoice.salesInvoiceDate,
         transactionDescription: transaction.transactionsDescription,
@@ -88,20 +88,6 @@ export const requestCreateSalesTransactions = () => {
 export const inputTransactionsAccount = (e) => {
   return {
     type: INPUT_TRANSACTIONS_ACCOUNT,
-    payload: e,
-  };
-};
-
-export const inputTransactionsVendor = (e) => {
-  return {
-    type: INPUT_TRANSACTIONS_VENDOR,
-    payload: e,
-  };
-};
-
-export const inputTransactionCustomer = (e) => {
-  return {
-    type: INPUT_TRANSACTION_CUSTOMER,
     payload: e,
   };
 };
