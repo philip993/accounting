@@ -9,10 +9,7 @@ import {
   inputInvoiceNumber,
 } from './CreateInvoiceActions';
 import { requestGetAllVendors } from '../Vendor/VendorActions';
-import {
-  inputTransactionsVendor,
-  requestCreateTransactions,
-} from '../Transactions/TransactionsActions';
+import { requestCreateTransactions } from '../Transactions/TransactionsActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
 // Scss

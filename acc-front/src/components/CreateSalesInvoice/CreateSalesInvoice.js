@@ -4,16 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   inputSalesInvoiceCustomer,
   inputSalesInvoiceDate,
-  inputSalesInvoiceTotal,
   inputSalesInvoiceDue,
   inputSalesInvoiceNumber,
   requestCreateSalesInvoice,
 } from './CreateSalesInvoiceActions';
-import {
-  inputTransactionsVendor,
-  requestCreateTransactions,
-  requestCreateSalesTransactions,
-} from '../Transactions/TransactionsActions';
+import { requestCreateSalesTransactions } from '../Transactions/TransactionsActions';
 import { requestGetAllCustomers } from '../Customer/CustomerActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
@@ -119,7 +114,7 @@ const CreateSalesInvoice = () => {
               {!clicked
                 ? ''
                 : allCustomers
-                    .filter((cust) => cust.customerId === vendor)
+                    .filter((cust) => cust.customerId === customer)
                     .map(({ customerId }) => (
                       <Typography>{customerId}</Typography>
                     ))}
@@ -131,7 +126,7 @@ const CreateSalesInvoice = () => {
               {!clicked
                 ? ''
                 : allCustomers
-                    .filter((cust) => cust.customerId === vendor)
+                    .filter((cust) => cust.customerId === customer)
                     .map(({ customerAddress }) => (
                       <Typography>{customerAddress}</Typography>
                     ))}
@@ -143,7 +138,7 @@ const CreateSalesInvoice = () => {
               {!clicked
                 ? ''
                 : allCustomers
-                    .filter((cust) => cust.customerId === vendor)
+                    .filter((cust) => cust.customerId === customer)
                     .map(({ customerTaxNumber }) => (
                       <Typography>{customerTaxNumber}</Typography>
                     ))}
