@@ -58,7 +58,6 @@ const CreateInvoice = () => {
 
   const handleInvoiceVendor = (e) => {
     dispatch(inputInvoiceVendor(e.target.value));
-    dispatch(inputTransactionsVendor(e.target.value));
     setClicked(true);
   };
 

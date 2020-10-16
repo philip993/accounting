@@ -61,7 +61,6 @@ const CreateSalesInvoice = () => {
 
   const handleSalesInvoiceCustomer = (e) => {
     dispatch(inputSalesInvoiceCustomer(e.target.value));
-    dispatch(inputTransactionsVendor(e.target.value));
     setClicked(true);
   };
 
