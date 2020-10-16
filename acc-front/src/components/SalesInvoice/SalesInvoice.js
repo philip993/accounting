@@ -30,7 +30,7 @@ export const SalesInvoice = () => {
 
   const handleSelectInvoice = (e) => {
     dispatch(selectOneSalesInvoice(e));
-    history.push('/receivables/salesinvoice/saledetails');
+    history.push('/receivables/salesinvoice/salesdetails');
   };
 
   useEffect(() => {
