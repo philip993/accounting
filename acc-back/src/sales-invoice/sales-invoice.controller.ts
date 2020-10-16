@@ -12,7 +12,7 @@ export class SalesInvoiceController {
     return this.salesInvoiceService.findAll();
   }
 
-  @Get('id')
+  @Get(':id')
   async findOne(@Param('id') id): Promise<SalesInvoice> {
     return this.salesInvoiceService.findOne(id);
   }
