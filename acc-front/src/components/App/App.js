@@ -21,6 +21,7 @@ import Customer from '../Customer/Customer';
 import CreateSalesInvoice from '../CreateSalesInvoice/CreateSalesInvoice';
 import DetailsSalesInvoice from '../DetailsSalesInvoice/DetailsSalesInvoice';
 import CustomerHistory from '../Customer/CustomerHistory';
+import CreateCustomer from '../CreateCustomer/CreateCustomer';
 
 const App = () => {
   return (
@@ -68,6 +69,11 @@ const App = () => {
           exact
           path="/receivables/customers/customerhistory"
           component={CustomerHistory}
+        />
+        <Route
+          exact
+          path="/receivables/createcustomer"
+          component={CreateCustomer}
         />
       </Switch>
     </div>
