@@ -11,6 +11,7 @@ import { DetailInvoiceReducer } from '../components/DetailInvoice/DetailInvoiceR
 import { SalesInvoiceReducer } from '../components/SalesInvoice/SalesInvoiceReducer';
 import { CustomerReducer } from '../components/Customer/CustomerReducer';
 import { CreateSalesInvoiceReducer } from '../components/CreateSalesInvoice/CreateSalesInvoiceReducer';
+import { DetailsSalesInvoiceReducer } from '../components/DetailsSalesInvoice/DetailsSalesInvoiceReducer';
 
 const rootReducer = combineReducers({
   ChartAccountsReducer,
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   SalesInvoiceReducer,
   CustomerReducer,
   CreateSalesInvoiceReducer,
+  DetailsSalesInvoiceReducer,
 });
 
 export default rootReducer;
