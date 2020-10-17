@@ -1,0 +1,127 @@
+.createCustomer {
+  width: 80%;
+  margin: auto;
+  border: 1px solid #0f52ab;
+  margin-top: 2%;
+  padding: 1%;
+
+  h1 {
+    text-align: center;
+    color: #0f52ab;
+  }
+
+  .createCustomerForm {
+    width: 60%;
+    margin: auto;
+    // padding: 1% 0%;
+    border: 1px solid #0f52ab;
+
+    .title {
+      width: 100%;
+      text-align: center;
+      width: 100%;
+      background-color: #1142a4;
+      color: #fff;
+      padding: 1% 0%;
+      margin-bottom: 2%;
+    }
+
+    .one,
+    .two,
+    .three,
+    .four {
+      column-count: 2;
+      column-gap: 10%;
+      margin: auto;
+      width: 80%;
+
+      .formGroup {
+        width: 100%;
+        margin: auto;
+
+        .formLabel {
+          background-color: #0f52ab;
+          padding: 5px 0px 5px 5px;
+          margin: 10px 0px 15px 0px;
+          text-align: center;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          letter-spacing: 1.5px;
+        }
+
+        .formInput {
+          background-color: #fff;
+          border: 1px solid gray;
+          padding-left: 10px;
+          margin-bottom: 2%;
+
+          &:hover {
+            box-shadow: 0px 0px 5px #a90f52;
+          }
+        }
+
+        .formHelperText {
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .formGroup {
+      width: 80%;
+      margin: auto;
+
+      .formLabel {
+        background-color: #0f52ab;
+        padding: 5px 0px 5px 5px;
+        margin: 10px 0px 15px 0px;
+        text-align: center;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        letter-spacing: 1.5px;
+      }
+
+      .formInput {
+        background-color: #fff;
+        border: 1px solid gray;
+        padding-left: 10px;
+
+        &:hover {
+          box-shadow: 0px 0px 5px #a90f52;
+        }
+      }
+
+      .formHelperText {
+        font-weight: bold;
+        letter-spacing: 1px;
+      }
+    }
+
+    .formGroupButton {
+      width: 80%;
+      margin: auto;
+      margin-top: 5%;
+      margin-bottom: 2%;
+      .saveButton {
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        width: 50%;
+        background-color: #fff;
+        border: 1px solid #a90f52;
+        color: #a90f52;
+        font-weight: bold;
+
+        &:hover {
+          background-color: #a90f52;
+          border: 1px solid #fff;
+          color: #fff;
+
+          letter-spacing: 1.5px;
+        }
+      }
+    }
+  }
+}

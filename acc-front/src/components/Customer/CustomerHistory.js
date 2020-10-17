@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Style
-import './VendorStyle.scss';
+import './CustomerStyle.scss';
 // Moment
 import Moment from 'react-moment';
 // Accounting
 import { formatMoney } from 'accounting';
 // Redux Actions
-import { requestGetOneVendor } from './VendorActions';
+import { requestGetOneCustomer } from './CustomerActions';
 // Material Ui
 import {
   Table,
@@ -18,23 +18,23 @@ import {
   TableFooter,
 } from '@material-ui/core';
 
-const VendorHistory = () => {
-  const { oneVendor } = useSelector((state) => state.VendorReducer);
+const CustomerHistory = () => {
+  const { oneCustomer } = useSelector((state) => state.CustomerReducer);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestGetOneVendor());
+    dispatch(requestGetOneCustomer());
   }, []);
 
   return (
     <div className="vendorHistory">
-      {oneVendor.map(
+      {oneCustomer.map(
         ({
-          vendorName,
-          invoice,
-          vendorAddress,
-          vendorTaxNumber,
-          vendorBankAccount,
+          customerName,
+          saleinvoice,
+          customerAddress,
+          customerTaxNumber,
+          customerBankAccount,
         }) => (
           <Table className="table">
             <TableHead className="tableHead">
@@ -42,31 +42,40 @@ const VendorHistory = () => {
                 <TableCell className="tableCell">INFO</TableCell>
               </TableRow>
               <TableRow className="tableRow">
-                <TableCell className="tableCell">{vendorName}</TableCell>
-                <TableCell className="tableCell">{vendorAddress}</TableCell>
-                <TableCell className="tableCell">{vendorBankAccount}</TableCell>
-                <TableCell className="tableCell">{vendorTaxNumber}</TableCell>
+                <TableCell className="tableCell">{customerName}</TableCell>
+                <TableCell className="tableCell">{customerAddress}</TableCell>
+                <TableCell className="tableCell">
+                  {customerBankAccount}
+                </TableCell>
+                <TableCell className="tableCell">{customerTaxNumber}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody className="tableBody">
               <TableRow className="tableRowHeader">
                 <TableCell className="tableCell">Date</TableCell>
-                <TableCell className="tableCell">Invoice No.</TableCell>
+                <TableCell className="tableCell">Sales Invoice No.</TableCell>
                 <TableCell className="tableCell">Amount</TableCell>
                 <TableCell className="tableCell">Due Date</TableCell>
               </TableRow>
-              {invoice.map(
-                ({ invoiceDate, invoiceNumber, invoiceTotal, invoiceDue }) => (
+              {saleinvoice.map(
+                ({
+                  salesInvoiceDate,
+                  salesInvoiceNumber,
+                  salesInvoiceTotal,
+                  salesInvoiceDue,
+                }) => (
                   <TableRow className="tableRow">
                     <TableCell className="tableCell">
-                      <Moment format="DD.MM.YYYY">{invoiceDate}</Moment>
-                    </TableCell>
-                    <TableCell className="tableCell">{invoiceNumber}</TableCell>
-                    <TableCell className="tableCell">
-                      {formatMoney(invoiceTotal)} $
+                      <Moment format="DD.MM.YYYY">{salesInvoiceDate}</Moment>
                     </TableCell>
                     <TableCell className="tableCell">
-                      <Moment format="DD.MM.YYYY">{invoiceDue}</Moment>
+                      {salesInvoiceNumber}
+                    </TableCell>
+                    <TableCell className="tableCell">
+                      {formatMoney(salesInvoiceTotal)} $
+                    </TableCell>
+                    <TableCell className="tableCell">
+                      <Moment format="DD.MM.YYYY">{salesInvoiceDue}</Moment>
                     </TableCell>
                   </TableRow>
                 )
@@ -78,7 +87,9 @@ const VendorHistory = () => {
                   Total
                 </TableCell>
                 <TableCell className="tableCell">
-                  {formatMoney(invoice.reduce((a, b) => a + b.invoiceTotal, 0))}
+                  {formatMoney(
+                    saleinvoice.reduce((a, b) => a + b.salesInvoiceDue, 0)
+                  )}
                 </TableCell>
               </TableRow>
             </TableFooter>
@@ -89,4 +100,4 @@ const VendorHistory = () => {
   );
 };
 
-export default VendorHistory;
+export default CustomerHistory;

@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Redux Actions
 import {
-  requestCreateInvoice,
-  inputInvoiceVendor,
-  inputInvoiceDate,
-  inputInvoiceDue,
-  inputInvoiceNumber,
-} from './CreateInvoiceActions';
-import { requestGetAllVendors } from '../Vendor/VendorActions';
-import { requestCreateTransactions } from '../Transactions/TransactionsActions';
+  inputSalesInvoiceCustomer,
+  inputSalesInvoiceDate,
+  inputSalesInvoiceDue,
+  inputSalesInvoiceNumber,
+  requestCreateSalesInvoice,
+} from './CreateSalesInvoiceActions';
+import { requestCreateSalesTransactions } from '../Transactions/TransactionsActions';
+import { requestGetAllCustomers } from '../Customer/CustomerActions';
 // React Hook Form
 import { useForm, Controller } from 'react-hook-form';
 // Scss
-import './CreateInvoiceStyle.scss';
+import './CreateSalesInvoiceStyle.scss';
 // Material Ui
 import {
   FormGroup,
@@ -28,20 +28,21 @@ import {
 // React Components
 import Transactions from '../Transactions/Transactions';
 
-const CreateInvoice = () => {
+const CreateSalesInvoice = () => {
   let {
-    newInvoice,
-    newInvoiceError,
+    newSalesInvoice,
+    newSalesInvoiceError,
+    customer,
     vendor,
-    invoiceNumber,
-    invoiceTotal,
-    invoiceDate,
-    invoiceDue,
-    allVendors,
+    salesInvoiceNumber,
+    salesInvoiceTotal,
+    salesInvoiceDate,
+    salesInvoiceDue,
+    allCustomers,
     transactionsRow,
   } = useSelector((state) => ({
-    ...state.CreateInvoiceReducer,
-    ...state.VendorReducer,
+    ...state.CreateSalesInvoiceReducer,
+    ...state.CustomerReducer,
     ...state.TransactionsReducer,
   }));
   const dispatch = useDispatch();
@@ -50,60 +51,60 @@ const CreateInvoice = () => {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
-    dispatch(requestGetAllVendors());
+    dispatch(requestGetAllCustomers());
   }, []);
 
-  const handleInvoiceVendor = (e) => {
-    dispatch(inputInvoiceVendor(e.target.value));
+  const handleSalesInvoiceCustomer = (e) => {
+    dispatch(inputSalesInvoiceCustomer(e.target.value));
     setClicked(true);
   };
 
-  const handleInvoiceNumber = (e) => {
-    dispatch(inputInvoiceNumber(e.target.value));
+  const handleSalesInvoiceNumber = (e) => {
+    dispatch(inputSalesInvoiceNumber(e.target.value));
   };
 
-  const handleInvoiceDate = (e) => {
-    dispatch(inputInvoiceDate(e.target.value));
+  const handleSalesInvoiceDate = (e) => {
+    dispatch(inputSalesInvoiceDate(e.target.value));
   };
 
-  const handleInvoiceDue = (e) => {
-    dispatch(inputInvoiceDue(e.target.value));
+  const handleSalesInvoiceDue = (e) => {
+    dispatch(inputSalesInvoiceDue(e.target.value));
   };
 
   const submitForm = async (e) => {
-    await dispatch(requestCreateInvoice());
-    await dispatch(requestCreateTransactions());
+    await dispatch(requestCreateSalesInvoice());
+    await dispatch(requestCreateSalesTransactions());
   };
 
   return (
     <div className="createInvoice">
-      <h1>Create Invoice</h1>
+      <h1>Create Sales Invoice</h1>
       <form className="createInvoiceForm" onSubmit={handleSubmit(submitForm)}>
         <div className="one">
           <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Vendor</FormLabel>
+            <FormLabel className="formLabel">Customer</FormLabel>
             <Controller
               control={control}
-              name="vendor"
+              name="customer"
               render={({ onChange, value, name, message }) => (
                 <Select
                   className="formInput"
-                  name="vendor"
-                  value={vendor}
-                  onChange={handleInvoiceVendor}
+                  name="customer"
+                  value={customer}
+                  onChange={handleSalesInvoiceCustomer}
                   inputRef={register({
                     required: 'This field is required',
                   })}
                 >
-                  {allVendors.map(({ vendorId, vendorName }) => (
-                    <MenuItem value={vendorId}>{vendorName}</MenuItem>
+                  {allCustomers.map(({ customerId, customerName }) => (
+                    <MenuItem value={customerId}>{customerName}</MenuItem>
                   ))}
                 </Select>
               )}
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.vendor && errors.vendor.message}
+              {errors.customer && errors.customer.message}
             </FormHelperText>
           </FormGroup>
 
@@ -112,9 +113,11 @@ const CreateInvoice = () => {
             <div className="formInput">
               {!clicked
                 ? ''
-                : allVendors
-                    .filter((vend) => vend.vendorId === vendor)
-                    .map(({ vendorId }) => <Typography>{vendorId}</Typography>)}
+                : allCustomers
+                    .filter((cust) => cust.customerId === customer)
+                    .map(({ customerId }) => (
+                      <Typography>{customerId}</Typography>
+                    ))}
             </div>
           </FormGroup>
           <FormGroup className="formGroup">
@@ -122,10 +125,10 @@ const CreateInvoice = () => {
             <div className="formInput">
               {!clicked
                 ? ''
-                : allVendors
-                    .filter((vend) => vend.vendorId === vendor)
-                    .map(({ vendorAddress }) => (
-                      <Typography>{vendorAddress}</Typography>
+                : allCustomers
+                    .filter((cust) => cust.customerId === customer)
+                    .map(({ customerAddress }) => (
+                      <Typography>{customerAddress}</Typography>
                     ))}
             </div>
           </FormGroup>
@@ -134,26 +137,26 @@ const CreateInvoice = () => {
             <div className="formInput">
               {!clicked
                 ? ''
-                : allVendors
-                    .filter((vend) => vend.vendorId === vendor)
-                    .map(({ vendorTaxNumber }) => (
-                      <Typography>{vendorTaxNumber}</Typography>
+                : allCustomers
+                    .filter((cust) => cust.customerId === customer)
+                    .map(({ customerTaxNumber }) => (
+                      <Typography>{customerTaxNumber}</Typography>
                     ))}
             </div>
           </FormGroup>
         </div>
         <div className="two">
           <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Invoice No.</FormLabel>
+            <FormLabel className="formLabel">Sales Invoice No.</FormLabel>
             <Controller
               control={control}
-              name="invoiceNumber"
+              name="salesInvoiceNumber"
               render={({ onChange, value, name, message }) => (
                 <InputBase
                   className="formInput"
-                  name="invoiceNumber"
-                  value={invoiceNumber}
-                  onChange={handleInvoiceNumber}
+                  name="salesInvoiceNumber"
+                  value={salesInvoiceNumber}
+                  onChange={handleSalesInvoiceNumber}
                   inputRef={register({
                     required: 'This field is required!',
                     minLength: {
@@ -170,21 +173,21 @@ const CreateInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceNumber && errors.invoiceNumber.message}
+              {errors.salesInvoiceNumber && errors.salesInvoiceNumber.message}
             </FormHelperText>
           </FormGroup>
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Invoice Date</FormLabel>
             <Controller
               control={control}
-              name="invoiceDate"
+              name="salesInvoiceDate"
               render={({ onChange, value, name, message }) => (
                 <InputBase
                   className="formInput"
-                  name="invoiceDate"
+                  name="salesInvoiceDate"
                   type="date"
-                  value={invoiceDate}
-                  onChange={handleInvoiceDate}
+                  value={salesInvoiceDate}
+                  onChange={handleSalesInvoiceDate}
                   inputRef={register({
                     required: 'This field is required!',
                   })}
@@ -193,21 +196,21 @@ const CreateInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceDate && errors.invoiceDate.message}
+              {errors.salesInvoiceDate && errors.salesInvoiceDate.message}
             </FormHelperText>
           </FormGroup>
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Due Date</FormLabel>
             <Controller
               control={control}
-              name="invoiceDue"
+              name="salesInvoiceDue"
               render={({ onChange, value, name, message }) => (
                 <InputBase
                   className="formInput"
-                  name="invoiceDue"
+                  name="salesInvoiceDue"
                   type="date"
-                  value={invoiceDue}
-                  onChange={handleInvoiceDue}
+                  value={salesInvoiceDue}
+                  onChange={handleSalesInvoiceDue}
                   inputRef={register({
                     required: 'This field is required!',
                   })}
@@ -216,7 +219,7 @@ const CreateInvoice = () => {
             />
 
             <FormHelperText className="formHelperText" error>
-              {errors.invoiceDue && errors.invoiceDue.message}
+              {errors.salesInvoiceDue && errors.salesInvoiceDue.message}
             </FormHelperText>
           </FormGroup>
         </div>
@@ -228,8 +231,8 @@ const CreateInvoice = () => {
             <FormLabel className="formLabel">Total</FormLabel>
             <Typography className="formTotal">
               {
-                (invoiceTotal = transactionsRow.reduce(
-                  (a, b) => a + b.transactionsDebit,
+                (salesInvoiceTotal = transactionsRow.reduce(
+                  (a, b) => a + b.transactionsCredit,
                   0
                 ))
               }{' '}
@@ -250,4 +253,4 @@ const CreateInvoice = () => {
   );
 };
 
-export default CreateInvoice;
+export default CreateSalesInvoice;

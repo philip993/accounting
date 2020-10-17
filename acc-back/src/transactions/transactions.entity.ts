@@ -11,6 +11,8 @@ import {
 import { Accounts } from '../accounts/accounts.entity';
 import { Invoice } from 'src/invoice/invoice.entity';
 import { Vendor } from 'src/vendor/vendor.entity';
+import { Customer } from 'src/customer/customer.entity';
+import { SalesInvoice } from 'src/sales-invoice/sales-invoice.entity';
 
 @Entity({ name: 'transactions' })
 export class Transactions {
@@ -23,8 +25,14 @@ export class Transactions {
   @Column({ name: 'transaction_lines_FK' })
   transactionLinesFK: number;
 
+  @Column({ name: 'transaction_customer_FK' })
+  transactionCustomerFK: number;
+
   @Column({ name: 'transaction_invoice_FK' })
   transactionInvoiceFK: number;
+
+  @Column({ name: 'transaction_salesinvoice_FK' })
+  transactionSalesinvoiceFK: number;
 
   @Column({ name: 'transaction_description' })
   transactionDescription: string;
@@ -49,10 +57,21 @@ export class Transactions {
   @JoinColumn({ name: 'transaction_lines_FK' })
   invoicelines: Vendor;
 
+  @ManyToOne(type => Customer)
+  @JoinColumn({ name: 'transaction_customer_FK' })
+  saleslines: Customer;
+
   @ManyToOne(
     type => Invoice,
     transactionlines => transactionlines.invoices,
   )
   @JoinColumn({ name: 'transaction_invoice_FK' })
   transactionlines: Invoice[];
+
+  @ManyToOne(
+    type => SalesInvoice,
+    transactionsales => transactionsales.salesinvoice,
+  )
+  @JoinColumn({ name: 'transaction_salesinvoice_FK' })
+  transactionsales: SalesInvoice[];
 }

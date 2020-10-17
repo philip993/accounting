@@ -2,7 +2,6 @@ import {
   SUCCESS_CREATE_TRANSACTIONS,
   FAILURE_CREATE_TRANSACTIONS,
   INPUT_TRANSACTIONS_ACCOUNT,
-  INPUT_TRANSACTIONS_VENDOR,
   INPUT_TRANSACTIONS_DESCRIPTION,
   INPUT_TRANSACTIONS_DEBIT,
   INPUT_TRANSACTIONS_CREDIT,
@@ -21,9 +20,44 @@ export const requestCreateTransactions = () => {
     let transactions = transactionsRow
       .map((transaction, index) => ({
         transactionFK: transaction.account,
-        transactionLinesFK: transaction.vendor,
+        transactionLinesFK: transaction.userType,
         transactionInvoiceFK: newInvoice.invoiceId,
         transactionDate: newInvoice.invoiceDate,
+        transactionDescription: transaction.transactionsDescription,
+        transactionDebit: transaction.transactionsDebit,
+        transactionCredit: transaction.transactionsCredit,
+      }))
+      .slice(1);
+    console.log(transactions);
+    return axios
+      .post(`http://localhost:4000/transactions`, transactions)
+      .then((response) => {
+        console.log(response);
+        dispatch({
+          type: SUCCESS_CREATE_TRANSACTIONS,
+          payload: response.data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({
+          type: FAILURE_CREATE_TRANSACTIONS,
+        });
+      });
+  };
+};
+
+// request
+export const requestCreateSalesTransactions = () => {
+  return (dispatch, getState) => {
+    let { transactionsRow } = getState().TransactionsReducer;
+    let { newSalesInvoice } = getState().CreateSalesInvoiceReducer;
+    let transactions = transactionsRow
+      .map((transaction, index) => ({
+        transactionFK: transaction.account,
+        transactionCustomerFK: transaction.userType,
+        transactionSalesinvoiceFK: newSalesInvoice.salesInvoiceId,
+        transactionDate: newSalesInvoice.salesInvoiceDate,
         transactionDescription: transaction.transactionsDescription,
         transactionDebit: transaction.transactionsDebit,
         transactionCredit: transaction.transactionsCredit,
@@ -52,13 +86,6 @@ export const requestCreateTransactions = () => {
 export const inputTransactionsAccount = (e) => {
   return {
     type: INPUT_TRANSACTIONS_ACCOUNT,
-    payload: e,
-  };
-};
-
-export const inputTransactionsVendor = (e) => {
-  return {
-    type: INPUT_TRANSACTIONS_VENDOR,
     payload: e,
   };
 };

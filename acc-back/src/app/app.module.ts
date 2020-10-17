@@ -24,6 +24,16 @@ import { InvoiceController } from 'src/invoice/invoice.controller';
 import { InvoiceService } from 'src/invoice/invoice.service';
 import { invoiceProviders } from 'src/invoice/invoice.providers';
 import { InvoiceModule } from 'src/invoice/invoice.module';
+// Customer
+import { CustomerController } from 'src/customer/customer.controller';
+import { CustomerService } from 'src/customer/customer.service';
+import { customerProviders } from 'src/customer/customer.providers';
+import { CustomerModule } from 'src/customer/customer.module';
+// Sales Invoice
+import { SalesInvoiceController } from 'src/sales-invoice/sales-invoice.controller';
+import { SalesInvoiceService } from 'src/sales-invoice/sales-invoice.service';
+import { salesInvoiceProviders } from 'src/sales-invoice/sales-invoice.providers';
+import { SalesInvoiceModule } from 'src/sales-invoice/sales-invoice.module';
 
 @Module({
   imports: [
@@ -32,6 +42,8 @@ import { InvoiceModule } from 'src/invoice/invoice.module';
     TransactionsModule,
     VendorModule,
     InvoiceModule,
+    CustomerModule,
+    SalesInvoiceModule,
   ],
   controllers: [
     AppController,
@@ -39,6 +51,8 @@ import { InvoiceModule } from 'src/invoice/invoice.module';
     TransactionsController,
     VendorController,
     InvoiceController,
+    CustomerController,
+    SalesInvoiceController,
   ],
   providers: [
     AppService,
@@ -50,6 +64,10 @@ import { InvoiceModule } from 'src/invoice/invoice.module';
     ...vendorProviders,
     InvoiceService,
     ...invoiceProviders,
+    CustomerService,
+    ...customerProviders,
+    SalesInvoiceService,
+    ...salesInvoiceProviders,
   ],
 })
 export class AppModule {}
