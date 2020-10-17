@@ -18,6 +18,7 @@ export class TransactionsService {
         'transactionlines',
         'saleslines',
         'transactionsales',
+        'journalslines',
       ],
     });
   }

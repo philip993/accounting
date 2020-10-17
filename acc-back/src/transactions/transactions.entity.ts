@@ -13,6 +13,7 @@ import { Invoice } from 'src/invoice/invoice.entity';
 import { Vendor } from 'src/vendor/vendor.entity';
 import { Customer } from 'src/customer/customer.entity';
 import { SalesInvoice } from 'src/sales-invoice/sales-invoice.entity';
+import { PaymentJournal } from 'src/payment-journal/payment-journal.entity';
 
 @Entity({ name: 'transactions' })
 export class Transactions {
@@ -33,6 +34,9 @@ export class Transactions {
 
   @Column({ name: 'transaction_salesinvoice_FK' })
   transactionSalesinvoiceFK: number;
+
+  @Column({ name: 'transaction_journal_FK' })
+  transactionJournalFK: number;
 
   @Column({ name: 'transaction_description' })
   transactionDescription: string;
@@ -74,4 +78,11 @@ export class Transactions {
   )
   @JoinColumn({ name: 'transaction_salesinvoice_FK' })
   transactionsales: SalesInvoice[];
+
+  @ManyToOne(
+    type => PaymentJournal,
+    journalslines => journalslines.journals,
+  )
+  @JoinColumn({ name: 'transaction_journal_FK' })
+  journalslines: PaymentJournal[];
 }
