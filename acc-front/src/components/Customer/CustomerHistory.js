@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Style
 import './CustomerStyle.scss';
+// Moment
+import Moment from 'react-moment';
 // Accounting
 import { formatMoney } from 'accounting';
 // Redux Actions
@@ -64,7 +66,7 @@ const CustomerHistory = () => {
                 }) => (
                   <TableRow className="tableRow">
                     <TableCell className="tableCell">
-                      {salesInvoiceDate}
+                      <Moment format="DD.MM.YYYY">{salesInvoiceDate}</Moment>
                     </TableCell>
                     <TableCell className="tableCell">
                       {salesInvoiceNumber}
@@ -73,7 +75,7 @@ const CustomerHistory = () => {
                       {formatMoney(salesInvoiceTotal)} $
                     </TableCell>
                     <TableCell className="tableCell">
-                      {salesInvoiceDue}
+                      <Moment format="DD.MM.YYYY">{salesInvoiceDue}</Moment>
                     </TableCell>
                   </TableRow>
                 )

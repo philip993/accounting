@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Style
 import './VendorStyle.scss';
+// Moment
+import Moment from 'react-moment';
 // Accounting
 import { formatMoney } from 'accounting';
 // Redux Actions
@@ -56,12 +58,16 @@ const VendorHistory = () => {
               {invoice.map(
                 ({ invoiceDate, invoiceNumber, invoiceTotal, invoiceDue }) => (
                   <TableRow className="tableRow">
-                    <TableCell className="tableCell">{invoiceDate}</TableCell>
+                    <TableCell className="tableCell">
+                      <Moment format="DD.MM.YYYY">{invoiceDate}</Moment>
+                    </TableCell>
                     <TableCell className="tableCell">{invoiceNumber}</TableCell>
                     <TableCell className="tableCell">
                       {formatMoney(invoiceTotal)} $
                     </TableCell>
-                    <TableCell className="tableCell">{invoiceDue}</TableCell>
+                    <TableCell className="tableCell">
+                      <Moment format="DD.MM.YYYY">{invoiceDue}</Moment>
+                    </TableCell>
                   </TableRow>
                 )
               )}
