@@ -27,6 +27,11 @@ const Home = () => {
           Payables
         </Link>
       </div>
+      <div className="four">
+        <Link className="link" to="/journal">
+          Payment Journal
+        </Link>
+      </div>
     </div>
   );
 };

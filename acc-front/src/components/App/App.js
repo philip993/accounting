@@ -22,6 +22,7 @@ import CreateSalesInvoice from '../CreateSalesInvoice/CreateSalesInvoice';
 import DetailsSalesInvoice from '../DetailsSalesInvoice/DetailsSalesInvoice';
 import CustomerHistory from '../Customer/CustomerHistory';
 import CreateCustomer from '../CreateCustomer/CreateCustomer';
+import PaymentJournalMenu from '../Menu/PaymentJournalMenu';
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const App = () => {
         <Route exact path="/receivables" component={ReceivablesMenu} />
         <Route exact path="/general" component={GeneralMenu} />
         <Route exact path="/hr" component={HumanResourcesMenu} />
+        <Route exact path="/journal" component={PaymentJournalMenu} />
         <Route
           exact
           path="/receivables/salesinvoice"
