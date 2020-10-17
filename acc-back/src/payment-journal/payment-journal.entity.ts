@@ -18,7 +18,4 @@ export class PaymentJournal {
     journals => journals.journalslines,
   )
   journals: Transactions[];
-  // M:O Vendor
-
-  // M:O Customer
 }
