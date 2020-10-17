@@ -34,6 +34,11 @@ import { SalesInvoiceController } from 'src/sales-invoice/sales-invoice.controll
 import { SalesInvoiceService } from 'src/sales-invoice/sales-invoice.service';
 import { salesInvoiceProviders } from 'src/sales-invoice/sales-invoice.providers';
 import { SalesInvoiceModule } from 'src/sales-invoice/sales-invoice.module';
+// Payment Journal
+import { PaymentJournalController } from 'src/payment-journal/payment-journal.controller';
+import { PaymentJournalService } from 'src/payment-journal/payment-journal.service';
+import { paymentJournalProviders } from 'src/payment-journal/payment-journal.providers';
+import { PaymentJournalModule } from 'src/payment-journal/payment-journal.module';
 
 @Module({
   imports: [
@@ -44,6 +49,7 @@ import { SalesInvoiceModule } from 'src/sales-invoice/sales-invoice.module';
     InvoiceModule,
     CustomerModule,
     SalesInvoiceModule,
+    PaymentJournalModule,
   ],
   controllers: [
     AppController,
@@ -53,6 +59,7 @@ import { SalesInvoiceModule } from 'src/sales-invoice/sales-invoice.module';
     InvoiceController,
     CustomerController,
     SalesInvoiceController,
+    PaymentJournalController,
   ],
   providers: [
     AppService,
@@ -68,6 +75,8 @@ import { SalesInvoiceModule } from 'src/sales-invoice/sales-invoice.module';
     ...customerProviders,
     SalesInvoiceService,
     ...salesInvoiceProviders,
+    PaymentJournalService,
+    ...paymentJournalProviders,
   ],
 })
 export class AppModule {}
