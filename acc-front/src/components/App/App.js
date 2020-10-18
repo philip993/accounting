@@ -23,6 +23,8 @@ import DetailsSalesInvoice from '../DetailsSalesInvoice/DetailsSalesInvoice';
 import CustomerHistory from '../Customer/CustomerHistory';
 import CreateCustomer from '../CreateCustomer/CreateCustomer';
 import PaymentJournalMenu from '../Menu/PaymentJournalMenu';
+import CreatePaymentJournal from '../CreatePaymentJournal/CreatePaymentJournal';
+import PaymentTransction from '../PaymentTransaction/PaymentTransaction';
 
 const App = () => {
   return (
@@ -77,6 +79,8 @@ const App = () => {
           path="/receivables/createcustomer"
           component={CreateCustomer}
         />
+        <Route exact path="/journal/new" component={CreatePaymentJournal} />
+        <Route exact path="/payment" component={PaymentTransction} />
       </Switch>
     </div>
   );
