@@ -15,6 +15,7 @@ import { DetailsSalesInvoiceReducer } from '../components/DetailsSalesInvoice/De
 import { CreateCustomerReducer } from '../components/CreateCustomer/CreateCustomerReducer';
 import { CreatePaymentJournalReducer } from '../components/CreatePaymentJournal/CreatePaymentJournalReducer';
 import { PaymentTransactionReducer } from '../components/PaymentTransaction/PaymentTransactionReducer';
+import { PaymentJournalsReducer } from '../components/PaymentJournals/PaymentJournalsReducer';
 
 const rootReducer = combineReducers({
   ChartAccountsReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   CreateCustomerReducer,
   CreatePaymentJournalReducer,
   PaymentTransactionReducer,
+  PaymentJournalsReducer,
 });
 
 export default rootReducer;
