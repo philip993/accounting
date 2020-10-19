@@ -14,8 +14,6 @@
     width: 100%;
     margin: auto;
     padding: 1% 0%;
-    // display: inline-flex;
-
 
     .one {
       display: inline-flex;
@@ -53,47 +51,28 @@
           font-weight: bold;
           letter-spacing: 1px;
         }
-
-        .saveButton {
-          margin: auto;
-          margin-top: 40px;
-          margin-bottom: 1%;
-          width: 30%;
-          background-color: #fff;
-          border: 1px solid #a90f52;
-          color: #a90f52;
-          font-weight: bold;
-
-          &:hover {
-            background-color: #a90f52;
-            border: 1px solid #fff;
-            color: #fff;
-
-            letter-spacing: 1.5px;
-          }
-        }
       }
-
     }
 
-    .saveButton {
-      margin: auto;
-      margin-top: 40px;
-      margin-bottom: 1%;
-      width: 30%;
-      background-color: #fff;
-      border: 1px solid #a90f52;
-      color: #a90f52;
-      font-weight: bold;
+    .formGroup {
+      .saveButton {
+        margin: auto;
+        margin-top: 40px;
+        margin-bottom: 1%;
+        width: 30%;
+        background-color: #fff;
+        border: 1px solid #a90f52;
+        color: #a90f52;
+        font-weight: bold;
 
-      &:hover {
-        background-color: #a90f52;
-        border: 1px solid #fff;
-        color: #fff;
+        &:hover {
+          background-color: #a90f52;
+          border: 1px solid #fff;
+          color: #fff;
 
-        letter-spacing: 1.5px;
+          letter-spacing: 1.5px;
+        }
       }
     }
   }
-
 }
