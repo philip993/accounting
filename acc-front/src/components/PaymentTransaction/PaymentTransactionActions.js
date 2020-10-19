@@ -17,12 +17,14 @@ import axios from 'axios';
 export const requestCreatePayTransactions = () => {
   return (dispatch, getState) => {
     let { paymentRow } = getState().PaymentTransactionReducer;
+    let { newPaymentJournal } = getState().CreatePaymentJournalReducer;
     let transactions = paymentRow
       .map((transaction, index) => ({
         transactionFK: transaction.paymentAccount,
         transactionLinesFK: transaction.paymentVendor,
         transactionCustomerFK: transaction.paymentCustomer,
-        transactionDate: '2020-01-01',
+        transactionJournalFK: newPaymentJournal.paymentJournalId,
+        transactionDate: newPaymentJournal.paymentJournalDate,
         transactionDescription: transaction.paymentDescription,
         transactionDebit: transaction.paymentDebit,
         transactionCredit: transaction.paymentCredit,
