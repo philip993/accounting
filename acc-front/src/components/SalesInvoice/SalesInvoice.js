@@ -96,3 +96,5 @@ export const SalesInvoice = () => {
     </div>
   );
 };
+
+export default SalesInvoice;

@@ -62,6 +62,11 @@ const SideMenu = () => {
               Payables
             </Link>
           </ListItem>
+          <ListItem className="listItem">
+            <Link to="/journal" className="link">
+              Payment Journal
+            </Link>
+          </ListItem>
         </List>
       </Drawer>
     </div>

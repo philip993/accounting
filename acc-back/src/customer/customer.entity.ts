@@ -23,6 +23,9 @@ export class Customer {
   @Column({ name: 'customer_state' })
   customerState: string;
 
+  @Column({ name: 'customer_type' })
+  customerType: string;
+
   @Column({ name: 'customer_tax_number' })
   customerTaxNumber: string;
 

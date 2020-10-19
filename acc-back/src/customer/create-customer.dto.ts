@@ -9,6 +9,7 @@ export class CreateCustomerDto {
   customerCity: string;
   customerZipcode: string;
   customerState: string;
+  customerType: string;
   customerTaxNumber: string;
   customerBankAccount: string;
   customerEmail: string;

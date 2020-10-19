@@ -16,12 +16,16 @@ import PayablesMenu from '../Menu/PayablesMenu';
 import ReceivablesMenu from '../Menu/Receivables';
 import GeneralMenu from '../Menu/GeneralMenu';
 import HumanResourcesMenu from '../Menu/HumanResourcesMenu';
-import { SalesInvoice } from '../SalesInvoice/SalesInvoice';
+import SalesInvoice from '../SalesInvoice/SalesInvoice';
 import Customer from '../Customer/Customer';
 import CreateSalesInvoice from '../CreateSalesInvoice/CreateSalesInvoice';
 import DetailsSalesInvoice from '../DetailsSalesInvoice/DetailsSalesInvoice';
 import CustomerHistory from '../Customer/CustomerHistory';
 import CreateCustomer from '../CreateCustomer/CreateCustomer';
+import PaymentJournalMenu from '../Menu/PaymentJournalMenu';
+import CreatePaymentJournal from '../CreatePaymentJournal/CreatePaymentJournal';
+import PaymentJournals from '../PaymentJournals/PaymentJournals';
+import DetailsPaymentJournal from '../DetailsPaymentJournal/DetailsPaymentJournal';
 
 const App = () => {
   return (
@@ -49,6 +53,7 @@ const App = () => {
         <Route exact path="/receivables" component={ReceivablesMenu} />
         <Route exact path="/general" component={GeneralMenu} />
         <Route exact path="/hr" component={HumanResourcesMenu} />
+        <Route exact path="/journal" component={PaymentJournalMenu} />
         <Route
           exact
           path="/receivables/salesinvoice"
@@ -74,6 +79,13 @@ const App = () => {
           exact
           path="/receivables/createcustomer"
           component={CreateCustomer}
+        />
+        <Route exact path="/journal/new" component={CreatePaymentJournal} />
+        <Route exact path="/journal/list" component={PaymentJournals} />
+        <Route
+          exact
+          path="/journal/details"
+          component={DetailsPaymentJournal}
         />
       </Switch>
     </div>

@@ -13,6 +13,10 @@ import { CustomerReducer } from '../components/Customer/CustomerReducer';
 import { CreateSalesInvoiceReducer } from '../components/CreateSalesInvoice/CreateSalesInvoiceReducer';
 import { DetailsSalesInvoiceReducer } from '../components/DetailsSalesInvoice/DetailsSalesInvoiceReducer';
 import { CreateCustomerReducer } from '../components/CreateCustomer/CreateCustomerReducer';
+import { CreatePaymentJournalReducer } from '../components/CreatePaymentJournal/CreatePaymentJournalReducer';
+import { PaymentTransactionReducer } from '../components/PaymentTransaction/PaymentTransactionReducer';
+import { PaymentJournalsReducer } from '../components/PaymentJournals/PaymentJournalsReducer';
+import { DetailsPaymentJournalReducer } from '../components/DetailsPaymentJournal/DetailsPaymentJournalReducer';
 
 const rootReducer = combineReducers({
   ChartAccountsReducer,
@@ -28,6 +32,10 @@ const rootReducer = combineReducers({
   CreateSalesInvoiceReducer,
   DetailsSalesInvoiceReducer,
   CreateCustomerReducer,
+  CreatePaymentJournalReducer,
+  PaymentTransactionReducer,
+  PaymentJournalsReducer,
+  DetailsPaymentJournalReducer,
 });
 
 export default rootReducer;
