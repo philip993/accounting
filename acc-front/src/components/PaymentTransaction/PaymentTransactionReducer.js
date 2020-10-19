@@ -9,6 +9,7 @@ import {
   INPUT_CREATE_PAYMENT_DEBIT,
   INPUT_CREATE_PAYMENT_CREDIT,
   SELECT_NEW_ROW,
+  TRANSACTION_TOTAL,
 } from './PaymentTransactionActionTypes';
 
 const initialState = {
@@ -38,8 +39,22 @@ export const PaymentTransactionReducer = (state = initialState, action) => {
     case SUCCESS_CREATE_PAYMENT_TRANSACTION:
       return {
         ...state,
-        newPaymentTransaction: action.payload,
+        newPaymentTransaction: state.paymentRow,
         newPaymentTransactionError: false,
+        paymentDescription: '',
+        paymentAccount: '',
+        paymentRow: [
+          {
+            paymentAccount: '',
+            paymentCustomer: null,
+            paymentVendor: null,
+            paymentDescription: '',
+            paymentDebit: 0,
+            paymentCredit: 0,
+          },
+        ],
+        paymentDebit: 0,
+        paymentCredit: 0,
       };
     case FAILURE_CREATE_PAYMENT_TRANSACTION:
       return {
@@ -83,6 +98,11 @@ export const PaymentTransactionReducer = (state = initialState, action) => {
         paymentCredit: action.payload,
       };
     case SELECT_NEW_ROW:
+      return {
+        ...state,
+        paymentRow: [...state.paymentRow, action.payload],
+      };
+    case TRANSACTION_TOTAL:
       return {
         ...state,
         paymentRow: [...state.paymentRow, action.payload],
