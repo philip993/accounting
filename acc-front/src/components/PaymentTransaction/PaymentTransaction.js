@@ -12,7 +12,6 @@ import {
   inputCreatePaymentDebit,
   inputCreatePaymentDescription,
   inputCreatePaymentVendor,
-  // requestCreatePaymentTransaction,
   requestCreatePayTransactions,
   selectNewRow,
   getPaymentTransactionsTotal,
@@ -20,6 +19,7 @@ import {
 import { requestGetAllCustomers } from '../Customer/CustomerActions';
 import { requestGetAllVendors } from '../Vendor/VendorActions';
 import { requestGetChartOfAccounts } from '../ChartAccounts/ChartAccountsActions';
+import { requestGetPaymentJournals } from '../PaymentJournals/PaymentJournalsActions';
 // Material Ui
 import {
   InputBase,
@@ -55,6 +55,8 @@ const PaymentTransaction = () => {
     ...state.ChartAccountsReducer,
     ...state.VendorReducer,
     ...state.CustomerReducer,
+    ...state.PaymentJournalsReducer,
+    ...state.CreatePaymentJournal,
   }));
   const dispatch = useDispatch();
   const { handleSubmit, message, errors, register, control } = useForm();
@@ -107,193 +109,199 @@ const PaymentTransaction = () => {
     dispatch(requestGetAllCustomers());
     dispatch(requestGetAllVendors());
     dispatch(requestGetChartOfAccounts());
+    dispatch(requestGetPaymentJournals());
   }, []);
 
   return (
     <div className="paymentTransction">
       <form
-        className="paymentTrransactionForm"
+        className="paymentTransactionForm"
         onSubmit={handleSubmit(submitForm)}
       >
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Transaction Type</FormLabel>
-          <Controller
-            control={control}
-            name="transactionType"
-            render={({ onChange, value, name, message }) => (
-              <Select
-                className="formInput"
-                name="transactionType"
-                value={transactionType}
-                onChange={handleTransactionType}
-                inputRef={register({
-                  required: 'This field is required!',
-                })}
-              >
-                <MenuItem value="vendor">Vendor</MenuItem>
-                <MenuItem value="customer">Customer</MenuItem>
-                <MenuItem value="gl">G/L</MenuItem>
-                <MenuItem value="bank">Bank Account</MenuItem>
-              </Select>
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.transactionType && errors.transactionType.message}
-          </FormHelperText>
-        </FormGroup>
+        <div className="one">
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Transaction Type</FormLabel>
+            <Controller
+              control={control}
+              name="transactionType"
+              render={({ onChange, value, name, message }) => (
+                <Select
+                  className="formInput"
+                  name="transactionType"
+                  value={transactionType}
+                  onChange={handleTransactionType}
+                  inputRef={register({
+                    required: 'This field is required!',
+                  })}
+                >
+                  <MenuItem value="vendor">Vendor</MenuItem>
+                  <MenuItem value="customer">Customer</MenuItem>
+                  <MenuItem value="gl">G/L</MenuItem>
+                  <MenuItem value="bank">Bank Account</MenuItem>
+                </Select>
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.transactionType && errors.transactionType.message}
+            </FormHelperText>
+          </FormGroup>
 
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Name</FormLabel>
-          <Controller
-            control={control}
-            name="userType"
-            render={({ onChange, value, name, message }) => (
-              <Select
-                className="formInput"
-                name="userType"
-                value={
-                  transactionType === 'vendor' ? paymentVendor : paymentCustomer
-                }
-                onChange={
-                  transactionType === 'vendor' ? handleVendor : handleCustomer
-                }
-                inputRef={register({
-                  required: 'This field is required!',
-                })}
-              >
-                {transactionType === 'vendor' ? (
-                  allVendors.map(({ vendorId, vendorName }) => (
-                    <MenuItem value={vendorId}>{vendorName}</MenuItem>
-                  ))
-                ) : transactionType === 'customer' ? (
-                  allCustomers.map(({ customerId, customerName }) => (
-                    <MenuItem value={customerId}>{customerName}</MenuItem>
-                  ))
-                ) : transactionType === 'gl' ? (
-                  <MenuItem>-----</MenuItem>
-                ) : (
-                  ''
-                )}
-              </Select>
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.paymentAccount && errors.paymentAccount.message}
-          </FormHelperText>
-        </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Name</FormLabel>
+            <Controller
+              control={control}
+              name="userType"
+              render={({ onChange, value, name, message }) => (
+                <Select
+                  className="formInput"
+                  name="userType"
+                  value={
+                    transactionType === 'vendor'
+                      ? paymentVendor
+                      : paymentCustomer
+                  }
+                  onChange={
+                    transactionType === 'vendor' ? handleVendor : handleCustomer
+                  }
+                  inputRef={register({
+                    required: 'This field is required!',
+                  })}
+                >
+                  {transactionType === 'vendor' ? (
+                    allVendors.map(({ vendorId, vendorName }) => (
+                      <MenuItem value={vendorId}>{vendorName}</MenuItem>
+                    ))
+                  ) : transactionType === 'customer' ? (
+                    allCustomers.map(({ customerId, customerName }) => (
+                      <MenuItem value={customerId}>{customerName}</MenuItem>
+                    ))
+                  ) : transactionType === 'gl' ? (
+                    <MenuItem>-----</MenuItem>
+                  ) : (
+                    ''
+                  )}
+                </Select>
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.userType && errors.userType.message}
+            </FormHelperText>
+          </FormGroup>
+        </div>
 
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Account</FormLabel>
-          <Controller
-            control={control}
-            name="paymentAccount"
-            render={({ onChange, value, name, message }) => (
-              <Select
-                className="formInput"
-                name="paymentAccount"
-                value={paymentAccount}
-                onChange={handleTransactionsAccount}
-                inputRef={register({
-                  required: 'This field is required!',
-                })}
-              >
-                {transactionType === 'gl' ? (
-                  accounts.map(({ accountId, accountCode, accountName }) => (
-                    <MenuItem value={accountId}>
-                      {accountCode} - {accountName}
-                    </MenuItem>
-                  ))
-                ) : transactionType === 'customer' ? (
-                  <MenuItem value="2">1 - Accounts Receivables</MenuItem>
-                ) : transactionType === 'vendor' ? (
-                  <MenuItem value="3">2 - Accounts Payables</MenuItem>
-                ) : (
-                  ''
-                )}
-              </Select>
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.paymentAccount && errors.paymentAccount.message}
-          </FormHelperText>
-        </FormGroup>
+        <div className="two">
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Account</FormLabel>
+            <Controller
+              control={control}
+              name="paymentAccount"
+              render={({ onChange, value, name, message }) => (
+                <Select
+                  className="formInput"
+                  name="paymentAccount"
+                  value={paymentAccount}
+                  onChange={handleTransactionsAccount}
+                  inputRef={register({
+                    required: 'This field is required!',
+                  })}
+                >
+                  {transactionType === 'gl' ? (
+                    accounts.map(({ accountId, accountCode, accountName }) => (
+                      <MenuItem value={accountId}>
+                        {accountCode} - {accountName}
+                      </MenuItem>
+                    ))
+                  ) : transactionType === 'customer' ? (
+                    <MenuItem value="2">1 - Accounts Receivables</MenuItem>
+                  ) : transactionType === 'vendor' ? (
+                    <MenuItem value="3">2 - Accounts Payables</MenuItem>
+                  ) : (
+                    ''
+                  )}
+                </Select>
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.paymentAccount && errors.paymentAccount.message}
+            </FormHelperText>
+          </FormGroup>
 
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Description</FormLabel>
-          <Controller
-            control={control}
-            name="paymentDescription"
-            render={({ onChange, value, name, message }) => (
-              <InputBase
-                className="formInput"
-                name="paymentDescription"
-                value={paymentDescription}
-                onChange={handleTransactionsDescription}
-              />
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.paymentDescription && errors.paymentDescription.message}
-          </FormHelperText>
-        </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Description</FormLabel>
+            <Controller
+              control={control}
+              name="paymentDescription"
+              render={({ onChange, value, name, message }) => (
+                <InputBase
+                  className="formInput"
+                  name="paymentDescription"
+                  value={paymentDescription}
+                  onChange={handleTransactionsDescription}
+                />
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.paymentDescription && errors.paymentDescription.message}
+            </FormHelperText>
+          </FormGroup>
 
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Debit</FormLabel>
-          <Controller
-            control={control}
-            name="paymentDebit"
-            render={({ onChange, value, name, message }) => (
-              <InputBase
-                className="formInput"
-                name="paymentDebit"
-                type="number"
-                value={paymentDebit}
-                onChange={handleTransactionsDebit}
-              />
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.paymentDebit && errors.paymentDebit.message}
-          </FormHelperText>
-        </FormGroup>
-        <FormGroup className="formGroup">
-          <FormLabel className="formLabel">Credit</FormLabel>
-          <Controller
-            control={control}
-            name="paymentCredit"
-            render={({ onChange, value, name, message }) => (
-              <InputBase
-                className="formInput"
-                name="paymentCredit"
-                value={paymentCredit}
-                onChange={handleTransactionsCredit}
-              />
-            )}
-          />
-          <FormHelperText className="formHelperText" error>
-            {errors.paymentCredit && errors.paymentCredit.message}
-          </FormHelperText>
-        </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Debit</FormLabel>
+            <Controller
+              control={control}
+              name="paymentDebit"
+              render={({ onChange, value, name, message }) => (
+                <InputBase
+                  className="formInput"
+                  name="paymentDebit"
+                  type="number"
+                  value={paymentDebit}
+                  onChange={handleTransactionsDebit}
+                />
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.paymentDebit && errors.paymentDebit.message}
+            </FormHelperText>
+          </FormGroup>
+          <FormGroup className="formGroup">
+            <FormLabel className="formLabel">Credit</FormLabel>
+            <Controller
+              control={control}
+              name="paymentCredit"
+              render={({ onChange, value, name, message }) => (
+                <InputBase
+                  className="formInput"
+                  name="paymentCredit"
+                  value={paymentCredit}
+                  onChange={handleTransactionsCredit}
+                />
+              )}
+            />
+            <FormHelperText className="formHelperText" error>
+              {errors.paymentCredit && errors.paymentCredit.message}
+            </FormHelperText>
+          </FormGroup>
 
-        <FormGroup className="formGroupButton">
-          <Button
-            className="saveButton"
-            onClick={handleNewRow.bind(this, {
-              paymentAccount,
-              paymentVendor:
-                transactionType === 'vendor' ? paymentVendor : null,
-              paymentCustomer:
-                transactionType === 'customer' ? paymentCustomer : null,
-              paymentDescription,
-              paymentDate,
-              paymentDebit: parseInt(paymentDebit),
-              paymentCredit: parseInt(paymentCredit),
-            })}
-          >
-            <AddBoxIcon fontSize="large" className="plusIcon" />
-          </Button>
-        </FormGroup>
-        <Button type={'submit'}>POST</Button>
+          <FormGroup className="formGroupButton">
+            <Button
+              className="saveButton"
+              onClick={handleNewRow.bind(this, {
+                paymentAccount,
+                paymentVendor:
+                  transactionType === 'vendor' ? paymentVendor : null,
+                paymentCustomer:
+                  transactionType === 'customer' ? paymentCustomer : null,
+                paymentDescription,
+                paymentDate,
+                paymentDebit: parseInt(paymentDebit),
+                paymentCredit: parseInt(paymentCredit),
+              })}
+            >
+              <AddBoxIcon fontSize="large" className="plusIcon" />
+            </Button>
+          </FormGroup>
+        </div>
       </form>
 
       <Table className="table">

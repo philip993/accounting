@@ -14,12 +14,12 @@
     width: 100%;
     margin: auto;
     padding: 1% 0%;
+    // display: inline-flex;
 
-    .one,
-    .two {
-      margin: auto;
-      display: inline-table;
-      width: 50%;
+
+    .one {
+      display: inline-flex;
+      width: 40%;
 
       .formGroup {
         width: 80%;
@@ -74,106 +74,26 @@
         }
       }
 
-      // .formGroupButton {
-      //     width: 80%;
-      //     margin: auto;
-      //     margin-top: 5%;
-      //     margin-bottom: 2%;
     }
 
-    // .one,
-    // .two,
-    .three {
-      align-items: auto;
+    .saveButton {
       margin: auto;
-      display: inline-flex;
-      width: 100%;
-
-      .formGroup {
-        width: 80%;
-        margin: auto;
-        padding: 1%;
-
-        .formLabel {
-          background-color: #0f52ab;
-          padding: 5px 0px 5px 5px;
-          margin: 10px 0px 15px 0px;
-          text-align: center;
-          color: #fff;
-          font-size: 16px;
-          font-weight: bold;
-          letter-spacing: 1.5px;
-        }
-
-        .formInput {
-          background-color: #fff;
-          border: 1px solid gray;
-          padding-left: 10px;
-          min-height: 32px;
-
-          &:hover {
-            box-shadow: 0px 0px 5px #a90f52;
-          }
-        }
-
-        .formHelperText {
-          font-weight: bold;
-          letter-spacing: 1px;
-        }
-
-        .saveButton {
-          margin: auto;
-          margin-top: 40px;
-          margin-bottom: 1%;
-          width: 30%;
-          background-color: #fff;
-          border: 1px solid #a90f52;
-          color: #a90f52;
-          font-weight: bold;
-
-          &:hover {
-            background-color: #a90f52;
-            border: 1px solid #fff;
-            color: #fff;
-
-            letter-spacing: 1.5px;
-          }
-        }
-      }
-
-      // .formGroupButton {
-      //     width: 80%;
-      //     margin: auto;
-      //     margin-top: 5%;
-      //     margin-bottom: 2%;
-    }
-
-    .four {
+      margin-top: 40px;
+      margin-bottom: 1%;
       width: 30%;
-      margin-left: 1%;
+      background-color: #fff;
+      border: 1px solid #a90f52;
+      color: #a90f52;
+      font-weight: bold;
 
-      .formGroup {
-        .formLabel {
-          background-color: #0f52ab;
-          padding: 5px 0px 5px 5px;
-          margin: 10px 0px 15px 0px;
-          text-align: center;
-          color: #fff;
-          font-size: 16px;
-          font-weight: bold;
-          letter-spacing: 1.5px;
-        }
+      &:hover {
+        background-color: #a90f52;
+        border: 1px solid #fff;
+        color: #fff;
 
-        .formTotal {
-          background-color: #fff;
-          border: 1px solid gray;
-          padding-left: 20px;
-
-          &:hover {
-            box-shadow: 0px 0px 5px #a90f52;
-          }
-        }
+        letter-spacing: 1.5px;
       }
     }
   }
+
 }
