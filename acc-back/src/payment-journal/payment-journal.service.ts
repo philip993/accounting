@@ -17,7 +17,9 @@ export class PaymentJournalService {
   }
 
   async findOne(id: number): Promise<PaymentJournal> {
-    return await this.paymentJournalRepository.findOne(id);
+    return await this.paymentJournalRepository.findOne(id, {
+      relations: ['journals'],
+    });
   }
 
   async create(paymentJournal: PaymentJournal): Promise<PaymentJournal> {
