@@ -1,0 +1,45 @@
+.paymentJournals {
+  width: 60%;
+  margin: auto;
+
+  .table {
+    .tableHead {
+      background-color: #1471e9;
+
+      .tableRow {
+        .tableCell {
+          color: #fff;
+          border: 1px solid #363636;
+          font-size: 1rem;
+          letter-spacing: 1.5px;
+        }
+      }
+    }
+
+    .tableBody {
+      .tableRow {
+        .tableCell {
+          color: #363636;
+          border: 1px solid #bebebe;
+        }
+
+        .tableCellTotal {
+          color: #0f52ab;
+          font-weight: bold;
+          letter-spacing: 1.5px;
+        }
+
+        .tableBtn {
+          color: #a90f52;
+          border: 1px solid #a90f52;
+          font-weight: bold;
+
+          &:hover {
+            background-color: #a90f52;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
