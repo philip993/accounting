@@ -1,12 +1,9 @@
-import {} from './CreatePaymentJournalActions';
-import axios from 'axios';
 import {
   FAILURE_CREATE_PAYMENT_JOURNAL,
   INPUT_PAYMENT_JOURNAL_DATE,
-  INPUT_PAYMENT_JOURNAL_DESCRIPTION,
-  INPUT_PAYMENT_JOURNAL_USER,
   SUCCESS_CREATE_PAYMENT_JOURNAL,
 } from './CreatePaymentJournalActionTypes';
+import axios from 'axios';
 
 // request
 export const requestCreatePaymentJournal = () => {
@@ -15,9 +12,11 @@ export const requestCreatePaymentJournal = () => {
       paymentJournalDescription,
       paymentJournalDate,
     } = getState().CreatePaymentJournalReducer;
+    let { allPaymentJournals } = getState().PaymentJournalsReducer;
+    let number = allPaymentJournals.length + 1;
     return axios
       .post(`http://localhost:4000/payment-journal`, {
-        paymentJournalDescription,
+        paymentJournalDescription: `Bank Statement 00${number}`,
         paymentJournalDate,
       })
       .then((response) => {
@@ -36,24 +35,9 @@ export const requestCreatePaymentJournal = () => {
   };
 };
 
-// input
-export const inputPaymentJournalDescription = (e) => {
-  return {
-    type: INPUT_PAYMENT_JOURNAL_DESCRIPTION,
-    payload: e,
-  };
-};
-
 export const inputPaymentJournalDate = (e) => {
   return {
     type: INPUT_PAYMENT_JOURNAL_DATE,
-    payload: e,
-  };
-};
-
-export const inputPaymentJournalUser = (e) => {
-  return {
-    type: INPUT_PAYMENT_JOURNAL_USER,
     payload: e,
   };
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Style
 import './CreatePaymentJournalStyle.scss';
@@ -7,13 +7,11 @@ import { useForm, Controller } from 'react-hook-form';
 // Redux
 import {
   inputPaymentJournalDate,
-  inputPaymentJournalDescription,
-  inputPaymentJournalUser,
   requestCreatePaymentJournal,
 } from './CreatePaymentJournalActions';
-import { requestCreateTransactions } from '../Transactions/TransactionsActions';
 // React Components
-import Transactions from '../Transactions/Transactions';
+import PaymentTransaction from '../PaymentTransaction/PaymentTransaction';
+
 // Material Ui
 import {
   FormGroup,
@@ -21,20 +19,11 @@ import {
   InputBase,
   FormHelperText,
   Button,
-  Select,
-  MenuItem,
-  Typography,
 } from '@material-ui/core';
-import { requestGetAllCustomers } from '../Customer/CustomerActions';
-import { requestGetAllVendors } from '../Vendor/VendorActions';
+import { requestCreatePayTransactions } from '../PaymentTransaction/PaymentTransactionActions';
 
 const CreatePaymentJournal = () => {
-  const {
-    paymentJournalDescription,
-    paymentJournalDate,
-    allCustomers,
-    allVendors,
-  } = useSelector((state) => ({
+  const { paymentJournalDate } = useSelector((state) => ({
     ...state.CreatePaymentJournalReducer,
     ...state.CustomerReducer,
     ...state.VendorReducer,
@@ -44,29 +33,15 @@ const CreatePaymentJournal = () => {
 
   const [isType, setIsType] = useState('');
 
-  const handlePaymentJournalDescription = (e) => {
-    dispatch(inputPaymentJournalDescription(e.target.value));
-  };
-
   const handlePaymentJournalDate = (e) => {
     dispatch(inputPaymentJournalDate(e.target.value));
   };
 
-  const handleSelectUserType = (e) => {
-    dispatch(inputPaymentJournalUser(e.target.value));
-  };
-
   const submitForm = async (e) => {
     await dispatch(requestCreatePaymentJournal());
-    await dispatch(requestCreateTransactions());
+    await dispatch(requestCreatePayTransactions());
   };
 
-  useEffect(() => {
-    dispatch(requestGetAllCustomers());
-    dispatch(requestGetAllVendors());
-  }, []);
-
-  console.log(isType);
   return (
     <div className="createPaymentJournal">
       <h1>Create Payment Journal</h1>
@@ -75,66 +50,6 @@ const CreatePaymentJournal = () => {
         onSubmit={handleSubmit(submitForm)}
       >
         <div className="one">
-          <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Select Type</FormLabel>
-            <Controller
-              control={control}
-              name="userType"
-              render={({ onChange, value, name, message }) => (
-                <Select
-                  className="formInput"
-                  name="userType"
-                  value={isType}
-                  onChange={(e) => setIsType(e.target.value)}
-                  inputRef={register({
-                    required: 'This field is required',
-                  })}
-                >
-                  <MenuItem value="vendor">Vendor</MenuItem>
-                  <MenuItem value="customer">Customer</MenuItem>
-                </Select>
-              )}
-            />
-
-            {/* <FormHelperText className="formHelperText" error>
-              {errors.paymentJournalDescription &&
-                errors.paymentJournalDescription.message}
-            </FormHelperText> */}
-          </FormGroup>
-
-          <FormGroup className="formGroup">
-            <FormLabel className="formLabel">User</FormLabel>
-            <Controller
-              control={control}
-              name="user"
-              render={({ onChange, value, name, message }) => (
-                <Select
-                  className="formInput"
-                  name="user"
-                  value={''}
-                  onChange={handleSelectUserType}
-                  inputRef={register({
-                    required: 'This field is required',
-                  })}
-                >
-                  {isType === ''
-                    ? ''
-                    : isType === 'vendor'
-                    ? allVendors.map(({ vendorId, vendorName }) => (
-                        <MenuItem value={vendorId}>{vendorName}</MenuItem>
-                      ))
-                    : allCustomers.map(({ customerId, customerName }) => (
-                        <MenuItem value={customerId}>{customerName}</MenuItem>
-                      ))}
-                </Select>
-              )}
-            />
-            <FormHelperText className="formHelperText" error>
-              {errors.user && errors.user.message}
-            </FormHelperText>
-          </FormGroup>
-        </div>
-        <div className="two">
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Date</FormLabel>
             <Controller
@@ -166,55 +81,17 @@ const CreatePaymentJournal = () => {
               {errors.paymentJournalDate && errors.paymentJournalDate.message}
             </FormHelperText>
           </FormGroup>
-          <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Description</FormLabel>
-            <Controller
-              control={control}
-              name="paymentJournalDescription"
-              render={({ onChange, value, name, message }) => (
-                <InputBase
-                  className="formInput"
-                  name="paymentJournalDescription"
-                  value={paymentJournalDescription}
-                  onChange={handlePaymentJournalDescription}
-                  inputRef={register({
-                    required: 'This field is required!',
-                  })}
-                />
-              )}
-            />
-
-            <FormHelperText className="formHelperText" error>
-              {errors.paymentJournalDescription &&
-                errors.paymentJournalDescription.message}
-            </FormHelperText>
-          </FormGroup>
         </div>
 
-        <Transactions />
+        {/* <div className="two"> */}
+        <PaymentTransaction />
+        {/* </div> */}
 
-        <div className="four">
-          <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Total</FormLabel>
-            <Typography className="formTotal">
-              {/* {
-                (invoiceTotal = transactionsRow.reduce(
-                  (a, b) => a + b.transactionsDebit,
-                  0
-                ))
-              }{' '} */}
-              $
-            </Typography>
-          </FormGroup>
-        </div>
-
-        <div className="three">
-          <FormGroup className="formGroup">
-            <Button className="saveButton" type={'submit'}>
-              Post
-            </Button>
-          </FormGroup>
-        </div>
+        <FormGroup className="formGroup">
+          <Button className="saveButton" type={'submit'}>
+            Post
+          </Button>
+        </FormGroup>
       </form>
     </div>
   );

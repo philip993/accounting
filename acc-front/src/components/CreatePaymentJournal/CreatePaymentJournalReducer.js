@@ -1,8 +1,6 @@
 import {
   FAILURE_CREATE_PAYMENT_JOURNAL,
   INPUT_PAYMENT_JOURNAL_DATE,
-  INPUT_PAYMENT_JOURNAL_DESCRIPTION,
-  INPUT_PAYMENT_JOURNAL_USER,
   SUCCESS_CREATE_PAYMENT_JOURNAL,
 } from './CreatePaymentJournalActionTypes';
 
@@ -30,20 +28,10 @@ export const CreatePaymentJournalReducer = (state = initialState, action) => {
         newPaymentJournal: null,
         newPaymentJournalError: true,
       };
-    case INPUT_PAYMENT_JOURNAL_DESCRIPTION:
-      return {
-        ...state,
-        paymentJournalDescription: action.payload,
-      };
     case INPUT_PAYMENT_JOURNAL_DATE:
       return {
         ...state,
         paymentJournalDate: action.payload,
-      };
-    case INPUT_PAYMENT_JOURNAL_USER:
-      return {
-        ...state,
-        user: action.payload,
       };
     default:
       return state;
