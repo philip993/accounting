@@ -1,6 +1,7 @@
 import {
   SUCCESS_GET_PAYMENT_JOURNALS,
   FAILURE_GET_PAYMENT_JOURNALS,
+  SELECT_ONE_PAYMENT_JOURNAL,
 } from './PaymentJournalsActionTypes';
 import axios from 'axios';
 
@@ -22,5 +23,13 @@ export const requestGetPaymentJournals = () => {
           type: FAILURE_GET_PAYMENT_JOURNALS,
         });
       });
+  };
+};
+
+// select
+export const selectOnePaymentJournal = (e) => {
+  return {
+    type: SELECT_ONE_PAYMENT_JOURNAL,
+    payload: e,
   };
 };

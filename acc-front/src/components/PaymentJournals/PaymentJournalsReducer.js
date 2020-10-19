@@ -1,13 +1,14 @@
 import {
   SUCCESS_GET_PAYMENT_JOURNALS,
   FAILURE_GET_PAYMENT_JOURNALS,
-  GET_NUMBER_OF_PAYMENT_JOURNAL,
+  SELECT_ONE_PAYMENT_JOURNAL,
 } from './PaymentJournalsActionTypes';
 
 const initialState = {
   allPaymentJournals: [],
   allPaymentJournalsError: null,
   paymentJournalLength: 0,
+  selectedJournal: [],
 };
 
 export const PaymentJournalsReducer = (state = initialState, action) => {
@@ -25,11 +26,11 @@ export const PaymentJournalsReducer = (state = initialState, action) => {
         allPaymentJournals: null,
         allPaymentJournalsError: true,
       };
-    // case GET_NUMBER_OF_PAYMENT_JOURNAL:
-    //   return {
-    //     ...state,
-    //     paymentJournalLength: state.allPaymentJournals.length,
-    //   };
+    case SELECT_ONE_PAYMENT_JOURNAL:
+      return {
+        ...state,
+        selectedJournal: action.payload,
+      };
     default:
       return state;
   }
