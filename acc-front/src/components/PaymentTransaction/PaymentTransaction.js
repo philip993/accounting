@@ -12,16 +12,14 @@ import {
   inputCreatePaymentDebit,
   inputCreatePaymentDescription,
   inputCreatePaymentVendor,
-  requestCreatePaymentTransaction,
-} from './PaymentTransactionActions';
-import {
-  inputTransactionsAccount,
-  inputTransactionsCredit,
-  inputTransactionsDebit,
-  inputTransactionsDescription,
-  requestCreateTransactions,
+  // requestCreatePaymentTransaction,
+  requestCreatePayTransactions,
   selectNewRow,
-} from '../Transactions/TransactionsActions';
+  getPaymentTransactionsTotal,
+} from './PaymentTransactionActions';
+import { requestGetAllCustomers } from '../Customer/CustomerActions';
+import { requestGetAllVendors } from '../Vendor/VendorActions';
+import { requestGetChartOfAccounts } from '../ChartAccounts/ChartAccountsActions';
 // Material Ui
 import {
   InputBase,
@@ -38,26 +36,12 @@ import {
   TableBody,
 } from '@material-ui/core';
 import AddBoxIcon from '@material-ui/icons/AddBox';
-import { requestGetAllCustomers } from '../Customer/CustomerActions';
-import { requestGetAllVendors } from '../Vendor/VendorActions';
 
 const PaymentTransaction = () => {
   const {
     allCustomers,
     allVendors,
     accounts,
-    userType,
-    newPaymentTransaction,
-    transactionsDescription,
-    transactionsDate,
-    transactionsRow,
-    transactionsDebit,
-    transactionsCredit,
-    documentType,
-    vendor,
-    customer,
-    account,
-    invoice,
     paymentVendor,
     paymentCustomer,
     paymentAccount,
@@ -71,24 +55,19 @@ const PaymentTransaction = () => {
     ...state.ChartAccountsReducer,
     ...state.VendorReducer,
     ...state.CustomerReducer,
-    ...state.TransactionsReducer,
   }));
   const dispatch = useDispatch();
   const { handleSubmit, message, errors, register, control } = useForm();
 
   const [transactionType, setTransactionType] = useState('');
-  const [sec, SetSec] = useState();
+  const [clicked, setClicked] = useState(false);
 
   const handleTransactionType = (e) => {
     setTransactionType(e.target.value);
   };
 
   const handleTransactionsAccount = (e) => {
-    dispatch(inputCreatePaymentAccount(e.target.value));
-  };
-
-  const handleTransactionUserType = (e) => {
-    SetSec(e.target.value);
+    dispatch(inputCreatePaymentAccount(parseInt(e.target.value)));
   };
 
   const handleTransactionsDescription = (e) => {
@@ -115,14 +94,21 @@ const PaymentTransaction = () => {
     dispatch(selectNewRow(e));
   };
 
-  const submitForm = (e) => {
-    dispatch(requestCreatePaymentTransaction());
+  const handleReconcileRow = (e) => {
+    dispatch(getPaymentTransactionsTotal(e));
+    setClicked(true);
+  };
+
+  const submitForm = async (e) => {
+    await dispatch(requestCreatePayTransactions());
   };
 
   useEffect(() => {
     dispatch(requestGetAllCustomers());
     dispatch(requestGetAllVendors());
+    dispatch(requestGetChartOfAccounts());
   }, []);
+
   return (
     <div className="paymentTransction">
       <form
@@ -175,21 +161,19 @@ const PaymentTransaction = () => {
                   required: 'This field is required!',
                 })}
               >
-                {transactionType === 'vendor'
-                  ? allVendors.map(({ vendorId, vendorName }) => (
-                      <MenuItem value={vendorId}>{vendorName}</MenuItem>
-                    ))
-                  : transactionType === 'customer'
-                  ? allCustomers.map(({ customerId, customerName }) => (
-                      <MenuItem value={customerId}>{customerName}</MenuItem>
-                    ))
-                  : transactionType === 'gl'
-                  ? accounts.map(({ accountId, accountCode, accountName }) => (
-                      <MenuItem value={accountId}>
-                        {accountCode} - {accountName}
-                      </MenuItem>
-                    ))
-                  : ''}
+                {transactionType === 'vendor' ? (
+                  allVendors.map(({ vendorId, vendorName }) => (
+                    <MenuItem value={vendorId}>{vendorName}</MenuItem>
+                  ))
+                ) : transactionType === 'customer' ? (
+                  allCustomers.map(({ customerId, customerName }) => (
+                    <MenuItem value={customerId}>{customerName}</MenuItem>
+                  ))
+                ) : transactionType === 'gl' ? (
+                  <MenuItem>-----</MenuItem>
+                ) : (
+                  ''
+                )}
               </Select>
             )}
           />
@@ -220,17 +204,12 @@ const PaymentTransaction = () => {
                     </MenuItem>
                   ))
                 ) : transactionType === 'customer' ? (
-                  <MenuItem value="2">1</MenuItem>
+                  <MenuItem value="2">1 - Accounts Receivables</MenuItem>
                 ) : transactionType === 'vendor' ? (
-                  <MenuItem value="3">2</MenuItem>
+                  <MenuItem value="3">2 - Accounts Payables</MenuItem>
                 ) : (
                   ''
                 )}
-                {accounts.map(({ accountId, accountCode, accountName }) => (
-                  <MenuItem value={accountId}>
-                    {accountCode} - {accountName}
-                  </MenuItem>
-                ))}
               </Select>
             )}
           />
@@ -346,10 +325,10 @@ const PaymentTransaction = () => {
                   {paymentDescription}
                 </TableCell>
                 <TableCell className="tableCell">
-                  {paymentDebit.toFixed(2)} $
+                  {parseInt(paymentDebit)} $
                 </TableCell>
                 <TableCell className="tableCell">
-                  {paymentCredit.toFixed(2)} $
+                  {parseInt(paymentCredit)} $
                 </TableCell>
               </TableRow>
             )
@@ -357,26 +336,29 @@ const PaymentTransaction = () => {
 
           <TableRow className="tableRow">
             <TableCell className="tableCellTotal" colSpan={2}>
-              Complete Transactions
+              Reconcile Journal
             </TableCell>
             <TableCell className="tableCellTotal" colSpan={2}>
-              {/* <Button
-                // disabled={clicked === true}
+              <Button
+                disabled={clicked === true}
                 className="tableBtn"
-                onClick={handleTotalPayablesRow.bind(this, {
-                  account: 2,
-                  userType: vendor,
-                  documentType: invoice,
-                  transactionsDescription: 'Payables',
-                  transactionsDebit: 0,
-                  transactionsCredit: transactionsRow.reduce(
-                    (a, b) => a + b.transactionsDebit,
+                onClick={handleReconcileRow.bind(this, {
+                  paymentAccount: 2,
+                  paymentVendor: null,
+                  paymentCustomer: null,
+                  paymentDescription: 'Bank Account',
+                  paymentDebit: paymentRow.reduce(
+                    (a, b) => a + b.paymentCredit,
+                    0
+                  ),
+                  paymentCredit: paymentRow.reduce(
+                    (a, b) => a + b.paymentDebit,
                     0
                   ),
                 })}
               >
                 Yes
-              </Button> */}
+              </Button>
             </TableCell>
           </TableRow>
         </TableBody>
