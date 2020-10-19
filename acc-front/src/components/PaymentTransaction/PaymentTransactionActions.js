@@ -9,31 +9,28 @@ import {
   INPUT_CREATE_PAYMENT_DEBIT,
   INPUT_CREATE_PAYMENT_CREDIT,
   SELECT_NEW_ROW,
+  TRANSACTION_TOTAL,
 } from './PaymentTransactionActionTypes';
 import axios from 'axios';
 
 // request
-export const requestCreatePaymentTransaction = () => {
+export const requestCreatePayTransactions = () => {
   return (dispatch, getState) => {
-    let {
-      paymentCustomer,
-      paymentVendor,
-      paymentRow,
-    } = getState().PaymentTransactionReducer;
+    let { paymentRow } = getState().PaymentTransactionReducer;
     let transactions = paymentRow
       .map((transaction, index) => ({
         transactionFK: transaction.paymentAccount,
-        transactionLinesFK: paymentVendor,
-        transactionCustomerFK: paymentCustomer,
-        transactionJournalFK: 1,
+        transactionLinesFK: transaction.paymentVendor,
+        transactionCustomerFK: transaction.paymentCustomer,
         transactionDate: '2020-01-01',
         transactionDescription: transaction.paymentDescription,
         transactionDebit: transaction.paymentDebit,
         transactionCredit: transaction.paymentCredit,
       }))
       .slice(1);
+    console.log(transactions);
     return axios
-      .post(`http://localhost:4000/transaction`, { transactions })
+      .post(`http://localhost:4000/transactions`, transactions)
       .then((response) => {
         console.log(response);
         dispatch({
@@ -104,6 +101,14 @@ export const inputCreatePaymentCredit = (e) => {
 export const selectNewRow = (e) => {
   return {
     type: SELECT_NEW_ROW,
+    payload: e,
+  };
+};
+
+// total
+export const getPaymentTransactionsTotal = (e) => {
+  return {
+    type: TRANSACTION_TOTAL,
     payload: e,
   };
 };
