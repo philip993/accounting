@@ -26,6 +26,7 @@ import PaymentJournalMenu from '../Menu/PaymentJournalMenu';
 import CreatePaymentJournal from '../CreatePaymentJournal/CreatePaymentJournal';
 import PaymentJournals from '../PaymentJournals/PaymentJournals';
 import DetailsPaymentJournal from '../DetailsPaymentJournal/DetailsPaymentJournal';
+import DetailAccountReport from '../DetailAccountReport/DetailAccountReport';
 
 const App = () => {
   return (
@@ -86,6 +87,11 @@ const App = () => {
           exact
           path="/journal/details"
           component={DetailsPaymentJournal}
+        />
+        <Route
+          exact
+          path="/general/reports/account"
+          component={DetailAccountReport}
         />
       </Switch>
     </div>
