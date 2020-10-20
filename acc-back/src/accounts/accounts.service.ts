@@ -14,7 +14,9 @@ export class AccountsService {
   }
 
   async findOne(id: number): Promise<Accounts> {
-    return await this.accountsRepository.findOne(id);
+    return await this.accountsRepository.findOne(id, {
+      relations: ['transactions'],
+    });
   }
 
   async create(account: Accounts): Promise<Accounts> {
