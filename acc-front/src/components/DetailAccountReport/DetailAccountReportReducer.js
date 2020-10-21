@@ -4,6 +4,7 @@ import {
   INPUT_FILTER_ACCOUNT_CODE,
   INPUT_FILTER_START_DATE,
   INPUT_FILTER_END_DATE,
+  RESET_SEARCH_FIELDS,
 } from './DetailAccountReportActionTypes';
 
 const initialState = {
@@ -42,6 +43,13 @@ export const DetailAccountReportReducer = (state = initialState, action) => {
       return {
         ...state,
         endDateFilter: action.payload,
+      };
+    case RESET_SEARCH_FIELDS:
+      return {
+        ...state,
+        accountFilter: '',
+        startDateFilter: '',
+        endDateFilter: '',
       };
     default:
       return state;

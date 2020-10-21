@@ -4,17 +4,14 @@ import {
   INPUT_FILTER_ACCOUNT_CODE,
   INPUT_FILTER_START_DATE,
   INPUT_FILTER_END_DATE,
+  RESET_SEARCH_FIELDS,
 } from './DetailAccountReportActionTypes';
 import axios from 'axios';
 
 // request
 export const requestGetDetailsAccount = () => {
   return (dispatch, getState) => {
-    let {
-      accountFilter,
-      startDateFilter,
-      endDateFilter,
-    } = getState().DetailAccountReportReducer;
+    let { accountFilter } = getState().DetailAccountReportReducer;
     let id = accountFilter;
     return axios
       .get(`http://localhost:4000/accounts/${id}`)
@@ -53,5 +50,12 @@ export const inputFilterEndDate = (e) => {
   return {
     type: INPUT_FILTER_END_DATE,
     payload: e,
+  };
+};
+
+// reset
+export const resetSearchFields = () => {
+  return {
+    type: RESET_SEARCH_FIELDS,
   };
 };
