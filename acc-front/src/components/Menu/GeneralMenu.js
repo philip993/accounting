@@ -18,6 +18,9 @@ const GeneralMenu = () => {
         </li>
         <li>
           <h3>Reports</h3>
+          <Link to="/general/reports/account" className="link">
+            Details Account Report
+          </Link>
         </li>
         <li>
           <h3>Tasks</h3>
