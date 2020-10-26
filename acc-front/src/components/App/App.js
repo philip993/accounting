@@ -27,6 +27,7 @@ import CreatePaymentJournal from '../CreatePaymentJournal/CreatePaymentJournal';
 import PaymentJournals from '../PaymentJournals/PaymentJournals';
 import DetailsPaymentJournal from '../DetailsPaymentJournal/DetailsPaymentJournal';
 import DetailAccountReport from '../DetailAccountReport/DetailAccountReport';
+import VendorAnalytics from '../VendorAnalytics/VendorAnalytics';
 
 const App = () => {
   return (
@@ -92,6 +93,11 @@ const App = () => {
           exact
           path="/general/reports/account"
           component={DetailAccountReport}
+        />
+        <Route
+          exact
+          path="/payables/reports/vendor"
+          component={VendorAnalytics}
         />
       </Switch>
     </div>
