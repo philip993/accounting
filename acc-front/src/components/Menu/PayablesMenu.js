@@ -21,6 +21,9 @@ const PayablesMenu = () => {
         </li>
         <li>
           <h3>Reports</h3>
+          <Link to="/payables/reports/vendor" className="link">
+            Vendor Analytics
+          </Link>
         </li>
         <li>
           <h3>Tasks</h3>

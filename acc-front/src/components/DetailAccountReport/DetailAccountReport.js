@@ -195,7 +195,7 @@ const DetailAccountReport = () => {
             <CardContent className="cardContent">
               <div className="left">
                 <Typography className="typography">
-                  Account: {accountFilter}
+                  Account: {accountFilter - 1}
                 </Typography>
                 <Typography className="typography">
                   From: {startDateFilter}
