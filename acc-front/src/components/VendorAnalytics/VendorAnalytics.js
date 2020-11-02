@@ -92,7 +92,7 @@ const VendorAnalytics = () => {
         className="vendorAnalyticsForm"
         hidden={clicked}
       >
-        <h1>Report {vendorFilter ? `- account code: ${vendorFilter}` : '?'}</h1>
+        <h1>Report {vendorFilter ? `- vendor code: ${vendorFilter}` : '?'}</h1>
         <div className="one">
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Vendor</FormLabel>
@@ -193,7 +193,7 @@ const VendorAnalytics = () => {
             <CardContent className="cardContent">
               <div className="left">
                 <Typography className="typography">
-                  Vendor: {vendorFilter}
+                  Vendor code: {vendorFilter}
                 </Typography>
                 <Typography className="typography">
                   From: {startDateFilter}
@@ -219,7 +219,8 @@ const VendorAnalytics = () => {
                   <TableRow className="tableRow">
                     <TableCell className="tableCell">#</TableCell>
                     <TableCell className="tableCell">Date</TableCell>
-                    <TableCell className="tableCell">Desc.</TableCell>
+                    <TableCell className="tableCell">Invoice</TableCell>
+                    <TableCell className="tableCell">Journal</TableCell>
                     <TableCell className="tableCell">Debit</TableCell>
                     <TableCell className="tableCell">Credit</TableCell>
                   </TableRow>
@@ -230,7 +231,9 @@ const VendorAnalytics = () => {
                       (inv) =>
                         inv.transactionDate.split('T').shift() >=
                           startDateFilter &&
-                        inv.transactionDate.split('T').shift() <= endDateFilter
+                        inv.transactionDate.split('T').shift() <=
+                          endDateFilter &&
+                        inv.transactionJournalFK !== null
                     )
                     .map((invs, indx) => (
                       <TableRow className="tableRow">
@@ -240,31 +243,42 @@ const VendorAnalytics = () => {
                         <TableCell className="tableCell">
                           {invs.transactionDate}
                         </TableCell>
+                        <TableCell className="tableCell"></TableCell>
                         <TableCell className="tableCell">
-                          {invs.transactionInvoiceFK}
+                          {invs.transactionDescription}
                         </TableCell>
+                        <TableCell className="tableCell"></TableCell>
                         <TableCell className="tableCell">
-                          {invs.transactionJournalFK}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {/* {formatMoney(invs.)} */}
-                          {vendorlines
-                            .filter(
-                              (tr) =>
-                                tr.transactionInvoiceFK ===
-                                invs.transactionInvoiceFK
-                            )
-                            .reduce((a, b) => a + b.transactionDebit, 0)}
-                        </TableCell>
-                        <TableCell className="tableCell">
-                          {/* {formatMoney(invs.invoiceTotal)}
-                           */}
-                          {invs.transactionCredit}
+                          {formatMoney(invs.transactionDebit)}
                         </TableCell>
                       </TableRow>
                     ))}
+                  {invoice
+                    .filter(
+                      (inv) =>
+                        inv.invoiceDate.split('T').shift() >= startDateFilter &&
+                        inv.invoiceDate.split('T').shift() <= endDateFilter
+                    )
+                    .map((invs, indx) => (
+                      <TableRow className="tableRow">
+                        <TableCell className="tableCell">
+                          {invs.invoiceId}
+                        </TableCell>
+                        <TableCell className="tableCell">
+                          {invs.invoiceDate}
+                        </TableCell>
+                        <TableCell className="tableCell">
+                          {invs.invoiceNumber}
+                        </TableCell>
+                        <TableCell className="tableCell"></TableCell>
+                        <TableCell className="tableCell">
+                          {formatMoney(invs.invoiceTotal)}
+                        </TableCell>
+                        <TableCell className="tableCell"></TableCell>
+                      </TableRow>
+                    ))}
                   <TableRow className="tableRowSubtotal">
-                    <TableCell className="tableCell" colSpan={3}>
+                    <TableCell className="tableCell" colSpan={4}>
                       Subtotal
                     </TableCell>
                     <TableCell className="tableCell">
@@ -280,26 +294,27 @@ const VendorAnalytics = () => {
                           .reduce((a, b) => a + b.invoiceTotal, 0))
                       )}
                     </TableCell>
-                    {/* <TableCell className="tableCell">
+                    <TableCell className="tableCell">
                       {formatMoney(
-                        (credit = invoice
+                        (credit = vendorlines
                           .filter(
                             (inv) =>
-                              inv.invoiceDate.split('T').shift() >=
+                              inv.transactionDate.split('T').shift() >=
                                 startDateFilter &&
-                              inv.invoiceDate.split('T').shift() <=
-                                endDateFilter
+                              inv.transactionDate.split('T').shift() <=
+                                endDateFilter &&
+                              inv.transactionJournalFK !== null
                           )
-                          .reduce((a, b) => a + b.invoiceCredit, 0))
+                          .reduce((a, b) => a + b.transactionDebit, 0))
                       )}
-                    </TableCell> */}
+                    </TableCell>
                   </TableRow>
                   <TableRow className="tableRowTotal">
                     <TableCell className="tableCell" colSpan={4}>
                       Total
                     </TableCell>
                     <TableCell className="tableCell">
-                      {/* {formatMoney(debit - credit)} */}
+                      {formatMoney(debit - credit)}
                     </TableCell>
                   </TableRow>
                 </TableBody>

@@ -30,27 +30,6 @@ export const requestGetVendorAnalytics = () => {
       });
   };
 };
-// export const requestGetVendorAnalytics = () => {
-//   return (dispatch, getState) => {
-//     let { vendorFilter } = getState().VendorAnalyticsReducer;
-//     let id = vendorFilter;
-//     return axios
-//       .get(`http://localhost:4000/vendor/${id}`)
-//       .then((response) => {
-//         console.log(response);
-//         dispatch({
-//           type: SUCCESS_GET_VENDOR_ANALYTICS,
-//           payload: response.data,
-//         });
-//       })
-//       .catch((err) => {
-//         console.log(response);
-//         dispatch({
-//           type: FAILURE_GET_VENDOR_ANALYTICS,
-//         });
-//       });
-//   };
-// };
 
 // filter
 export const inputFilterVendorCode = (e) => {
