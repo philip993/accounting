@@ -247,10 +247,10 @@ const VendorAnalytics = () => {
                         <TableCell className="tableCell">
                           {invs.transactionDescription}
                         </TableCell>
-                        <TableCell className="tableCell"></TableCell>
                         <TableCell className="tableCell">
                           {formatMoney(invs.transactionDebit)}
                         </TableCell>
+                        <TableCell className="tableCell"></TableCell>
                       </TableRow>
                     ))}
                   {invoice
@@ -271,28 +271,15 @@ const VendorAnalytics = () => {
                           {invs.invoiceNumber}
                         </TableCell>
                         <TableCell className="tableCell"></TableCell>
+                        <TableCell className="tableCell"></TableCell>
                         <TableCell className="tableCell">
                           {formatMoney(invs.invoiceTotal)}
                         </TableCell>
-                        <TableCell className="tableCell"></TableCell>
                       </TableRow>
                     ))}
                   <TableRow className="tableRowSubtotal">
                     <TableCell className="tableCell" colSpan={4}>
                       Subtotal
-                    </TableCell>
-                    <TableCell className="tableCell">
-                      {formatMoney(
-                        (debit = invoice
-                          .filter(
-                            (tran) =>
-                              tran.invoiceDate.split('T').shift() >=
-                                startDateFilter &&
-                              tran.invoiceDate.split('T').shift() <=
-                                endDateFilter
-                          )
-                          .reduce((a, b) => a + b.invoiceTotal, 0))
-                      )}
                     </TableCell>
                     <TableCell className="tableCell">
                       {formatMoney(
@@ -306,6 +293,19 @@ const VendorAnalytics = () => {
                               inv.transactionJournalFK !== null
                           )
                           .reduce((a, b) => a + b.transactionDebit, 0))
+                      )}
+                    </TableCell>
+                    <TableCell className="tableCell">
+                      {formatMoney(
+                        (debit = invoice
+                          .filter(
+                            (tran) =>
+                              tran.invoiceDate.split('T').shift() >=
+                                startDateFilter &&
+                              tran.invoiceDate.split('T').shift() <=
+                                endDateFilter
+                          )
+                          .reduce((a, b) => a + b.invoiceTotal, 0))
                       )}
                     </TableCell>
                   </TableRow>

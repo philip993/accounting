@@ -308,7 +308,7 @@ const CustomerAnalytics = () => {
                                 endDateFilter &&
                               inv.transactionJournalFK !== null
                           )
-                          .reduce((a, b) => a + b.transactionDebit, 0))
+                          .reduce((a, b) => a + b.transactionCredit, 0))
                       )}
                     </TableCell>
                   </TableRow>
