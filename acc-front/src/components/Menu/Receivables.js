@@ -21,6 +21,9 @@ const ReceivablesMenu = () => {
         </li>
         <li>
           <h3>Reports</h3>
+          <Link to="/receivables/reports/customer" className="link">
+            Customer Analytics
+          </Link>
         </li>
         <li>
           <h3>Tasks</h3>
