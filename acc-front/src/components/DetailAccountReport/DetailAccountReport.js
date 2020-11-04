@@ -251,7 +251,7 @@ const DetailAccountReport = () => {
                             {tr.transactionId}
                           </TableCell>
                           <TableCell className="tableCell">
-                            {tr.transactionDate}
+                            {tr.transactionDate.split('T').shift()}
                           </TableCell>
                           <TableCell className="tableCell">
                             {tr.transactionDescription}

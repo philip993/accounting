@@ -241,7 +241,7 @@ const VendorAnalytics = () => {
                           {invs.transactionId}
                         </TableCell>
                         <TableCell className="tableCell">
-                          {invs.transactionDate}
+                          {invs.transactionDate.split('T').shift()}
                         </TableCell>
                         <TableCell className="tableCell"></TableCell>
                         <TableCell className="tableCell">
@@ -265,7 +265,7 @@ const VendorAnalytics = () => {
                           {invs.invoiceId}
                         </TableCell>
                         <TableCell className="tableCell">
-                          {invs.invoiceDate}
+                          {invs.invoiceDate.split('T').shift()}
                         </TableCell>
                         <TableCell className="tableCell">
                           {invs.invoiceNumber}
