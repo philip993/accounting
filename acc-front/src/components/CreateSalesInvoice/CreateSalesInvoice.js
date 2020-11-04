@@ -5,7 +5,6 @@ import {
   inputSalesInvoiceCustomer,
   inputSalesInvoiceDate,
   inputSalesInvoiceDue,
-  inputSalesInvoiceNumber,
   requestCreateSalesInvoice,
 } from './CreateSalesInvoiceActions';
 import { requestCreateSalesTransactions } from '../Transactions/TransactionsActions';
@@ -27,6 +26,7 @@ import {
 } from '@material-ui/core';
 // React Components
 import Transactions from '../Transactions/Transactions';
+import { requestGetAllSalesInvoices } from '../SalesInvoice/SalesInvoiceActions';
 
 const CreateSalesInvoice = () => {
   let {
@@ -34,7 +34,6 @@ const CreateSalesInvoice = () => {
     newSalesInvoiceError,
     customer,
     vendor,
-    salesInvoiceNumber,
     salesInvoiceTotal,
     salesInvoiceDate,
     salesInvoiceDue,
@@ -52,15 +51,12 @@ const CreateSalesInvoice = () => {
 
   useEffect(() => {
     dispatch(requestGetAllCustomers());
+    dispatch(requestGetAllSalesInvoices());
   }, []);
 
   const handleSalesInvoiceCustomer = (e) => {
     dispatch(inputSalesInvoiceCustomer(e.target.value));
     setClicked(true);
-  };
-
-  const handleSalesInvoiceNumber = (e) => {
-    dispatch(inputSalesInvoiceNumber(e.target.value));
   };
 
   const handleSalesInvoiceDate = (e) => {
@@ -146,36 +142,6 @@ const CreateSalesInvoice = () => {
           </FormGroup>
         </div>
         <div className="two">
-          <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Sales Invoice No.</FormLabel>
-            <Controller
-              control={control}
-              name="salesInvoiceNumber"
-              render={({ onChange, value, name, message }) => (
-                <InputBase
-                  className="formInput"
-                  name="salesInvoiceNumber"
-                  value={salesInvoiceNumber}
-                  onChange={handleSalesInvoiceNumber}
-                  inputRef={register({
-                    required: 'This field is required!',
-                    minLength: {
-                      value: 1,
-                      message: 'Minimum length of one character..',
-                    },
-                    maxLength: {
-                      value: 50,
-                      message: 'Maximum length of fifty characters',
-                    },
-                  })}
-                />
-              )}
-            />
-
-            <FormHelperText className="formHelperText" error>
-              {errors.salesInvoiceNumber && errors.salesInvoiceNumber.message}
-            </FormHelperText>
-          </FormGroup>
           <FormGroup className="formGroup">
             <FormLabel className="formLabel">Invoice Date</FormLabel>
             <Controller

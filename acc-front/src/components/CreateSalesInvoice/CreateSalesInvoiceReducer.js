@@ -1,7 +1,6 @@
 import {
   SUCCESS_CREATE_SALES_INVOICE,
   FAILURE_CREATE_SALES_INVOICE,
-  INPUT_SALES_INVOICE_NUMBER,
   INPUT_SALES_INVOICE_TOTAL,
   INPUT_SALES_INVOICE_CUSTOMER,
   INPUT_SALES_INVOICE_DATE,
@@ -46,11 +45,6 @@ export const CreateSalesInvoiceReducer = (state = initialState, action) => {
       return {
         ...state,
         customer: action.payload,
-      };
-    case INPUT_SALES_INVOICE_NUMBER:
-      return {
-        ...state,
-        salesInvoiceNumber: action.payload,
       };
     case INPUT_SALES_INVOICE_DATE:
       return {
