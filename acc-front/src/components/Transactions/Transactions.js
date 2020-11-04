@@ -340,7 +340,9 @@ const Transactions = () => {
               transactionsCredit,
             }) => (
               <TableRow className="tableRow">
-                <TableCell className="tableCell">{account}</TableCell>
+                <TableCell className="tableCell">
+                  {account === '' ? '' : account - 1}
+                </TableCell>
                 <TableCell className="tableCell">
                   {transactionsDescription}
                 </TableCell>
