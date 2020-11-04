@@ -27,6 +27,7 @@ import {
 } from '@material-ui/core';
 // React Components
 import Transactions from '../Transactions/Transactions';
+import { requestGetAllInvoices } from '../Invoice/InvoiceActions';
 
 const CreateInvoice = () => {
   let {
@@ -51,6 +52,7 @@ const CreateInvoice = () => {
 
   useEffect(() => {
     dispatch(requestGetAllVendors());
+    dispatch(requestGetAllInvoices());
   }, []);
 
   const handleInvoiceVendor = (e) => {

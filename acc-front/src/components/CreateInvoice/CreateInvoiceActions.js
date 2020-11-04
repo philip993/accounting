@@ -19,9 +19,14 @@ export const requestCreateInvoice = () => {
       invoiceDate,
       invoiceDue,
     } = getState().CreateInvoiceReducer;
+    let { allInvoices } = getState().InvoiceReducer;
+    let number = allInvoices.length + 1;
+    let date = new Date();
+    let year = date.getFullYear();
     return axios
       .post(`http://localhost:4000/invoice`, {
         invoiceVendorFK: vendor,
+        invoicePostedNumber: `PI${year}/${number}`,
         invoiceNumber,
         invoiceTotal,
         invoiceDate,
