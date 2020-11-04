@@ -17,6 +17,9 @@ export class Invoice {
   @Column({ name: 'invoice_vendor_FK' })
   invoiceVendorFK: number;
 
+  @Column({ name: 'invoice_posted_number' })
+  invoicePostedNumber: string;
+
   @Column({ name: 'invoice_number' })
   invoiceNumber: string;
 
