@@ -3,9 +3,9 @@ import { Transactions } from 'src/transactions/transactions.entity';
 
 export class CreateInvoiceDto {
   invoiceId: number;
-  // invoiceFK: number;
   invoiceVendorFK: number;
   invoiceNumber: string;
+  invoicePostedNumber: string;
   invoiceTotal: number;
   invoiceDate: string;
   invoiceDue: string;

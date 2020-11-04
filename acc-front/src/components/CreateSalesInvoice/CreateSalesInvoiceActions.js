@@ -2,7 +2,6 @@ import {
   SUCCESS_CREATE_SALES_INVOICE,
   FAILURE_CREATE_SALES_INVOICE,
   INPUT_SALES_INVOICE_CUSTOMER,
-  INPUT_SALES_INVOICE_NUMBER,
   INPUT_SALES_INVOICE_DATE,
   INPUT_SALES_INVOICE_TOTAL,
   INPUT_SALES_INVOICE_DUE,
@@ -14,15 +13,20 @@ export const requestCreateSalesInvoice = () => {
   return (dispatch, getState) => {
     let {
       customer,
-      salesInvoiceNumber,
       salesInvoiceTotal,
       salesInvoiceDate,
       salesInvoiceDue,
     } = getState().CreateSalesInvoiceReducer;
+    let { allSalesInvoice } = getState().SalesInvoiceReducer;
+    let number = allSalesInvoice.length + 1;
+    let date = new Date();
+    let year = date.getFullYear();
+    console.log(allSalesInvoice);
+    console.log(number);
     return axios
       .post(`http://localhost:4000/sales-invoice`, {
         salesInvoiceCustomerFK: customer,
-        salesInvoiceNumber,
+        salesInvoiceNumber: `SI${year}/${number}`,
         salesInvoiceTotal,
         salesInvoiceDate,
         salesInvoiceDue,
@@ -47,13 +51,6 @@ export const requestCreateSalesInvoice = () => {
 export const inputSalesInvoiceCustomer = (e) => {
   return {
     type: INPUT_SALES_INVOICE_CUSTOMER,
-    payload: e,
-  };
-};
-
-export const inputSalesInvoiceNumber = (e) => {
-  return {
-    type: INPUT_SALES_INVOICE_NUMBER,
     payload: e,
   };
 };

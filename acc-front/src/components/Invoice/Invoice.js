@@ -41,6 +41,7 @@ const Invoice = () => {
         <TableHead className="tableHead">
           <TableRow className="tableRow">
             <TableCell className="tableCell">#</TableCell>
+            <TableCell className="tableCell">Posted Number</TableCell>
             <TableCell className="tableCell">Date</TableCell>
             <TableCell className="tableCell">Vendor</TableCell>
             <TableCell className="tableCell">Invoice Number</TableCell>
@@ -55,6 +56,7 @@ const Invoice = () => {
             ({
               invoiceId,
               vendor,
+              invoicePostedNumber,
               invoiceNumber,
               invoiceTotal,
               invoiceDate,
@@ -63,6 +65,9 @@ const Invoice = () => {
             }) => (
               <TableRow className="tableRow">
                 <TableCell className="tableCell">{invoiceId}</TableCell>
+                <TableCell className="tableCell">
+                  {invoicePostedNumber}
+                </TableCell>
                 <TableCell className="tableCell">
                   <Moment format="DD.MM.yyyy">{invoiceDate}</Moment>
                 </TableCell>

@@ -1,0 +1,196 @@
+.vendorAnalytics {
+  width: 60%;
+  margin: auto;
+
+  margin-top: 2%;
+  padding: 1%;
+
+  h1 {
+    text-align: center;
+    color: #0f52ab;
+  }
+
+  .vendorAnalyticsForm {
+    width: 100%;
+    margin: auto;
+    padding: 1% 0%;
+    border: 1px solid #0f52ab;
+
+    .one {
+      margin: auto;
+      display: inline-flex;
+      width: 100%;
+
+      .formGroup {
+        width: 80%;
+        margin: auto;
+        padding: 1%;
+
+        .inputBase,
+        .select {
+          width: 80%;
+          border: 1px solid #0f52ab;
+        }
+
+        .formLabel {
+          background-color: #0f52ab;
+          padding: 5px 0px 5px 5px;
+          margin: 10px 0px 15px 0px;
+          width: 60%;
+          text-align: left;
+          color: #fff;
+          font-size: 16px;
+          font-weight: bold;
+          letter-spacing: 1.5px;
+        }
+
+        .formInput {
+          background-color: #fff;
+          border: 1px solid gray;
+          padding-left: 10px;
+          min-height: 32px;
+
+          &:hover {
+            box-shadow: 0px 0px 5px #a90f52;
+          }
+        }
+
+        .formHelperText {
+          font-weight: bold;
+          letter-spacing: 1px;
+        }
+      }
+    }
+
+    .formGroup {
+      width: 50%;
+      margin: auto;
+
+      .saveButton {
+        margin: auto;
+        margin-top: 40px;
+        margin-bottom: 1%;
+        width: 30%;
+        background-color: #fff;
+        border: 1px solid #a90f52;
+        color: #a90f52;
+        font-weight: bold;
+
+        &:hover {
+          background-color: #a90f52;
+          border: 1px solid #fff;
+          color: #fff;
+
+          letter-spacing: 1.5px;
+        }
+      }
+    }
+  }
+
+  .two {
+    .card {
+      .cardContent {
+        .left {
+          float: left;
+          letter-spacing: 2px;
+          font-weight: bold;
+
+          .typography {
+            border: 1px solid #0f52ab;
+            background-color: #0f52ab;
+            color: #fff;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin: 1%;
+            padding: 1%;
+            width: 200px;
+          }
+        }
+
+        .right {
+          float: right;
+
+          .button {
+            margin: auto;
+            background-color: #fff;
+            border: 1px solid #a90f52;
+            color: #a90f52;
+
+            &:hover {
+              background-color: #a90f52;
+              border: 1px solid #fff;
+              color: #fff;
+
+              .icon {
+                color: #fff;
+              }
+            }
+
+            .icon {
+              color: #a90f52;
+
+              &:hover {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
+
+      .table {
+        .tableHead {
+          background-color: #1471e9;
+
+          .tableRow {
+            .tableCell {
+              color: #fff;
+              border: 1px solid #363636;
+              font-size: 1rem;
+              letter-spacing: 1.5px;
+            }
+          }
+        }
+
+        .tableBody {
+          .tableRow {
+            .tableCell {
+              color: #363636;
+              border: 1px solid #bebebe;
+            }
+
+            .tableCellTotal {
+              color: #0f52ab;
+              font-weight: bold;
+              letter-spacing: 1.5px;
+            }
+
+            .tableBtn {
+              color: #a90f52;
+              border: 1px solid #a90f52;
+              font-weight: bold;
+
+              &:hover {
+                background-color: #a90f52;
+                color: #fff;
+              }
+            }
+          }
+
+          .tableRowSubtotal {
+            .tableCell {
+              font-weight: bold;
+              letter-spacing: 2px;
+            }
+          }
+
+          .tableRowTotal {
+            .tableCell {
+              font-weight: bold;
+              letter-spacing: 2px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -26,6 +26,9 @@ import PaymentJournalMenu from '../Menu/PaymentJournalMenu';
 import CreatePaymentJournal from '../CreatePaymentJournal/CreatePaymentJournal';
 import PaymentJournals from '../PaymentJournals/PaymentJournals';
 import DetailsPaymentJournal from '../DetailsPaymentJournal/DetailsPaymentJournal';
+import DetailAccountReport from '../DetailAccountReport/DetailAccountReport';
+import VendorAnalytics from '../VendorAnalytics/VendorAnalytics';
+import CustomerAnalytics from '../CustomerAnalytics/CustomerAnalytics';
 
 const App = () => {
   return (
@@ -86,6 +89,21 @@ const App = () => {
           exact
           path="/journal/details"
           component={DetailsPaymentJournal}
+        />
+        <Route
+          exact
+          path="/general/reports/account"
+          component={DetailAccountReport}
+        />
+        <Route
+          exact
+          path="/payables/reports/vendor"
+          component={VendorAnalytics}
+        />
+        <Route
+          exact
+          path="/receivables/reports/customer"
+          component={CustomerAnalytics}
         />
       </Switch>
     </div>
