@@ -5,7 +5,6 @@ import {
   SUCCESS_CREATE_PAYMENT_TRANSACTION,
   INPUT_CREATE_PAYMENT_ACCOUNT,
   INPUT_CREATE_PAYMENT_DATE,
-  INPUT_CREATE_PAYMENT_DESCRIPTION,
   INPUT_CREATE_PAYMENT_DEBIT,
   INPUT_CREATE_PAYMENT_CREDIT,
   SELECT_NEW_ROW,
@@ -25,7 +24,7 @@ export const requestCreatePayTransactions = () => {
         transactionCustomerFK: transaction.paymentCustomer,
         transactionJournalFK: newPaymentJournal.paymentJournalId,
         transactionDate: newPaymentJournal.paymentJournalDate,
-        transactionDescription: transaction.paymentDescription,
+        transactionDescription: newPaymentJournal.paymentJournalDescription,
         transactionDebit: transaction.paymentDebit,
         transactionCredit: transaction.paymentCredit,
       }))
@@ -67,13 +66,6 @@ export const inputCreatePaymentVendor = (e) => {
 export const inputCreatePaymentAccount = (e) => {
   return {
     type: INPUT_CREATE_PAYMENT_ACCOUNT,
-    payload: e,
-  };
-};
-
-export const inputCreatePaymentDescription = (e) => {
-  return {
-    type: INPUT_CREATE_PAYMENT_DESCRIPTION,
     payload: e,
   };
 };

@@ -10,7 +10,6 @@ import {
   inputCreatePaymentCredit,
   inputCreatePaymentCustomer,
   inputCreatePaymentDebit,
-  inputCreatePaymentDescription,
   inputCreatePaymentVendor,
   requestCreatePayTransactions,
   selectNewRow,
@@ -70,10 +69,6 @@ const PaymentTransaction = () => {
 
   const handleTransactionsAccount = (e) => {
     dispatch(inputCreatePaymentAccount(parseInt(e.target.value)));
-  };
-
-  const handleTransactionsDescription = (e) => {
-    dispatch(inputCreatePaymentDescription(e.target.value));
   };
 
   const handleTransactionsDebit = (e) => {
@@ -227,25 +222,6 @@ const PaymentTransaction = () => {
           </FormGroup>
 
           <FormGroup className="formGroup">
-            <FormLabel className="formLabel">Description</FormLabel>
-            <Controller
-              control={control}
-              name="paymentDescription"
-              render={({ onChange, value, name, message }) => (
-                <InputBase
-                  className="formInput"
-                  name="paymentDescription"
-                  value={paymentDescription}
-                  onChange={handleTransactionsDescription}
-                />
-              )}
-            />
-            <FormHelperText className="formHelperText" error>
-              {errors.paymentDescription && errors.paymentDescription.message}
-            </FormHelperText>
-          </FormGroup>
-
-          <FormGroup className="formGroup">
             <FormLabel className="formLabel">Debit</FormLabel>
             <Controller
               control={control}
@@ -292,7 +268,6 @@ const PaymentTransaction = () => {
                   transactionType === 'vendor' ? paymentVendor : null,
                 paymentCustomer:
                   transactionType === 'customer' ? paymentCustomer : null,
-                paymentDescription,
                 paymentDate,
                 paymentDebit: parseInt(paymentDebit),
                 paymentCredit: parseInt(paymentCredit),
@@ -310,7 +285,6 @@ const PaymentTransaction = () => {
             <TableCell className="tableCell">Account</TableCell>
             <TableCell className="tableCell">Customer</TableCell>
             <TableCell className="tableCell">Vendor</TableCell>
-            <TableCell className="tableCell">Description</TableCell>
             <TableCell className="tableCell">Debit</TableCell>
             <TableCell className="tableCell">Credit</TableCell>
           </TableRow>
@@ -321,17 +295,15 @@ const PaymentTransaction = () => {
               paymentAccount,
               paymentCustomer,
               paymentVendor,
-              paymentDescription,
               paymentDebit,
               paymentCredit,
             }) => (
               <TableRow className="tableRow">
-                <TableCell className="tableCell">{paymentAccount}</TableCell>
+                <TableCell className="tableCell">
+                  {paymentAccount === '' ? '' : paymentAccount - 1}
+                </TableCell>
                 <TableCell className="tableCell">{paymentCustomer}</TableCell>
                 <TableCell className="tableCell">{paymentVendor}</TableCell>
-                <TableCell className="tableCell">
-                  {paymentDescription}
-                </TableCell>
                 <TableCell className="tableCell">
                   {parseInt(paymentDebit)} $
                 </TableCell>
@@ -354,7 +326,6 @@ const PaymentTransaction = () => {
                   paymentAccount: 2,
                   paymentVendor: null,
                   paymentCustomer: null,
-                  paymentDescription: 'Bank Account',
                   paymentDebit: paymentRow.reduce(
                     (a, b) => a + b.paymentCredit,
                     0

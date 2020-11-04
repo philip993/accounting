@@ -5,7 +5,6 @@ import {
   SUCCESS_CREATE_PAYMENT_TRANSACTION,
   INPUT_CREATE_PAYMENT_ACCOUNT,
   INPUT_CREATE_PAYMENT_DATE,
-  INPUT_CREATE_PAYMENT_DESCRIPTION,
   INPUT_CREATE_PAYMENT_DEBIT,
   INPUT_CREATE_PAYMENT_CREDIT,
   SELECT_NEW_ROW,
@@ -76,11 +75,6 @@ export const PaymentTransactionReducer = (state = initialState, action) => {
       return {
         ...state,
         paymentAccount: action.payload,
-      };
-    case INPUT_CREATE_PAYMENT_DESCRIPTION:
-      return {
-        ...state,
-        paymentDescription: action.payload,
       };
     case INPUT_CREATE_PAYMENT_DATE:
       return {
