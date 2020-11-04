@@ -8,15 +8,14 @@ import axios from 'axios';
 // request
 export const requestCreatePaymentJournal = () => {
   return (dispatch, getState) => {
-    let {
-      paymentJournalDescription,
-      paymentJournalDate,
-    } = getState().CreatePaymentJournalReducer;
+    let { paymentJournalDate } = getState().CreatePaymentJournalReducer;
     let { allPaymentJournals } = getState().PaymentJournalsReducer;
     let number = allPaymentJournals.length + 1;
+    let date = new Date();
+    let year = date.getFullYear();
     return axios
       .post(`http://localhost:4000/payment-journal`, {
-        paymentJournalDescription: `Bank Statement 00${number}`,
+        paymentJournalDescription: `BS${year}/${number}`,
         paymentJournalDate,
       })
       .then((response) => {
